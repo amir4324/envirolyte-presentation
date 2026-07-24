@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="مقترح فني تفاعلي لتقييم إنتاج محاليل التطهير في الموقع باستخدام تقنية Envirolyte">
+  <title>حلول التطهير والإنتاج في الموقع | Envirolyte</title>
+  <style>
+    /* =========================
+       Design tokens
+       ========================= */
+    :root {
+      --navy-950: #08253a;
+      --navy-900: #0b3048;
+      --navy-800: #154762;
+      --aqua-600: #0b94a6;
+      --aqua-500: #22aebe;
+      --aqua-100: #dff5f6;
+      --green-600: #3c8b72;
+      --green-100: #e4f2ec;
+      --amber-600: #b97818;
+      --amber-100: #fff2d8;
+      --slate-700: #3c5362;
+      --slate-500: #68808d;
+      --slate-300: #bed0d8;
+      --slate-200: #dce7eb;
+      --slate-100: #edf3f5;
+      --paper: #f8fbfc;
+      --white: #ffffff;
+      --shadow: 0 24px 70px rgba(8, 37, 58, .14);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --font-ar: "IBM Plex Sans Arabic", "Noto Sans Arabic", "Segoe UI", Tahoma, Arial, sans-serif;
+      --space-1: clamp(.45rem, .6vw, .7rem);
+      --space-2: clamp(.75rem, 1vw, 1.1rem);
+      --space-3: clamp(1rem, 1.5vw, 1.6rem);
+      --space-4: clamp(1.4rem, 2.2vw, 2.4rem);
+      --space-5: clamp(2rem, 3vw, 3.4rem);
+      --slide-pad-x: clamp(2rem, 5.2vw, 6rem);
+      --slide-pad-y: clamp(2rem, 4.6vw, 4.8rem);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; overflow: hidden; }
+    body {
+      background: #dfe9ed;
+      color: var(--navy-950);
+      font-family: var(--font-ar);
+      line-height: 1.55;
+      text-rendering: optimizeLegibility;
+    }
+    button, input, textarea, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: var(--aqua-600); text-underline-offset: 3px; }
+    [dir="ltr"], .latin { direction: ltr; unicode-bidi: isolate; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    /* =========================
+       Presentation shell
+       ========================= */
+    .presentation {
+      position: fixed; inset: 0; display: grid; place-items: center;
+      padding: clamp(.4rem, 1.2vw, 1.1rem);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(34,174,190,.10), transparent 28%),
+        linear-gradient(145deg, #eaf1f3, #d8e4e8);
+    }
+    .deck {
+      position: relative;
+      width: min(calc(100vw - 1.6rem), calc((100vh - 1.6rem) * 16 / 9));
+      aspect-ratio: 16 / 9;
+      background: var(--paper);
+      border: 1px solid rgba(8,37,58,.08);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .slides { position: absolute; inset: 0; }
+    .slide {
+      position: absolute; inset: 0;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: var(--space-3);
+      padding: var(--slide-pad-y) var(--slide-pad-x) clamp(2.8rem, 5vw, 4.6rem);
+      background:
+        linear-gradient(90deg, rgba(11,148,166,.025) 1px, transparent 1px),
+        linear-gradient(rgba(11,148,166,.025) 1px, transparent 1px),
+        var(--paper);
+      background-size: 40px 40px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(-2.5%);
+      transition: opacity .42s ease, transform .42s ease, visibility 0s .42s;
+      pointer-events: none;
+    }
+    .slide.active {
+      opacity: 1; visibility: visible; transform: translateX(0);
+      transition-delay: 0s; pointer-events: auto; z-index: 2;
+    }
+    .slide.previous { transform: translateX(2.5%); }
+    .slide::after {
+      content: ""; position: absolute; inset-inline-start: 0; top: 0; bottom: 0; width: 5px;
+      background: var(--aqua-500);
+    }
+    .slide-cover { background: var(--navy-950); color: var(--white); }
+    .slide-cover::after { width: 8px; background: var(--aqua-500); }
+    .slide-appendix { background-color: #f2f7f8; }
+
+    .slide-head {
+      display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4);
+      min-height: 5.4rem;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: .55rem;
+      margin-bottom: .55rem; color: var(--aqua-600);
+      font-size: clamp(.68rem, 1vw, .95rem); font-weight: 750; letter-spacing: .02em;
+    }
+    .eyebrow::before { content: ""; width: 1.75rem; height: 2px; background: currentColor; }
+    h1, h2, h3, p { margin: 0; }
+    .slide h2 {
+      max-width: 62rem;
+      font-size: clamp(1.7rem, 3.15vw, 3.55rem);
+      line-height: 1.2; letter-spacing: -.035em; font-weight: 800;
+    }
+    .slide h3 { font-size: clamp(1rem, 1.45vw, 1.55rem); line-height: 1.35; }
+    .lead { color: var(--slate-700); font-size: clamp(.88rem, 1.25vw, 1.22rem); }
+    .small { font-size: clamp(.65rem, .86vw, .85rem); color: var(--slate-500); }
+    .muted { color: var(--slate-500); }
+    .accent { color: var(--aqua-600); }
+    .green { color: var(--green-600); }
+    .amber { color: var(--amber-600); }
+
+    .brand-lockup {
+      display: flex; align-items: center; gap: .7rem; flex: 0 0 auto;
+      color: var(--navy-900); direction: ltr;
+    }
+    .brand-mark {
+      width: 2.25rem; height: 2.25rem; border: 2px solid var(--aqua-500);
+      border-radius: 50% 50% 48% 52% / 36% 36% 64% 64%;
+      transform: rotate(45deg); position: relative;
+    }
+    .brand-mark::after {
+      content: ""; position: absolute; inset: .42rem; border: 2px solid var(--green-600);
+      border-radius: 50%;
+    }
+    .brand-name { font-weight: 850; letter-spacing: .01em; font-size: clamp(.7rem, 1vw, 1rem); }
+    .client-logo {
+      border: 1px dashed var(--slate-300); border-radius: 10px; padding: .55rem .8rem;
+      color: var(--slate-500); font-size: clamp(.62rem, .75vw, .78rem); white-space: nowrap;
+    }
+    .slide-cover .brand-lockup, .slide-cover .client-logo { color: var(--white); }
+    .slide-cover .client-logo { border-color: rgba(255,255,255,.35); }
+
+    .slide-body { min-height: 0; display: grid; align-content: center; }
+    .slide-foot {
+      position: absolute; inset-inline: var(--slide-pad-x); bottom: clamp(1rem, 2vw, 1.7rem);
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      color: var(--slate-500); font-size: clamp(.58rem, .72vw, .75rem);
+    }
+    .series-title { display: flex; align-items: center; gap: .7rem; }
+    .series-title::before { content: ""; width: 1.5rem; height: 1px; background: var(--slate-300); }
+    .slide-cover .slide-foot { color: rgba(255,255,255,.65); }
+    .slide-cover .series-title::before { background: rgba(255,255,255,.35); }
+
+    /* =========================
+       Shared compositions
+       ========================= */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); align-items: center; }
+    .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); }
+    .four-col { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-2); }
+    .split-60 { display: grid; grid-template-columns: 1.18fr .82fr; gap: var(--space-5); align-items: center; }
+    .stack { display: grid; gap: var(--space-2); }
+    .rule { height: 1px; background: var(--slate-200); }
+    .panel {
+      border: 1px solid var(--slate-200); border-radius: var(--radius-md);
+      padding: var(--space-3); background: rgba(255,255,255,.74);
+    }
+    .panel.emphasis { border-color: rgba(11,148,166,.45); box-shadow: 0 12px 32px rgba(11,148,166,.08); }
+    .message-band {
+      border-inline-start: 4px solid var(--aqua-500); padding: .85rem 1rem;
+      background: var(--aqua-100); color: var(--navy-900); border-radius: 10px;
+      font-size: clamp(.76rem, 1.05vw, 1rem);
+    }
+    .notice {
+      display: flex; gap: .65rem; align-items: flex-start;
+      padding: .75rem .9rem; border: 1px solid #eed6aa;
+      background: var(--amber-100); color: #735016; border-radius: 12px;
+      font-size: clamp(.68rem, .9vw, .86rem);
+    }
+    .notice::before { content: "!"; display: grid; place-items: center; flex: 0 0 1.35rem; height: 1.35rem; border-radius: 50%; background: var(--amber-600); color: white; font-weight: 900; }
+    ul.clean { margin: 0; padding: 0; list-style: none; display: grid; gap: .62rem; }
+    ul.clean li { position: relative; padding-inline-start: 1.45rem; color: var(--slate-700); font-size: clamp(.76rem, 1.05vw, 1rem); }
+    ul.clean li::before { content: ""; position: absolute; inset-inline-start: 0; top: .66em; width: .52rem; height: .52rem; border: 2px solid var(--aqua-500); border-radius: 50%; }
+    .check-list li::before { content: "✓" !important; top: .08em !important; width: auto !important; height: auto !important; border: 0 !important; color: var(--green-600); font-weight: 900; }
+    .big-words { display: flex; flex-wrap: wrap; gap: .7rem 1.5rem; font-size: clamp(1.35rem, 2.65vw, 2.8rem); font-weight: 850; color: var(--navy-900); }
+    .big-words span:not(:last-child)::after { content: "—"; color: var(--aqua-500); margin-inline-start: 1.5rem; }
+
+    /* Cover */
+    .cover-grid {
+      display: grid; grid-template-columns: 1.04fr .96fr; gap: clamp(2rem, 5vw, 5rem); align-items: center;
+    }
+    .cover-copy { position: relative; z-index: 2; min-width: 0; }
+    .cover-kicker { color: #8bd7df; font-weight: 700; margin-bottom: 1rem; }
+    .cover-title {
+      max-width: 100%; font-size: clamp(2.2rem, 4vw, 4.5rem);
+      line-height: 1.08; letter-spacing: -.055em; font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+    .cover-sub { max-width: 44rem; margin-top: 1.25rem; color: rgba(255,255,255,.74); font-size: clamp(.85rem, 1.3vw, 1.25rem); }
+    .cover-meta { margin-top: 1.8rem; display: flex; gap: .8rem 1.6rem; flex-wrap: wrap; color: rgba(255,255,255,.58); font-size: clamp(.63rem, .8vw, .82rem); }
+    .facility-visual { position: relative; aspect-ratio: 1.1; min-height: 18rem; }
+    .facility-orbit {
+      position: absolute; inset: 7%; border: 1px solid rgba(139,215,223,.26); border-radius: 50%;
+      animation: slowSpin 34s linear infinite;
+    }
+    .facility-orbit::before, .facility-orbit::after {
+      content: ""; position: absolute; width: .8rem; height: .8rem; border-radius: 50%; background: var(--aqua-500);
+    }
+    .facility-orbit::before { top: 12%; right: 12%; }
+    .facility-orbit::after { bottom: 16%; left: 8%; background: var(--green-600); }
+    .facility-svg { width: 100%; height: 100%; filter: drop-shadow(0 26px 35px rgba(0,0,0,.24)); }
+    .source-link { display: inline-flex; align-items: center; gap: .35rem; color: #8bd7df; font-size: .72rem; }
+    @keyframes slowSpin { to { transform: rotate(360deg); } }
+
+    /* Supply chain */
+    .chain-wrap { position: relative; margin-top: .5rem; }
+    .chain-line {
+      position: absolute; top: 2.15rem; inset-inline: 5%; height: 3px;
+      background: linear-gradient(90deg, var(--slate-300), var(--amber-600));
+    }
+    .chain {
+      position: relative; display: grid; grid-template-columns: repeat(8, 1fr); gap: .5rem;
+    }
+    .chain-step { position: relative; text-align: center; cursor: help; min-width: 0; }
+    .chain-icon {
+      position: relative; z-index: 1; width: clamp(2.9rem, 5vw, 4.6rem); aspect-ratio: 1;
+      margin: 0 auto .6rem; display: grid; place-items: center;
+      border: 2px solid var(--slate-300); border-radius: 50%; background: var(--white);
+      color: var(--navy-800); transition: .2s ease;
+    }
+    .chain-step:hover .chain-icon, .chain-step:focus-within .chain-icon { transform: translateY(-4px); border-color: var(--amber-600); color: var(--amber-600); }
+    .chain-icon svg { width: 47%; height: 47%; }
+    .chain-label { font-size: clamp(.56rem, .72vw, .78rem); font-weight: 750; color: var(--navy-900); }
+    .tooltip {
+      position: absolute; z-index: 5; inset-inline-start: 50%; bottom: calc(100% + .5rem);
+      width: 9.5rem; transform: translateX(50%) translateY(.4rem);
+      padding: .55rem .65rem; border-radius: 9px; background: var(--navy-950); color: white;
+      font-size: .66rem; opacity: 0; visibility: hidden; transition: .2s ease;
+      box-shadow: 0 12px 28px rgba(8,37,58,.18);
+    }
+    .chain-step:hover .tooltip, .chain-step:focus-within .tooltip { opacity: 1; visibility: visible; transform: translateX(50%) translateY(0); }
+    .risk-strip { margin-top: 1.35rem; display: flex; gap: 1.2rem; flex-wrap: wrap; justify-content: center; color: var(--slate-500); font-size: clamp(.63rem, .82vw, .8rem); }
+    .risk-strip span::before { content: "•"; color: var(--amber-600); margin-inline-end: .4rem; }
+
+    /* Four themes */
+    .orbit-grid { position: relative; min-height: clamp(20rem, 33vw, 31rem); }
+    .orbit-center {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 31%; aspect-ratio: 1; display: grid; place-items: center; text-align: center;
+      padding: 1.2rem; border-radius: 50%; background: var(--navy-900); color: white;
+      box-shadow: 0 0 0 15px rgba(11,148,166,.08), 0 20px 45px rgba(8,37,58,.18);
+      font-size: clamp(.8rem, 1.25vw, 1.28rem); font-weight: 800; z-index: 2;
+    }
+    .orbit-center::after {
+      content: ""; position: absolute; inset: -27%; border: 1px dashed rgba(11,148,166,.38); border-radius: 50%;
+    }
+    .orbit-item {
+      position: absolute; width: 30%; padding: 1rem 1.05rem;
+      border: 1px solid var(--slate-200); border-radius: 16px; background: var(--white);
+      opacity: .22; transform: scale(.96); transition: opacity .35s ease, transform .35s ease, border-color .35s ease;
+    }
+    .orbit-item.revealed { opacity: 1; transform: scale(1); border-color: rgba(11,148,166,.34); }
+    .orbit-item:nth-child(2) { top: 2%; left: 5%; }
+    .orbit-item:nth-child(3) { top: 2%; right: 5%; }
+    .orbit-item:nth-child(4) { bottom: 2%; left: 5%; }
+    .orbit-item:nth-child(5) { bottom: 2%; right: 5%; }
+    .orbit-item h3 { color: var(--aqua-600); margin-bottom: .3rem; }
+    .orbit-item p { font-size: clamp(.62rem, .85vw, .85rem); color: var(--slate-700); }
+    .reveal-hint { position: absolute; inset-inline-end: 0; bottom: 0; color: var(--slate-500); font-size: .65rem; }
+
+    /* Current / future */
+    .state-compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: var(--space-3); align-items: stretch; }
+    .state {
+      border-radius: 22px; padding: clamp(1rem, 2vw, 2rem); min-height: 19rem;
+      display: grid; grid-template-rows: auto 1fr; gap: 1rem;
+    }
+    .state.current { background: #f5f1ed; border: 1px solid #e7d8c9; }
+    .state.future { background: #edf8f6; border: 1px solid #cbe4dc; }
+    .state-title { display: flex; align-items: center; justify-content: space-between; }
+    .state-title strong { font-size: clamp(1rem, 1.65vw, 1.65rem); }
+    .state-flow { display: flex; align-items: center; gap: .45rem; flex-wrap: wrap; align-content: center; }
+    .flow-node {
+      padding: .62rem .75rem; background: var(--white); border: 1px solid var(--slate-200);
+      border-radius: 10px; font-size: clamp(.63rem, .85vw, .82rem); font-weight: 700;
+    }
+    .state.current .flow-node:nth-child(even) { transform: translateY(1rem); }
+    .state.future .flow-node { border-color: #b8dbd0; }
+    .compare-arrow { display: grid; place-items: center; color: var(--aqua-600); font-size: clamp(1.3rem, 2vw, 2rem); }
+    .input-formula {
+      margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; gap: .75rem; flex-wrap: wrap;
+      font-size: clamp(1.05rem, 1.8vw, 1.8rem); font-weight: 850;
+    }
+    .input-formula span:not(.plus) { padding: .5rem .8rem; background: var(--white); border: 1px solid var(--slate-200); border-radius: 12px; }
+    .plus { color: var(--aqua-500); }
+
+    /* Process */
+    .process-svg { width: 100%; height: min(38vh, 25rem); overflow: visible; }
+    .flow-dash { stroke-dasharray: 10 10; animation: flowDash 2.2s linear infinite; }
+    @keyframes flowDash { to { stroke-dashoffset: -40; } }
+    .process-legend { display: flex; justify-content: center; gap: 1.5rem; color: var(--slate-600); font-size: clamp(.65rem, .86vw, .84rem); }
+    .legend-dot { display: inline-block; width: .65rem; height: .65rem; border-radius: 50%; margin-inline-end: .35rem; }
+
+    /* Solution cards */
+    .solution-card {
+      min-height: 20rem; padding: clamp(1.2rem, 2.1vw, 2.1rem);
+      border-radius: 24px; background: var(--white); border: 1px solid var(--slate-200);
+      position: relative; overflow: hidden;
+    }
+    .solution-card::after { content: ""; position: absolute; width: 11rem; height: 11rem; border-radius: 50%; opacity: .12; top: -5rem; inset-inline-end: -4rem; }
+    .solution-card.anolyte::after { background: var(--aqua-500); }
+    .solution-card.catholyte::after { background: var(--green-600); }
+    .solution-icon {
+      width: 3.5rem; height: 3.5rem; display: grid; place-items: center; border-radius: 16px;
+      margin-bottom: 1rem; color: white;
+    }
+    .anolyte .solution-icon { background: var(--aqua-600); }
+    .catholyte .solution-icon { background: var(--green-600); }
+    .solution-card h3 { font-size: clamp(1.3rem, 2vw, 2rem); margin-bottom: .8rem; }
+
+    /* Application */
+    .application-layout { display: grid; grid-template-columns: 1.25fr .8fr .8fr; gap: var(--space-3); align-items: stretch; }
+    .application {
+      border-top: 5px solid var(--slate-300); background: var(--white); border-radius: 0 0 18px 18px;
+      padding: clamp(1rem, 1.8vw, 1.7rem); border-inline: 1px solid var(--slate-200); border-bottom: 1px solid var(--slate-200);
+    }
+    .application.primary { border-top-color: var(--aqua-500); box-shadow: 0 18px 42px rgba(8,37,58,.09); }
+    .application .tag { display: inline-block; margin-bottom: .8rem; color: var(--aqua-600); font-weight: 800; font-size: .73rem; }
+    .application h3 { margin-bottom: .8rem; }
+
+    /* Integration flow */
+    .integration {
+      display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(13rem, .65fr); gap: var(--space-4); align-items: center;
+    }
+    .integration-svg { width: 100%; height: min(39vh, 25rem); }
+    .criteria { border-inline-start: 3px solid var(--aqua-500); padding-inline-start: 1.2rem; }
+
+    /* Operational routes */
+    .route {
+      display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; align-items: center;
+      padding: 1.1rem 0; border-bottom: 1px solid var(--slate-200);
+    }
+    .route:last-child { border-bottom: 0; }
+    .route-label { font-weight: 850; }
+    .route-track { display: flex; gap: .5rem; align-items: center; }
+    .route-track span {
+      padding: .58rem .72rem; border-radius: 9px; background: var(--white); border: 1px solid var(--slate-200);
+      font-size: clamp(.6rem, .83vw, .8rem); white-space: nowrap;
+    }
+    .route-track .arrow { border: 0; background: transparent; padding: 0; color: var(--slate-400); }
+    .route.on-site .route-track span:not(.arrow) { border-color: #b9ddd2; background: var(--green-100); }
+
+    /* Evidence */
+    .evidence-layout { display: grid; grid-template-columns: 1.05fr .95fr; gap: var(--space-5); align-items: center; }
+    .evidence-stairs { display: grid; gap: .48rem; align-items: end; }
+    .evidence-step {
+      padding: .72rem 1rem; color: white; border-radius: 8px; font-weight: 750;
+      font-size: clamp(.68rem, .95vw, .95rem); position: relative;
+    }
+    .evidence-step:nth-child(1) { width: 55%; background: #5f7785; }
+    .evidence-step:nth-child(2) { width: 66%; background: #477487; }
+    .evidence-step:nth-child(3) { width: 77%; background: #287f91; }
+    .evidence-step:nth-child(4) { width: 88%; background: var(--aqua-600); }
+    .evidence-step:nth-child(5) { width: 100%; background: var(--navy-900); }
+
+    /* Guardrails */
+    .guardrails { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
+    .guardrail { display: flex; gap: .75rem; align-items: flex-start; padding: .85rem .95rem; border-bottom: 1px solid var(--slate-200); }
+    .guardrail .tick {
+      flex: 0 0 1.5rem; height: 1.5rem; display: grid; place-items: center; border-radius: 50%;
+      background: var(--green-100); color: var(--green-600); font-weight: 900;
+    }
+    .guardrail p { font-size: clamp(.66rem, .9vw, .88rem); color: var(--slate-700); }
+
+    /* Pilot */
+    .timeline { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; padding-top: 2rem; }
+    .timeline::before { content: ""; position: absolute; top: 3.55rem; inset-inline: 7%; height: 3px; background: var(--slate-200); }
+    .phase { position: relative; z-index: 1; }
+    .phase-no {
+      width: 3.2rem; height: 3.2rem; display: grid; place-items: center; border-radius: 50%;
+      color: white; background: var(--navy-900); box-shadow: 0 0 0 8px var(--paper); font-weight: 850;
+      margin-bottom: 1rem;
+    }
+    .phase:nth-child(2) .phase-no, .phase:nth-child(3) .phase-no { background: var(--aqua-600); }
+    .phase:nth-child(4) .phase-no { background: var(--green-600); }
+    .phase h3 { margin-bottom: .5rem; }
+    .phase p { color: var(--slate-600); font-size: clamp(.62rem, .8vw, .8rem); }
+
+    /* KPI table */
+    .dashboard { border: 1px solid var(--slate-200); border-radius: 16px; overflow: hidden; background: white; }
+    .dashboard table { width: 100%; border-collapse: collapse; font-size: clamp(.59rem, .78vw, .78rem); }
+    .dashboard th { background: var(--navy-900); color: white; padding: .65rem .75rem; text-align: right; }
+    .dashboard td { padding: .6rem .75rem; border-bottom: 1px solid var(--slate-200); color: var(--slate-700); }
+    .dashboard tr:last-child td { border-bottom: 0; }
+    .status-empty { display: inline-block; width: .72rem; height: .72rem; border: 2px solid var(--slate-300); border-radius: 50%; }
+    .kpi-tabs { display: flex; gap: .55rem; margin-bottom: .8rem; flex-wrap: wrap; }
+    .kpi-tab { border: 1px solid var(--slate-200); background: white; color: var(--slate-700); padding: .42rem .7rem; border-radius: 999px; font-size: .68rem; }
+    .kpi-tab.active { background: var(--aqua-100); border-color: var(--aqua-500); color: var(--navy-900); font-weight: 800; }
+
+    /* Final */
+    .decision-layout { display: grid; grid-template-columns: .86fr 1.14fr; gap: var(--space-5); align-items: center; }
+    .future-visual { position: relative; min-height: 23rem; }
+    .future-visual svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .cta {
+      border: 0; border-radius: 12px; padding: .78rem 1.25rem; cursor: pointer;
+      background: var(--aqua-600); color: white; font-weight: 800;
+      box-shadow: 0 10px 24px rgba(11,148,166,.22); transition: .2s ease;
+    }
+    .cta:hover { transform: translateY(-2px); background: #087f90; }
+    .secondary-btn {
+      border: 1px solid var(--slate-300); border-radius: 11px; padding: .65rem .9rem;
+      background: white; color: var(--navy-900); cursor: pointer; font-weight: 750;
+    }
+
+    /* Appendix */
+    .appendix-label {
+      color: var(--green-600); font-weight: 800; font-size: clamp(.66rem, .9vw, .9rem); margin-bottom: .4rem;
+    }
+    .company-facts { display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--space-5); align-items: center; }
+    .fact-lines { display: grid; gap: .85rem; }
+    .fact-line { display: grid; grid-template-columns: 2.1rem 1fr; gap: .85rem; align-items: start; }
+    .fact-num { font-weight: 900; color: var(--aqua-600); font-size: 1.25rem; border-top: 2px solid var(--aqua-500); padding-top: .25rem; }
+    .placeholder-photo {
+      min-height: 19rem; border: 1px dashed var(--slate-300); border-radius: 20px; background:
+        linear-gradient(135deg, rgba(11,148,166,.08), rgba(60,139,114,.06));
+      display: grid; place-items: center; text-align: center; padding: 2rem; color: var(--slate-500);
+    }
+    .placeholder-photo svg { width: 5rem; height: 5rem; margin-bottom: 1rem; color: var(--aqua-600); }
+    .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
+    .product {
+      padding: 1rem; border: 1px solid var(--slate-200); border-radius: 15px; background: white;
+      min-height: 10.5rem; display: grid; grid-template-rows: auto 1fr auto;
+    }
+    .product h3 { color: var(--navy-900); }
+    .product p { color: var(--slate-500); font-size: .68rem; margin-top: .4rem; }
+    .product button { justify-self: start; border: 0; background: transparent; color: var(--aqua-600); cursor: pointer; padding: .25rem 0; font-weight: 800; font-size: .68rem; }
+    .spec-table-wrap { overflow: auto; border: 1px solid var(--slate-200); border-radius: 14px; background: white; }
+    .spec-table { width: 100%; border-collapse: collapse; font-size: clamp(.57rem, .75vw, .74rem); min-width: 49rem; }
+    .spec-table th, .spec-table td { padding: .58rem .72rem; border-bottom: 1px solid var(--slate-200); text-align: right; }
+    .spec-table th { background: var(--navy-900); color: white; }
+    .spec-table td:first-child { font-weight: 800; color: var(--navy-900); }
+    .cert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
+    .cert {
+      min-height: 8.8rem; padding: 1rem; background: white; border: 1px solid var(--slate-200); border-radius: 15px;
+      display: grid; align-content: space-between; gap: .7rem;
+    }
+    .cert .seal { width: 2.5rem; height: 2.5rem; display: grid; place-items: center; border: 2px solid var(--aqua-500); border-radius: 50%; color: var(--aqua-600); font-weight: 900; }
+    .cert p { color: var(--slate-500); font-size: .68rem; }
+    .calculator { display: grid; grid-template-columns: 1fr 1fr .72fr; gap: var(--space-3); align-items: start; }
+    .cost-group { border: 1px solid var(--slate-200); border-radius: 14px; padding: .8rem; background: white; }
+    .cost-group h3 { margin-bottom: .55rem; color: var(--aqua-600); }
+    .cost-fields { display: grid; grid-template-columns: 1fr 6.3rem; gap: .32rem .55rem; align-items: center; }
+    .cost-fields label { color: var(--slate-700); font-size: .62rem; }
+    .cost-fields input {
+      width: 100%; border: 1px solid var(--slate-200); border-radius: 7px; padding: .32rem .4rem;
+      color: var(--navy-900); background: var(--paper); direction: ltr; text-align: left; font-size: .65rem;
+    }
+    .results { display: grid; gap: .55rem; }
+    .result { padding: .72rem; border-radius: 10px; background: var(--navy-900); color: white; }
+    .result span { display: block; color: rgba(255,255,255,.65); font-size: .58rem; }
+    .result strong { display: block; direction: ltr; text-align: right; font-size: clamp(.85rem, 1.2vw, 1.15rem); margin-top: .15rem; }
+
+    /* =========================
+       Controls, menu, notes, modals
+       ========================= */
+    .controls {
+      position: fixed; z-index: 30; inset-inline: 50%; bottom: max(.75rem, env(safe-area-inset-bottom));
+      transform: translateX(50%); display: flex; align-items: center; gap: .45rem;
+      padding: .42rem; border: 1px solid rgba(255,255,255,.45);
+      background: rgba(8,37,58,.92); backdrop-filter: blur(16px); border-radius: 14px;
+      box-shadow: 0 12px 34px rgba(8,37,58,.24);
+    }
+    .control-btn {
+      width: 2.45rem; height: 2.45rem; display: grid; place-items: center; border: 0;
+      border-radius: 9px; background: transparent; color: white; cursor: pointer;
+    }
+    .control-btn:hover, .control-btn:focus-visible { background: rgba(255,255,255,.13); outline: none; }
+    .control-btn:disabled { opacity: .28; cursor: default; }
+    .control-btn svg { width: 1.15rem; height: 1.15rem; }
+    .counter { min-width: 4.5rem; text-align: center; color: white; font-size: .75rem; direction: ltr; }
+    .progress-track { position: fixed; z-index: 29; inset-inline: 0; bottom: 0; height: 4px; background: rgba(8,37,58,.12); }
+    .progress-bar { height: 100%; width: 0; background: var(--aqua-500); transition: width .35s ease; }
+    .utility {
+      position: fixed; z-index: 30; top: .8rem; inset-inline-end: .8rem; display: flex; gap: .4rem;
+    }
+    .utility .control-btn { background: rgba(8,37,58,.88); box-shadow: 0 8px 22px rgba(8,37,58,.12); }
+    .nav-drawer {
+      position: fixed; z-index: 60; top: 0; bottom: 0; inset-inline-start: 0; inset-inline-end: auto; width: min(24rem, 88vw);
+      transform: translateX(105%); transition: transform .32s ease;
+      background: rgba(248,251,252,.985); box-shadow: -18px 0 55px rgba(8,37,58,.18);
+      display: grid; grid-template-rows: auto 1fr; padding: 1.2rem; direction: rtl;
+    }
+    .nav-drawer.open { transform: translateX(0); }
+    .drawer-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: .8rem; border-bottom: 1px solid var(--slate-200); }
+    .drawer-list { overflow: auto; padding: .65rem 0; }
+    .drawer-item {
+      width: 100%; display: grid; grid-template-columns: 2rem 1fr; gap: .7rem; text-align: right;
+      border: 0; background: transparent; padding: .68rem .45rem; border-radius: 9px; cursor: pointer; color: var(--slate-700);
+    }
+    .drawer-item:hover, .drawer-item.active { background: var(--aqua-100); color: var(--navy-900); }
+    .drawer-item span:first-child { direction: ltr; color: var(--aqua-600); font-weight: 800; }
+    .scrim { position: fixed; z-index: 50; inset: 0; background: rgba(8,37,58,.36); opacity: 0; visibility: hidden; transition: .25s ease; }
+    .scrim.open { opacity: 1; visibility: visible; }
+    .speaker-notes {
+      position: fixed; z-index: 55; inset-inline: 0; bottom: 0; max-height: 44vh;
+      transform: translateY(105%); transition: transform .3s ease;
+      background: rgba(8,37,58,.97); color: white; padding: 1.3rem clamp(1.2rem, 5vw, 5rem) 4.9rem;
+      box-shadow: 0 -16px 44px rgba(8,37,58,.24); overflow: auto;
+    }
+    .speaker-notes.open { transform: translateY(0); }
+    .notes-close {
+      position: absolute; top: .65rem; inset-inline-end: .75rem; width: 2rem; height: 2rem;
+      border: 1px solid rgba(255,255,255,.2); border-radius: 50%; background: rgba(255,255,255,.1);
+      color: white; cursor: pointer;
+    }
+    .notes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+    .note-block h4 { margin: 0 0 .3rem; color: #8bd7df; font-size: .78rem; }
+    .note-block p { color: rgba(255,255,255,.76); font-size: .72rem; }
+    .modal {
+      position: fixed; z-index: 80; inset: 0; display: grid; place-items: center; padding: 1rem;
+      opacity: 0; visibility: hidden; transition: .22s ease; background: rgba(8,37,58,.58);
+    }
+    .modal.open { opacity: 1; visibility: visible; }
+    .modal-card {
+      width: min(42rem, 96vw); max-height: 90vh; overflow: auto;
+      background: var(--white); border-radius: 20px; padding: clamp(1.2rem, 3vw, 2.2rem);
+      box-shadow: 0 30px 90px rgba(8,37,58,.28); transform: translateY(1rem); transition: .22s ease;
+    }
+    .modal.open .modal-card { transform: translateY(0); }
+    .modal-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.1rem; }
+    .modal-head h3 { font-size: 1.35rem; }
+    .close-btn { width: 2.2rem; height: 2.2rem; border: 0; border-radius: 50%; background: var(--slate-100); cursor: pointer; color: var(--navy-900); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+    .field { display: grid; gap: .32rem; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { color: var(--slate-700); font-size: .78rem; font-weight: 700; }
+    .field input, .field textarea, .field select {
+      width: 100%; border: 1px solid var(--slate-300); border-radius: 9px; padding: .68rem .75rem;
+      color: var(--navy-900); background: white; outline: none;
+    }
+    .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--aqua-500); box-shadow: 0 0 0 3px rgba(34,174,190,.12); }
+    .field textarea { min-height: 6rem; resize: vertical; }
+    .doc-list { display: grid; gap: .7rem; }
+    .doc-item { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .8rem; border: 1px solid var(--slate-200); border-radius: 10px; }
+    .doc-item span { color: var(--slate-700); }
+
+    /* =========================
+       Responsive adaptation
+       ========================= */
+    @media (max-width: 900px) {
+      .presentation { padding: 0; align-items: stretch; }
+      .deck { width: 100vw; height: 100dvh; aspect-ratio: auto; border-radius: 0; }
+      .slide { overflow-y: auto; padding: 4.4rem 1.1rem 5.4rem; }
+      .slide-head { min-height: auto; }
+      .brand-lockup .brand-name { display: none; }
+      .two-col, .three-col, .four-col, .split-60, .cover-grid, .integration, .evidence-layout,
+      .decision-layout, .company-facts, .calculator { grid-template-columns: 1fr; }
+      .cover-grid { align-content: start; }
+      .facility-visual { min-height: 14rem; }
+      .chain-wrap { overflow-x: auto; padding-top: 3rem; }
+      .chain { min-width: 48rem; }
+      .state-compare { grid-template-columns: 1fr; }
+      .compare-arrow { transform: rotate(90deg); }
+      .application-layout { grid-template-columns: 1fr; }
+      .route { grid-template-columns: 1fr; }
+      .route-track { overflow-x: auto; padding-bottom: .35rem; }
+      .guardrails, .cert-grid, .product-grid { grid-template-columns: 1fr 1fr; }
+      .timeline { grid-template-columns: 1fr 1fr; }
+      .timeline::before { display: none; }
+      .orbit-grid { min-height: auto; display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+      .orbit-center { position: relative; inset: auto; transform: none; width: auto; aspect-ratio: auto; border-radius: 16px; grid-column: 1 / -1; min-height: 6rem; }
+      .orbit-center::after { display: none; }
+      .orbit-item { position: relative !important; inset: auto !important; width: auto; }
+      .notes-grid { grid-template-columns: 1fr; }
+      .slide-foot { inset-inline: 1.1rem; }
+    }
+    @media (max-width: 560px) {
+      .slide h2 { font-size: 1.65rem; }
+      .client-logo { display: none; }
+      .guardrails, .cert-grid, .product-grid, .timeline, .orbit-grid, .form-grid { grid-template-columns: 1fr; }
+      .orbit-center { grid-column: auto; }
+      .controls { gap: .12rem; }
+      .utility { top: .5rem; inset-inline-end: .5rem; }
+      .speaker-notes { max-height: 66vh; }
+      .dashboard { overflow-x: auto; }
+      .dashboard table { min-width: 42rem; }
+      .big-words span::after { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+    }
+
+    /* =========================
+       Print / PDF export
+       ========================= */
+    @media print {
+      @page { size: 13.333in 7.5in; margin: 0; }
+      html, body { overflow: visible; background: white; }
+      .presentation { position: static; display: block; padding: 0; background: white; }
+      .deck { width: auto; height: auto; aspect-ratio: auto; overflow: visible; border: 0; border-radius: 0; box-shadow: none; }
+      .slides { position: static; }
+      .slide {
+        position: relative; display: grid !important; visibility: visible !important; opacity: 1 !important;
+        transform: none !important; width: 13.333in; height: 7.5in; page-break-after: always;
+        break-after: page; overflow: hidden; pointer-events: auto;
+      }
+      .slide:last-child { page-break-after: auto; }
+      .controls, .utility, .progress-track, .nav-drawer, .scrim, .speaker-notes, .modal, .reveal-hint { display: none !important; }
+      .orbit-item { opacity: 1 !important; transform: none !important; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="presentation" aria-label="عرض Envirolyte التفاعلي">
+    <div class="deck" id="deck">
+      <div class="slides">
+
+        <!-- 01 | Cover -->
+        <section class="slide slide-cover active" data-title="من شراء مواد التعقيم إلى إنتاجها عند الحاجة">
+          <div class="slide-head">
+            <div class="brand-lockup" aria-label="مكان شعار Envirolyte">
+              <span class="brand-mark" aria-hidden="true"></span><span class="brand-name">ENVIROLYTE</span>
+            </div>
+            <div class="client-logo">[شعار الجهة]</div>
+          </div>
+          <div class="slide-body cover-grid">
+            <div class="cover-copy">
+              <p class="cover-kicker">مقترح فني لتقييم فرصة تشغيلية</p>
+              <h1 class="cover-title">من شراء مواد التعقيم إلى إنتاجها عند الحاجة</h1>
+              <p class="cover-sub">تقييم تقنية <span class="latin">Envirolyte</span> لإنتاج محاليل التطهير في الموقع باستخدام الماء والملح والكهرباء — في منشآت [اسم الجهة].</p>
+              <div class="cover-meta">
+                <span>مقدم من: [اسم الشركة أو الوكيل في قطر]</span>
+                <span>مقدم إلى: [اسم الجهة]</span>
+                <span>التاريخ: [التاريخ]</span>
+              </div>
+              <a class="source-link" href="https://www.ashghal.gov.qa/en/Projects/Pages/projectdetails.aspx?pid=231" target="_blank" rel="noopener">مرجع صورة مقترحة: منشأة مياه في قطر ↗</a>
+            </div>
+            <div class="facility-visual" aria-label="رسم تصوري لمنشأة مياه حديثة متصلة بوحدة إنتاج">
+              <div class="facility-orbit" aria-hidden="true"></div>
+              <svg class="facility-svg" viewBox="0 0 600 520" role="img" aria-label="منشأة معالجة مياه ووحدة Envirolyte">
+                <defs>
+                  <filter id="coverShadow"><feDropShadow dx="0" dy="18" stdDeviation="16" flood-opacity=".28"/></filter>
+                </defs>
+                <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M55 397 C155 335, 235 426, 336 362 S503 332, 558 370" stroke="#22aebe" stroke-width="10" opacity=".45"/>
+                  <path d="M52 423 C152 361, 240 452, 340 389 S508 358, 562 394" stroke="#8bd7df" stroke-width="3" opacity=".65" class="flow-dash"/>
+                  <g filter="url(#coverShadow)">
+                    <path d="M110 318V188h232v130" fill="#f8fbfc" stroke="#8bd7df" stroke-width="3"/>
+                    <path d="M90 188h273l-39-54H132z" fill="#154762" stroke="#8bd7df" stroke-width="3"/>
+                    <rect x="142" y="220" width="58" height="98" rx="6" fill="#dff5f6" stroke="#22aebe" stroke-width="3"/>
+                    <rect x="218" y="220" width="92" height="98" rx="6" fill="#edf3f5" stroke="#68808d" stroke-width="3"/>
+                    <path d="M374 318V222h105v96" fill="#f8fbfc" stroke="#8bd7df" stroke-width="3"/>
+                    <path d="M396 220v-50h62v50" fill="#0b3048" stroke="#8bd7df" stroke-width="3"/>
+                    <rect x="405" y="244" width="44" height="42" rx="5" fill="#22aebe" opacity=".25" stroke="#22aebe" stroke-width="2"/>
+                    <circle cx="427" cy="265" r="7" fill="#22aebe"/>
+                    <path d="M310 281h64" stroke="#22aebe" stroke-width="8"/>
+                    <path d="M479 282h58v90" stroke="#22aebe" stroke-width="8"/>
+                    <circle cx="538" cy="373" r="13" fill="#3c8b72" stroke="#e4f2ec" stroke-width="4"/>
+                  </g>
+                  <g stroke="#8bd7df" opacity=".48">
+                    <path d="M91 344h425"/><path d="M123 366h358"/>
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>01</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">افتتاح النقاش كتحول في إدارة عملية التطهير، لا كعرض جهاز أو كتالوج منتجات.</span>
+            <span data-note="opening">اليوم لا نقدم جهازاً فقط؛ بل نناقش ما إذا كان يمكن إنتاج المادة المطلوبة داخل المنشأة بدلاً من الاعتماد الكامل على نقلها وتخزينها.</span>
+            <span data-note="transition">لفهم قيمة الفكرة، نبدأ بما يحدث قبل وصول المادة المطهرة إلى نقطة الاستخدام.</span>
+            <span data-note="avoid">تجنب أي ادعاء عن وفر أو سلامة مطلقة قبل جمع بيانات الموقع.</span>
+          </aside>
+        </section>
+
+        <!-- 02 | Hidden problem -->
+        <section class="slide" data-title="التعقيم التقليدي لا يبدأ عند نقطة الاستخدام">
+          <header class="slide-head">
+            <div><span class="eyebrow">الوضع الحالي</span><h2>التعقيم التقليدي لا يبدأ عند نقطة الاستخدام</h2></div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body">
+            <div class="chain-wrap" aria-label="سلسلة توريد المواد الكيميائية الحالية">
+              <div class="chain-line"></div>
+              <div class="chain">
+                <div class="chain-step" tabindex="0"><span class="tooltip">التزام تعاقدي وتقلب محتمل في التوافر والسعر.</span><div class="chain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16v13H4zM8 7V4h8v3M8 12h8"/></svg></div><div class="chain-label">شراء</div></div>
+                <div class="chain-step" tabindex="0"><span class="tooltip">جدولة نقل، متطلبات امتثال، واحتمال تأخر.</span><div class="chain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h11v11H3zM14 10h4l3 3v4h-7z"/><circle cx="7" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg></div><div class="chain-label">نقل</div></div>
+                <div class="chain-step" tabindex="0"><span class="tooltip">فحص مستندات وكميات وحالة العبوات.</span><div class="chain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h14v16H5zM8 8h8M8 12h5M8 16h7"/></svg></div><div class="chain-label">استلام</div></div>
+                <div class="chain-step" tabindex="0"><span class="tooltip">مساحة مخصصة، جرد، فصل مواد، واشتراطات سلامة.</span><div class="chain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10l9-6 9 6v10H3zM8 20v-6h8v6"/></svg></div><div class="chain-label">تخزين</div></div>
+                <div class="chain-step" tabindex="0"><span class="tooltip">تعرض تشغيلي وحاجة إلى تدريب ومعدات وقاية.</span><div class="chain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 11V6a2 2 0 014 0v4M11 10V5a2 2 0 014 0v5M15 10V7a2 2 0 014 0v7c0 4-3 7-7 7H9c-3 0-5-2-5-5v-4a2 2 0 014 0v2"/></svg></div><div class="chain-label">مناولة</div></div>
+                <div class="chain-step" tabindex="0"><span class="tooltip">احتمال خطأ في النسبة أو التسلسل أو التوثيق.</span><div class="chain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3h6v6l4 8a3 3 0 01-3 4H8a3 3 0 01-3-4l4-8zM8 15h8"/></svg></div><div class="chain-label">تخفيف</div></div>
+                <div class="chain-step" tabindex="0"><span class="tooltip">تتطلب ضبط الجرعة وزمن التلامس والتحقق من المتبقي.</span><div class="chain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3s6 7 6 12a6 6 0 11-12 0c0-5 6-12 6-12zM9 16h6"/></svg></div><div class="chain-label">جرعات</div></div>
+                <div class="chain-step" tabindex="0"><span class="tooltip">عبوات تحتاج إلى فرز ونقل وتخلص وفق الإجراء.</span><div class="chain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"/></svg></div><div class="chain-label">تخلص</div></div>
+              </div>
+            </div>
+            <div class="risk-strip"><span>تكلفة تشغيلية</span><span>اعتماد على المورد</span><span>إجراءات سلامة</span><span>خطأ بشري محتمل</span><span>مخزون ومساحة</span></div>
+            <div class="message-band" style="margin-top:1.15rem">المشكلة ليست في سعر المادة الكيميائية فقط؛ بل في سلسلة الإجراءات التي تسبق استخدامها.</div>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>02</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">إظهار التكلفة التشغيلية والمخاطر موزعة عبر السلسلة، وليس في فاتورة المادة وحدها.</span>
+            <span data-note="opening">قبل أن تصل المادة إلى نقطة الحقن، تكون قد مرّت بسلسلة كاملة من القرارات والإجراءات.</span>
+            <span data-note="transition">وحين تتكرر هذه السلسلة، تصبح القضية قضية استمرارية تشغيل.</span>
+            <span data-note="avoid">لا تفترض أن كل مرحلة تمثل مشكلة لدى الجهة؛ استخدمها كأسئلة تحقق.</span>
+          </aside>
+        </section>
+
+        <!-- 03 | Why reconsider -->
+        <section class="slide" data-title="القضية ليست التعقيم فقط بل استمرارية العملية">
+          <header class="slide-head">
+            <div><span class="eyebrow">لماذا الآن؟</span><h2>القضية ليست التعقيم فقط… بل استمرارية عملية التعقيم</h2></div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body">
+            <div class="orbit-grid" data-step-group>
+              <div class="orbit-center">منظومة تطهير موثوقة وقابلة للقياس</div>
+              <div class="orbit-item step-item"><h3>استمرارية التشغيل</h3><p>توافر المادة المطهرة قد يرتبط بالتوريد والمخزون.</p></div>
+              <div class="orbit-item step-item"><h3>السلامة</h3><p>النقل والتخزين والمناولة تحتاج إلى ضوابط مستمرة.</p></div>
+              <div class="orbit-item step-item"><h3>جودة العملية</h3><p>التركيز والجرعة وزمن التلامس يجب أن تظل قابلة للمراقبة.</p></div>
+              <div class="orbit-item step-item"><h3>التكلفة والاستدامة</h3><p>الشراء والنقل والتخزين والعبوات تتكرر مع كل دورة توريد.</p></div>
+              <span class="reveal-hint">اضغط المسافة لإظهار المحاور تدريجيًا</span>
+            </div>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>03</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">ربط القرار بأربعة أبعاد تهم التشغيل والجودة والسلامة والمالية معاً.</span>
+            <span data-note="opening">نجاح التعقيم لا يقاس بلحظة الجرعة وحدها، بل بقدرة العملية على الاستمرار تحت السيطرة.</span>
+            <span data-note="transition">هذا يفتح سؤالاً عملياً: هل يمكن تبسيط مصدر المادة نفسها؟</span>
+            <span data-note="avoid">لا تصف الوضع الحالي بالفشل؛ ركز على فرصة زيادة المرونة والقياس.</span>
+          </aside>
+        </section>
+
+        <!-- 04 | Big idea -->
+        <section class="slide" data-title="ماذا لو أنتجت الجهة محلول التطهير داخل منشآتها؟">
+          <header class="slide-head">
+            <div><span class="eyebrow">ما يمكن أن يكون</span><h2>ماذا لو أنتجت الجهة محلول التطهير داخل منشآتها؟</h2></div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body">
+            <div class="input-formula"><span>ماء</span><b class="plus">+</b><span>ملح</span><b class="plus">+</b><span>كهرباء</span><b class="plus">←</b><span style="border-color:var(--aqua-500)">محاليل وظيفية عند الحاجة</span></div>
+            <div class="state-compare">
+              <div class="state current">
+                <div class="state-title"><strong>الوضع الحالي</strong><span class="amber">سلسلة متكررة</span></div>
+                <div class="state-flow"><span class="flow-node">شراء</span><span class="flow-node">نقل</span><span class="flow-node">تخزين</span><span class="flow-node">إعادة طلب</span><span class="flow-node">مناولة</span><span class="flow-node">عبوات</span></div>
+              </div>
+              <div class="compare-arrow">←</div>
+              <div class="state future">
+                <div class="state-title"><strong>ما يمكن أن يكون</strong><span class="green">عملية محلية</span></div>
+                <div class="state-flow"><span class="flow-node">إنتاج في الموقع</span><span class="flow-node">وفق الاحتياج</span><span class="flow-node">جرعة مضبوطة</span><span class="flow-node">بيانات تشغيل</span></div>
+              </div>
+            </div>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>04</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">عرض التباين بين سلسلة توريد طويلة وعملية إنتاج محلية أبسط من دون ادعاء إلغائها بالكامل.</span>
+            <span data-note="opening">الفكرة ليست استبدال كل شيء دفعة واحدة، بل دراسة نقل جزء من السيطرة إلى داخل الموقع.</span>
+            <span data-note="transition">كيف تتحول هذه المدخلات البسيطة إلى محلولين وظيفيين؟</span>
+            <span data-note="avoid">استخدم عبارة «قد يساعد على تقليل الاعتماد» لا «يلغي المواد المنقولة».</span>
+          </aside>
+        </section>
+
+        <!-- 05 | Technology -->
+        <section class="slide" data-title="أربع خطوات من المدخلات البسيطة إلى الاستخدام">
+          <header class="slide-head">
+            <div><span class="eyebrow">التقنية باختصار</span><h2>أربع خطوات من المدخلات البسيطة إلى الاستخدام</h2></div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body">
+            <svg class="process-svg" viewBox="0 0 1100 390" role="img" aria-label="مخطط إنتاج Anolyte وCatholyte من الماء والمحلول الملحي">
+              <defs><marker id="arrowAqua" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#0b94a6"/></marker></defs>
+              <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M180 120H395" stroke="#0b94a6" stroke-width="6" marker-end="url(#arrowAqua)" class="flow-dash"/>
+                <path d="M650 120H760V67H900" stroke="#0b94a6" stroke-width="6" marker-end="url(#arrowAqua)" class="flow-dash"/>
+                <path d="M650 120H760V258H900" stroke="#3c8b72" stroke-width="6" marker-end="url(#arrowAqua)" class="flow-dash"/>
+                <g>
+                  <rect x="40" y="50" width="140" height="140" rx="22" fill="#fff" stroke="#bed0d8" stroke-width="2"/>
+                  <path d="M88 113c0-25 23-45 23-45s23 20 23 45a23 23 0 11-46 0z" fill="#dff5f6" stroke="#0b94a6" stroke-width="3"/>
+                  <text x="110" y="165" fill="#08253a" font-family="Tahoma" font-size="22" text-anchor="middle">مياه</text>
+                  <rect x="210" y="50" width="140" height="140" rx="22" fill="#fff" stroke="#bed0d8" stroke-width="2"/>
+                  <path d="M250 122h60l-9 33h-42zM262 88h36v34h-36z" fill="#edf3f5" stroke="#68808d" stroke-width="3"/>
+                  <circle cx="275" cy="102" r="3" fill="#0b94a6"/><circle cx="288" cy="112" r="3" fill="#0b94a6"/>
+                  <text x="280" y="175" fill="#08253a" font-family="Tahoma" font-size="20" text-anchor="middle">محلول ملحي</text>
+                </g>
+                <g>
+                  <rect x="400" y="25" width="250" height="190" rx="26" fill="#0b3048" stroke="#22aebe" stroke-width="3"/>
+                  <rect x="444" y="58" width="162" height="112" rx="15" fill="#154762" stroke="#8bd7df" stroke-width="2"/>
+                  <path d="M525 58v112" stroke="#8bd7df" stroke-width="3" stroke-dasharray="7 7"/>
+                  <path d="M466 82v64M488 82v64M562 82v64M584 82v64" stroke="#22aebe" stroke-width="5"/>
+                  <text x="525" y="250" fill="#08253a" font-family="Tahoma" font-size="21" text-anchor="middle">خلية كهروكيميائية بغشاء فاصل</text>
+                </g>
+                <g>
+                  <rect x="905" y="18" width="165" height="110" rx="20" fill="#dff5f6" stroke="#0b94a6" stroke-width="3"/>
+                  <path d="M955 63c0-17 17-31 17-31s17 14 17 31a17 17 0 11-34 0z" fill="#0b94a6"/>
+                  <text x="987" y="99" fill="#08253a" font-family="Tahoma" font-size="20" text-anchor="middle">Anolyte</text>
+                  <rect x="905" y="214" width="165" height="110" rx="20" fill="#e4f2ec" stroke="#3c8b72" stroke-width="3"/>
+                  <path d="M951 266h42M961 246h22v20M956 280h32" stroke="#3c8b72" stroke-width="5"/>
+                  <text x="987" y="303" fill="#08253a" font-family="Tahoma" font-size="20" text-anchor="middle">Catholyte</text>
+                </g>
+                <path d="M987 128v60" stroke="#68808d" stroke-width="3" marker-end="url(#arrowAqua)"/>
+                <text x="987" y="363" fill="#3c5362" font-family="Tahoma" font-size="19" text-anchor="middle">خزان • مضخة جرعات • نقطة استخدام</text>
+              </g>
+            </svg>
+            <div class="process-legend"><span><i class="legend-dot" style="background:var(--aqua-600)"></i><span class="latin">Anolyte</span> للتطهير والتحكم الميكروبي</span><span><i class="legend-dot" style="background:var(--green-600)"></i><span class="latin">Catholyte</span> للغسيل والتنظيف القلوي</span></div>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>05</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">تبسيط مبدأ التنشيط الكهروكيميائي إلى مدخلات، خلية غشائية، ومسارين وظيفيين.</span>
+            <span data-note="opening">لا نحتاج إلى معادلات معقدة لفهم القرار التشغيلي: المدخلات معروفة، والخرج يُنتج ويُقاس.</span>
+            <span data-note="transition">المساران ليسا منتجاً واحداً؛ لكل محلول وظيفة مختلفة.</span>
+            <span data-note="avoid">لا تحدد تركيزاً أو جرعة أو جودة خرج من دون طراز ومياه وتطبيق معتمد.</span>
+          </aside>
+        </section>
+
+        <!-- 06 | Outputs -->
+        <section class="slide" data-title="محلولان بوظيفتين مختلفتين">
+          <header class="slide-head">
+            <div><span class="eyebrow">المخرجات</span><h2>محلولان، بوظيفتين مختلفتين</h2></div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body">
+            <div class="two-col">
+              <article class="solution-card anolyte">
+                <div class="solution-icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3s6 7 6 12a6 6 0 11-12 0c0-5 6-12 6-12z"/><path d="M9 15l2 2 4-5"/></svg></div>
+                <h3 class="latin">Anolyte</h3>
+                <ul class="clean"><li>تطهير المياه.</li><li>التحكم الميكروبي.</li><li>تطهير الأسطح والمعدات المتوافقة.</li><li>دعم بعض عمليات التصنيع والتنظيف.</li></ul>
+              </article>
+              <article class="solution-card catholyte">
+                <div class="solution-icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 18h16M7 18v-4h10v4M9 14V8h6v6M8 5h8M12 5v3"/></svg></div>
+                <h3 class="latin">Catholyte</h3>
+                <ul class="clean"><li>الغسيل والتنظيف.</li><li>دعم إزالة بعض الرواسب والأوساخ.</li><li>بعض عمليات <span class="latin">CIP</span>.</li><li>بعض تطبيقات تعديل الأس الهيدروجيني.</li></ul>
+              </article>
+            </div>
+            <div class="notice" style="margin-top:1rem">يعتمد الاستخدام النهائي والتركيز والجرعة على التطبيق، وجودة المياه، والمواد الملامسة، ومتطلبات الجهة.</div>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>06</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">تمييز الوظائف العامة للمحلولين مع إبقاء الاختيار النهائي خاضعاً للتحقق الفني.</span>
+            <span data-note="opening">قيمة الفصل بين المسارين أن وظيفة التطهير تختلف عن وظيفة الغسيل القلوي.</span>
+            <span data-note="transition">القيمة لا تتحقق إلا عند ربط التقنية بتطبيق محدد لدى الجهة.</span>
+            <span data-note="avoid">لا تقل إن المحلولين يناسبان كل سطح أو عملية، ولا تستخدم وصف «آمن 100%».</span>
+          </aside>
+        </section>
+
+        <!-- 07 | Applications -->
+        <section class="slide" data-title="أين يمكن أن تبدأ الجهة؟">
+          <header class="slide-head">
+            <div><span class="eyebrow">تطبيق أولي</span><h2>أين يمكن أن تبدأ [اسم الجهة]؟</h2></div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body">
+            <div class="application-layout">
+              <article class="application primary"><span class="tag">[التطبيق الأنسب للجهة]</span><h3>أنظمة المياه والخزانات</h3><ul class="clean"><li>إنتاج المحلول في الموقع.</li><li>حقن بجرعة محسوبة.</li><li>قياس المتبقي و<span class="latin">ORP / pH</span>.</li><li>تحقق قبل التطبيق وبعده.</li></ul></article>
+              <article class="application"><span class="tag">خيار للتقييم</span><h3>أبراج التبريد</h3><ul class="clean"><li>تحكم ميكروبي.</li><li>دعم إدارة الأغشية الحيوية.</li><li>جرعات خاضعة للمراقبة.</li><li>تكامل مع التشغيل الحالي.</li></ul></article>
+              <article class="application"><span class="tag">خيار للتقييم</span><h3>الأغذية والمطابخ و<span class="latin">CIP</span></h3><ul class="clean"><li><span class="latin">Catholyte</span> لدعم الغسيل.</li><li><span class="latin">Anolyte</span> للتطهير.</li><li>إنتاج حسب احتياج التشغيل.</li><li>تقليل محتمل للمواد المنقولة.</li></ul></article>
+            </div>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>07</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">اختيار نقطة بداية واحدة عالية الصلة بدلاً من نشر التقنية على عدة تطبيقات دفعة واحدة.</span>
+            <span data-note="opening">السؤال ليس أين يمكن استخدام التقنية نظرياً، بل أين يمكن اختبارها بوضوح وبأقل تعقيد.</span>
+            <span data-note="transition">بعد اختيار التطبيق، نرسم كيف يندمج النظام مع المنظومة القائمة.</span>
+            <span data-note="avoid">لا تعتمد التطبيق المميز قبل ورشة فنية وزيارة الموقع.</span>
+          </aside>
+        </section>
+
+        <!-- 08 | Integration -->
+        <section class="slide" data-title="تكامل مع المنظومة الحالية وليس استبدالاً عشوائياً">
+          <header class="slide-head">
+            <div><span class="eyebrow">تصور مبدئي</span><h2>تكامل مع المنظومة الحالية، وليس استبدالاً عشوائياً لها</h2></div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body integration">
+            <svg class="integration-svg" viewBox="0 0 820 430" role="img" aria-label="مخطط دمج جهاز Envirolyte مع شبكة المياه">
+              <defs><marker id="arrInt" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0v6l9-3z" fill="#0b94a6"/></marker></defs>
+              <g font-family="Tahoma" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M70 215H755" stroke="#0b94a6" stroke-width="10" opacity=".22"/>
+                <path d="M70 215H755" stroke="#0b94a6" stroke-width="4" marker-end="url(#arrInt)" class="flow-dash"/>
+                <g fill="#fff" stroke="#bed0d8" stroke-width="2">
+                  <rect x="25" y="160" width="110" height="110" rx="18"/><rect x="165" y="160" width="110" height="110" rx="18"/>
+                  <rect x="305" y="142" width="125" height="146" rx="18"/><rect x="470" y="160" width="110" height="110" rx="18"/>
+                  <rect x="610" y="160" width="110" height="110" rx="18"/>
+                </g>
+                <g fill="#08253a" font-size="17" text-anchor="middle">
+                  <text x="80" y="210">مصدر المياه</text><text x="80" y="235" font-size="13" fill="#68808d">[المصدر]</text>
+                  <text x="220" y="207">المعالجة</text><text x="220" y="232">الحالية</text>
+                  <text x="368" y="205">Envirolyte</text><text x="368" y="235" font-size="13" fill="#68808d">وحدة الإنتاج</text>
+                  <text x="525" y="207">خزان</text><text x="525" y="232">Anolyte</text>
+                  <text x="665" y="207">مضخة</text><text x="665" y="232">الجرعات</text>
+                </g>
+                <path d="M368 142V72H265" stroke="#3c8b72" stroke-width="4" marker-end="url(#arrInt)"/>
+                <rect x="160" y="34" width="105" height="75" rx="14" fill="#e4f2ec" stroke="#3c8b72" stroke-width="2"/>
+                <text x="212" y="79" fill="#08253a" font-size="17" text-anchor="middle">خزان الملح</text>
+                <path d="M665 270v70h75" stroke="#0b94a6" stroke-width="4" marker-end="url(#arrInt)"/>
+                <rect x="705" y="319" width="100" height="75" rx="14" fill="#dff5f6" stroke="#0b94a6" stroke-width="2"/>
+                <text x="755" y="350" fill="#08253a" font-size="15" text-anchor="middle">نقطة الحقن</text><text x="755" y="373" fill="#68808d" font-size="13" text-anchor="middle">زمن التلامس</text>
+                <path d="M605 215v-95H500" stroke="#68808d" stroke-width="3" marker-end="url(#arrInt)"/>
+                <rect x="435" y="55" width="120" height="70" rx="14" fill="#edf3f5" stroke="#68808d" stroke-width="2"/>
+                <text x="495" y="84" fill="#08253a" font-size="15" text-anchor="middle">لوحة التحكم</text><text x="495" y="106" fill="#68808d" font-size="12" text-anchor="middle">ORP / FAC</text>
+              </g>
+            </svg>
+            <div class="criteria">
+              <h3 style="margin-bottom:.8rem">يتحدد التصميم وفق:</h3>
+              <ul class="clean"><li>معدل التدفق.</li><li>جودة المياه.</li><li>التركيز المستهدف.</li><li>زمن التلامس.</li><li>متطلبات التطبيق.</li></ul>
+              <p class="small" style="margin-top:1rem">تصور أولي للنقاش؛ ليس مخططاً هندسياً تنفيذياً.</p>
+            </div>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>08</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">إظهار أن الوحدة جزء من منظومة متكاملة تشمل الخزان والجرعات والقياس والتحكم.</span>
+            <span data-note="opening">الجهاز وحده لا يصنع نتيجة؛ النتيجة تأتي من تكامل الإنتاج والجرعة وزمن التلامس والقياس.</span>
+            <span data-note="transition">عند اكتمال هذا التكامل، يتغير المسار التشغيلي نفسه.</span>
+            <span data-note="avoid">أكد أن الرسم تصور مبدئي ولا يحدد السعة أو نقطة التركيب النهائية.</span>
+          </aside>
+        </section>
+
+        <!-- 09 | Operating comparison -->
+        <section class="slide" data-title="من سلسلة توريد كيميائية إلى عملية إنتاج خاضعة للتحكم">
+          <header class="slide-head">
+            <div><span class="eyebrow">المقارنة التشغيلية</span><h2>من سلسلة توريد كيميائية إلى عملية إنتاج خاضعة للتحكم</h2></div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body">
+            <div class="route traditional"><div class="route-label">النموذج التقليدي</div><div class="route-track"><span>طلب دوري</span><span class="arrow">←</span><span>نقل</span><span class="arrow">←</span><span>تخزين</span><span class="arrow">←</span><span>مناولة</span><span class="arrow">←</span><span>جرعة</span><span class="arrow">←</span><span>عبوات</span></div></div>
+            <div class="route on-site"><div class="route-label">الإنتاج في الموقع</div><div class="route-track"><span>مدخلات تشغيلية</span><span class="arrow">←</span><span>إنتاج حسب الحاجة</span><span class="arrow">←</span><span>جرعة وقياس</span><span class="arrow">←</span><span>سجل تشغيل</span></div></div>
+            <div class="two-col" style="margin-top:1rem;align-items:start">
+              <p class="lead">التحول المقترح: استثمار مبدئي وتكاليف تشغيل وصيانة مقابل إمكانية تقليل الاعتماد على المطهر الجاهز.</p>
+              <div class="notice">لا توجد نسبة وفر معتمدة قبل بناء خط أساس وإدخال بيانات الجهة.</div>
+            </div>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>09</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">مقارنة طول المسارين ومصادر السيطرة، لا مقارنة سعرية غير موثقة.</span>
+            <span data-note="opening">الإنتاج في الموقع لا يلغي التكلفة؛ لكنه يعيد توزيعها من سلسلة توريد إلى أصول وتشغيل يمكن قياسهما.</span>
+            <span data-note="transition">ولهذا يجب أن ينتقل القرار من الوعود إلى طبقات واضحة من الأدلة.</span>
+            <span data-note="avoid">لا تذكر نسبة توفير أو فترة استرداد قبل إدخال بيانات فعلية.</span>
+          </aside>
+        </section>
+
+        <!-- 10 | Evidence -->
+        <section class="slide" data-title="القرار يجب أن يعتمد على الأدلة لا على الادعاءات">
+          <header class="slide-head">
+            <div><span class="eyebrow">الدليل والثقة</span><h2>القرار يجب أن يعتمد على الأدلة، لا على الادعاءات</h2></div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body evidence-layout">
+            <div class="evidence-stairs" aria-label="من اعتماد المصنع إلى إثبات النتائج داخل الموقع">
+              <div class="evidence-step">نظام الجودة والتصنيع</div>
+              <div class="evidence-step">الاختبارات الفنية والمخبرية</div>
+              <div class="evidence-step">التحقق من ملاءمة التطبيق</div>
+              <div class="evidence-step">التجربة داخل موقع الجهة</div>
+              <div class="evidence-step">قرار مبني على النتائج</div>
+            </div>
+            <div class="stack">
+              <h3>من اعتماد المصنع إلى إثبات النتائج داخل الموقع</h3>
+              <ul class="clean check-list"><li><span class="latin">ISO 9001:2015</span>.</li><li><span class="latin">NSF/ANSI 61</span> حيث ينطبق.</li><li>اختبارات ميكروبيولوجية ونواتج ثانوية.</li><li>وثائق التشغيل والصيانة.</li><li>بيانات الجرعات والمراقبة.</li></ul>
+              <button class="secondary-btn" data-open-modal="docsModal">عرض الوثائق الفنية</button>
+              <a class="small" href="https://envirolyte.com/approvals/quality-control/" target="_blank" rel="noopener">مرجع الاعتمادات الرسمي ↗</a>
+            </div>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>10</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">ترتيب الثقة من نظام المصنع إلى دليل الموقع، مع اعتبار التجربة المحلية أعلى قيمة للقرار.</span>
+            <span data-note="opening">الشهادة مهمة، لكنها لا تعوض إثبات أن التطبيق يعمل في مياه وظروف الجهة.</span>
+            <span data-note="transition">هذا النهج يفرض علينا أيضاً أن نكون واضحين بشأن حدود ما ندعيه.</span>
+            <span data-note="avoid">تحقق من نطاق كل شهادة وطراز وتطبيق قبل استخدامها في ملف اعتماد رسمي.</span>
+          </aside>
+        </section>
+
+        <!-- 11 | Guardrails -->
+        <section class="slide" data-title="ما الذي لا ندعيه؟">
+          <header class="slide-head">
+            <div><span class="eyebrow">منهج تقييم مسؤول</span><h2>ما الذي لا ندّعيه؟</h2></div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body">
+            <div class="guardrails">
+              <div class="guardrail"><span class="tick">✓</span><p>التقنية ليست حلاً واحداً مناسباً لكل التطبيقات.</p></div>
+              <div class="guardrail"><span class="tick">✓</span><p>اختيار الجهاز يأتي بعد دراسة السعة وجودة المياه.</p></div>
+              <div class="guardrail"><span class="tick">✓</span><p>لا نعتمد وفراً مالياً قبل إعداد خط أساس.</p></div>
+              <div class="guardrail"><span class="tick">✓</span><p>الموافقة التنظيمية تخضع لمراجعة الجهات المختصة.</p></div>
+              <div class="guardrail"><span class="tick">✓</span><p>الجرعة ترتبط بزمن التلامس ووسيلة القياس.</p></div>
+              <div class="guardrail"><span class="tick">✓</span><p>النتيجة النهائية تُختبر في ظروف تشغيل الجهة.</p></div>
+              <div class="guardrail"><span class="tick">✓</span><p>توافق المحلول مع المواد والأسطح يحتاج إلى تحقق.</p></div>
+            </div>
+            <div class="message-band" style="margin-top:1.1rem">الوضوح بشأن الحدود ليس تحفظاً؛ بل جزء من تصميم تجربة يمكن الوثوق بنتيجتها.</div>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>11</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">تحويل الاعتراضات إلى ضوابط مهنية تزيد جودة القرار.</span>
+            <span data-note="opening">أفضل حماية للقرار هي أن نحدد مسبقاً ما لا يمكن حسمه من دون بيانات واختبار.</span>
+            <span data-note="transition">وبناءً على هذه الضوابط، نقترح تجربة محدودة من أربع مراحل.</span>
+            <span data-note="avoid">لا تحول الضوابط إلى نقاط ضعف؛ قدمها كمعايير قبول للتجربة.</span>
+          </aside>
+        </section>
+
+        <!-- 12 | Pilot -->
+        <section class="slide" data-title="لا نطلب قرار شراء اليوم بل إثباتاً عملياً">
+          <header class="slide-head">
+            <div><span class="eyebrow">تجربة منخفضة المخاطر</span><h2>لا نطلب قرار شراء اليوم… نطلب إثباتاً عملياً</h2></div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body">
+            <div class="timeline">
+              <article class="phase"><div class="phase-no">1</div><h3>دراسة الوضع الحالي</h3><p>تحليل المياه • التدفق والاستهلاك • طريقة التعقيم • التكاليف والمشكلات</p></article>
+              <article class="phase"><div class="phase-no">2</div><h3>تصميم التجربة</h3><p>نقطة التطبيق • النظام المبدئي • الجرعة • زمن التلامس • مؤشرات النجاح</p></article>
+              <article class="phase"><div class="phase-no">3</div><h3>التشغيل التجريبي</h3><p>تركيب وتشغيل • تدريب • عينات قبل وبعد • تسجيل بيانات التشغيل</p></article>
+              <article class="phase"><div class="phase-no">4</div><h3>تقرير القرار</h3><p>نتائج فنية وتشغيلية • تحليل تكلفة • مخاطر • توصية بالتوسع أو التعديل أو التوقف</p></article>
+            </div>
+            <div class="message-band" style="margin-top:1.4rem">المدة المقترحة: [تحدد بعد المعاينة والاتفاق على نطاق التجربة]</div>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>12</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">خفض عتبة القرار عبر Pilot له بداية ونهاية ومعايير نجاح واضحة.</span>
+            <span data-note="opening">بدلاً من القفز إلى الشراء، نقترح مساراً يتيح للجهة أن تختبر وتتعلم ثم تقرر.</span>
+            <span data-note="transition">لكي تكون التجربة مفيدة، يجب الاتفاق مسبقاً على ما سنقيسه.</span>
+            <span data-note="avoid">لا تعد بمدة ثابتة قبل المعاينة وتحديد نطاق التطبيق.</span>
+          </aside>
+        </section>
+
+        <!-- 13 | KPIs -->
+        <section class="slide" data-title="نتائج قابلة للقياس قبل اتخاذ قرار التوسع">
+          <header class="slide-head">
+            <div><span class="eyebrow">لوحة قرار</span><h2>نتائج قابلة للقياس قبل اتخاذ قرار التوسع</h2></div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body">
+            <div class="kpi-tabs" aria-label="فئات مؤشرات النجاح">
+              <button class="kpi-tab active" data-kpi="فني">فنية</button><button class="kpi-tab" data-kpi="تشغيلي">تشغيلية</button><button class="kpi-tab" data-kpi="سلامة">سلامة</button><button class="kpi-tab" data-kpi="مالي">مالية</button>
+            </div>
+            <div class="dashboard">
+              <table>
+                <thead><tr><th>المؤشر</th><th>خط الأساس</th><th>هدف التجربة</th><th>النتيجة</th><th>الحالة</th></tr></thead>
+                <tbody id="kpiBody"></tbody>
+              </table>
+            </div>
+            <p class="small" style="margin-top:.65rem">جميع القيم أدناه حقول Placeholder؛ لا تمثل نتائج أو أهدافاً معتمدة.</p>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>13</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">تحويل التجربة من انطباع إلى لوحة مؤشرات فنية وتشغيلية وسلامة ومالية.</span>
+            <span data-note="opening">قبل التشغيل نعرّف خط الأساس والهدف وطريقة القياس؛ وبعده نقرأ النتيجة بالطريقة نفسها.</span>
+            <span data-note="transition">إذا اتفقنا على هذا النهج، فالخطوة التالية محددة وبسيطة.</span>
+            <span data-note="avoid">لا تملأ الهدف أو النتيجة قبل اعتماد بروتوكول القياس وبيانات الجهة.</span>
+          </aside>
+        </section>
+
+        <!-- 14 | Decision -->
+        <section class="slide" data-title="الخطوة التالية المقترحة">
+          <header class="slide-head">
+            <div><span class="eyebrow">القرار المطلوب</span><h2>الخطوة التالية المقترحة</h2></div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body decision-layout">
+            <div class="stack">
+              <h3>المطلوب من [اسم الجهة]</h3>
+              <ul class="clean check-list"><li>الموافقة على ورشة فنية.</li><li>اجتماع التشغيل والجودة والسلامة.</li><li>زيارة الموقع وجمع البيانات.</li><li>اختيار تطبيق واحد للتجربة.</li><li>إعداد نطاق <span class="latin">Pilot</span> ومؤشرات نجاح.</li></ul>
+              <div class="big-words"><span>إنتاج محلي</span><span>تحكم</span><span>قياس</span></div>
+              <p class="lead">نبدأ بتقييم محدود، نقيس النتائج، ثم تتخذ الجهة القرار بناءً على بيانات حقيقية من موقعها.</p>
+              <button class="cta" data-open-modal="workshopModal">طلب ورشة فنية</button>
+            </div>
+            <div class="future-visual" aria-label="رسم مستقبل منشأة تعمل بانسيابية">
+              <svg viewBox="0 0 620 470" role="img" aria-label="منشأة مترابطة للإنتاج والتحكم والقياس">
+                <defs><marker id="arrFuture" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0 0v6l9-3z" fill="#0b94a6"/></marker></defs>
+                <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="310" cy="235" r="190" stroke="#dce7eb" stroke-width="2"/>
+                  <circle cx="310" cy="235" r="142" stroke="#dff5f6" stroke-width="26"/>
+                  <path d="M145 235h105M370 235h105M310 70v100M310 300v100" stroke="#0b94a6" stroke-width="7" marker-end="url(#arrFuture)" class="flow-dash"/>
+                  <rect x="250" y="170" width="120" height="130" rx="24" fill="#0b3048" stroke="#22aebe" stroke-width="3"/>
+                  <rect x="275" y="199" width="70" height="55" rx="10" fill="#154762" stroke="#8bd7df" stroke-width="2"/>
+                  <circle cx="310" cy="269" r="9" fill="#3c8b72"/>
+                  <g fill="#fff" stroke="#bed0d8" stroke-width="2">
+                    <rect x="55" y="190" width="100" height="90" rx="16"/><rect x="465" y="190" width="100" height="90" rx="16"/>
+                    <rect x="260" y="15" width="100" height="70" rx="16"/><rect x="260" y="385" width="100" height="70" rx="16"/>
+                  </g>
+                  <g fill="#08253a" font-family="Tahoma" font-size="17" text-anchor="middle">
+                    <text x="105" y="230">مصدر المياه</text><text x="105" y="254" fill="#68808d" font-size="13">مدخل معلوم</text>
+                    <text x="515" y="230">نقطة الاستخدام</text><text x="515" y="254" fill="#68808d" font-size="13">جرعة مضبوطة</text>
+                    <text x="310" y="47">لوحة التحكم</text><text x="310" y="69" fill="#68808d" font-size="12">تسجيل ومراقبة</text>
+                    <text x="310" y="417">التحقق</text><text x="310" y="439" fill="#68808d" font-size="12">قياس وقرار</text>
+                  </g>
+                </g>
+              </svg>
+              <a class="small" style="position:absolute;bottom:0;inset-inline-end:0" href="https://www.aqualia-mena.com/aqualia-in-the-me/qatar" target="_blank" rel="noopener">مرجع صورة منشأة مقترحة ↗</a>
+            </div>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>14</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">طلب قرار صغير ومحدد: ورشة ومعاينة ونطاق Pilot، لا قرار شراء مباشر.</span>
+            <span data-note="opening">الهدف ليس امتلاك جهاز جديد؛ الهدف امتلاك عملية تُنتج عند الحاجة، تُقاس، وتُتحقق قبل التوسع.</span>
+            <span data-note="transition">بعد القرار، يوفر الملحق تفاصيل المنتجات والحقول الفنية المطلوب استكمالها.</span>
+            <span data-note="avoid">لا تحول زر الورشة إلى التزام تعاقدي؛ هو طلب تواصل فني أولي فقط.</span>
+          </aside>
+        </section>
+
+        <!-- A1 | Company -->
+        <section class="slide slide-appendix" data-title="الملحق الفني: نبذة عن Envirolyte">
+          <header class="slide-head">
+            <div><span class="appendix-label">الملحق الفني 01</span><h2>نبذة عن <span class="latin">Envirolyte</span></h2></div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body company-facts">
+            <div class="fact-lines">
+              <div class="fact-line"><span class="fact-num">01</span><div><h3>مجال الشركة</h3><p class="small">أنظمة إنتاج محاليل وظيفية في الموقع لمعالجة المياه والتطهير والنظافة التشغيلية.</p></div></div>
+              <div class="fact-line"><span class="fact-num">02</span><div><h3>التنشيط الكهروكيميائي</h3><p class="small">تقنية تعتمد على الماء والملح والكهرباء وخلية ذات غشاء فاصل.</p></div></div>
+              <div class="fact-line"><span class="fact-num">03</span><div><h3>الخبرة والدعم</h3><p class="small">[تضاف خبرة الشركة الدولية المعتمدة] • [تفاصيل دعم المصنع]</p></div></div>
+              <div class="fact-line"><span class="fact-num">04</span><div><h3>الحضور المحلي في قطر</h3><p class="small">[اسم الوكيل] • [نطاق الدعم المحلي] • [بيانات التواصل]</p></div></div>
+              <a class="small" href="https://envirolyte.com/" target="_blank" rel="noopener">الموقع الرسمي ومراجع صور الأجهزة ↗</a>
+            </div>
+            <div class="placeholder-photo">
+              <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M4 18l5-5 4 4 3-3 4 4"/></svg><strong>[صورة معتمدة لجهاز أو منشأة Envirolyte]</strong><p class="small">استبدل هذا الموضع بصورة مرخصة عالية الدقة.</p></div>
+            </div>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع — الملحق الفني</span><span>15</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">تقديم الشركة بإيجاز بعد اكتمال الحجة الفنية، لا في بداية العرض.</span>
+            <span data-note="opening">هذه النبذة توفر سياقاً للمصنع والدعم، بينما يبقى القرار مرتبطاً بالتطبيق والنتائج.</span>
+            <span data-note="transition">تختلف خطوط المنتجات حسب السعة والتركيز والتطبيق.</span>
+            <span data-note="avoid">استبدل الحقول المربعة بمعلومات موثقة قبل العرض الرسمي.</span>
+          </aside>
+        </section>
+
+        <!-- A2 | Products -->
+        <section class="slide slide-appendix" data-title="الملحق الفني: خطوط المنتجات">
+          <header class="slide-head">
+            <div><span class="appendix-label">الملحق الفني 02</span><h2>خطوط المنتجات تُختار وفق التطبيق، لا وفق الاسم</h2></div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body">
+            <div class="product-grid">
+              <article class="product"><div><h3 class="latin">ELA</h3><p>[صورة المنتج] • [السعة] • [التطبيق]</p></div><p>[تضاف الخصائص المعتمدة]</p><button data-open-modal="specModal" data-product="ELA">المواصفات الفنية ←</button></article>
+              <article class="product"><div><h3 class="latin">ANW</h3><p>[صورة المنتج] • [السعة] • [التطبيق]</p></div><p>[تضاف الخصائص المعتمدة]</p><button data-open-modal="specModal" data-product="ANW">المواصفات الفنية ←</button></article>
+              <article class="product"><div><h3 class="latin">HD</h3><p>[صورة المنتج] • [السعة] • [التطبيق]</p></div><p>[تضاف الخصائص المعتمدة]</p><button data-open-modal="specModal" data-product="HD">المواصفات الفنية ←</button></article>
+              <article class="product"><div><h3 class="latin">CIP</h3><p>[صورة المنتج] • [السعة] • [التطبيق]</p></div><p>[تضاف الخصائص المعتمدة]</p><button data-open-modal="specModal" data-product="CIP">المواصفات الفنية ←</button></article>
+              <article class="product"><div><h3 class="latin">CIP HD</h3><p>[صورة المنتج] • [السعة] • [التطبيق]</p></div><p>[تضاف الخصائص المعتمدة]</p><button data-open-modal="specModal" data-product="CIP HD">المواصفات الفنية ←</button></article>
+              <article class="product"><div><h3 class="latin">Catholyte Generators</h3><p>[صورة المنتج] • [السعة] • [التطبيق]</p></div><p>[تضاف الخصائص المعتمدة]</p><button data-open-modal="specModal" data-product="Catholyte Generators">المواصفات الفنية ←</button></article>
+            </div>
+            <a class="small" style="margin-top:.65rem;display:inline-block" href="https://envirolyte.com/products/" target="_blank" rel="noopener">مرجع رسمي لصور وفئات المنتجات ↗</a>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع — الملحق الفني</span><span>16</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">عرض عائلات المنتجات كخيارات تخضع للاختيار الفني، مع تجنب مواصفات غير معتمدة.</span>
+            <span data-note="opening">اسم العائلة لا يكفي لاختيار النظام؛ القرار يتبع التدفق والتركيز والبيئة التشغيلية.</span>
+            <span data-note="transition">لذلك تُجمع المواصفات المطلوبة في جدول واحد للمقارنة والتحقق.</span>
+            <span data-note="avoid">لا تملأ السعات أو الخصائص إلا من أوراق بيانات الطراز المختار.</span>
+          </aside>
+        </section>
+
+        <!-- A3 | Specs -->
+        <section class="slide slide-appendix" data-title="الملحق الفني: المواصفات المطلوبة للاختيار">
+          <header class="slide-head">
+            <div><span class="appendix-label">الملحق الفني 03</span><h2>المواصفات المطلوبة تُستكمل بعد تحديد الطراز</h2></div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body">
+            <div class="spec-table-wrap">
+              <table class="spec-table">
+                <thead><tr><th>المعيار</th><th>الطراز المقترح</th><th>القيمة / النطاق</th><th>مرجع الاعتماد</th></tr></thead>
+                <tbody>
+                  <tr><td>السعة الإنتاجية</td><td>[الطراز]</td><td>[تضاف السعة المعتمدة]</td><td>[ورقة البيانات]</td></tr>
+                  <tr><td>تركيز المادة الفعالة</td><td>[الطراز]</td><td>[تضاف القيمة المعتمدة]</td><td>[طريقة القياس]</td></tr>
+                  <tr><td>استهلاك الملح</td><td>[الطراز]</td><td>[تضاف القيمة المعتمدة]</td><td>[ورقة البيانات]</td></tr>
+                  <tr><td>استهلاك الكهرباء</td><td>[الطراز]</td><td>[تضاف القيمة المعتمدة]</td><td>[ورقة البيانات]</td></tr>
+                  <tr><td>ضغط المياه والتدفق</td><td>[الطراز]</td><td>[متطلبات الموقع]</td><td>[مخطط الربط]</td></tr>
+                  <tr><td>الأبعاد</td><td>[الطراز]</td><td>[الأبعاد المعتمدة]</td><td>[رسم GA]</td></tr>
+                  <tr><td>التحكم والاتصال</td><td>[الطراز]</td><td>[PLC / Monitoring]</td><td>[قائمة الخيارات]</td></tr>
+                  <tr><td>متطلبات الموقع</td><td>[الطراز]</td><td>[ماء / صرف / تهوية / مساحة]</td><td>[دراسة الموقع]</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="notice" style="margin-top:.8rem">هذه الحقول ليست مواصفات منتج؛ بل قائمة تحقق لاستكمالها من وثائق الطراز المعتمد.</div>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع — الملحق الفني</span><span>17</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">تحديد مجموعة المعلومات التي تمنع الاختيار المبكر أو غير القابل للتحقق.</span>
+            <span data-note="opening">هذا الجدول هو سجل متطلبات، وليس ورقة بيانات مكتملة.</span>
+            <span data-note="transition">إلى جانب المواصفات، نحتاج إلى مطابقة نطاق الاعتمادات والاختبارات.</span>
+            <span data-note="avoid">لا تنقل أرقام عائلة منتجات عامة إلى طراز محدد من دون وثيقة رسمية.</span>
+          </aside>
+        </section>
+
+        <!-- A4 | Certifications -->
+        <section class="slide slide-appendix" data-title="الملحق الفني: الاعتمادات والاختبارات">
+          <header class="slide-head">
+            <div><span class="appendix-label">الملحق الفني 04</span><h2>كل اعتماد يُراجع ضمن نطاقه وتطبيقه</h2></div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body">
+            <div class="cert-grid">
+              <article class="cert"><span class="seal">ISO</span><div><h3 class="latin">ISO 9001:2015</h3><p>[رابط الشهادة ونطاقها وتاريخ سريانها]</p></div></article>
+              <article class="cert"><span class="seal">NSF</span><div><h3 class="latin">NSF/ANSI 61</h3><p>[حيث ينطبق — يراجع الطراز والنطاق]</p></div></article>
+              <article class="cert"><span class="seal">LAB</span><div><h3>اختبارات ميكروبيولوجية</h3><p>[بروتوكول الاختبار والمختبر والعينة]</p></div></article>
+              <article class="cert"><span class="seal">BY</span><div><h3>النواتج الثانوية</h3><p>[تقارير الاختبار ذات الصلة بالمياه والتطبيق]</p></div></article>
+              <article class="cert"><span class="seal">REG</span><div><h3>مستندات تنظيمية</h3><p>[متطلبات الجهات المختصة في قطر]</p></div></article>
+              <article class="cert"><span class="seal">APP</span><div><h3>شهادات التطبيق</h3><p>[مرجع التطبيق المحدد والمواد المتوافقة]</p></div></article>
+            </div>
+            <a class="small" style="margin-top:.7rem;display:inline-block" href="https://envirolyte.com/approvals/quality-control/" target="_blank" rel="noopener">صفحة الجودة والاعتمادات الرسمية ↗</a>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع — الملحق الفني</span><span>18</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">فصل أنواع الأدلة ومنع استخدام شعار اعتماد خارج نطاقه.</span>
+            <span data-note="opening">الاعتماد ليس كلمة عامة؛ نراجع الجهة المانحة والطراز والنطاق والتاريخ والتطبيق.</span>
+            <span data-note="transition">بعد اكتمال الجانب الفني، يمكن إدخال بيانات الجهة في نموذج التكلفة الكلية.</span>
+            <span data-note="avoid">لا تعرض شهادة منتهية أو غير مطابقة للطراز أو التطبيق المقترح.</span>
+          </aside>
+        </section>
+
+        <!-- A5 | TCO -->
+        <section class="slide slide-appendix" data-title="الملحق الفني: نموذج التكلفة الكلية">
+          <header class="slide-head">
+            <div><span class="appendix-label">الملحق الفني 05</span><h2>المقارنة المالية تبدأ ببيانات الجهة، لا بنسبة جاهزة</h2></div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body">
+            <div class="calculator" id="calculator">
+              <div class="cost-group">
+                <h3>التكلفة الحالية / سنة</h3>
+                <div class="cost-fields">
+                  <label for="cChem">المواد الكيميائية</label><input id="cChem" data-cost="current" type="number" min="0" value="0">
+                  <label for="cTransport">النقل</label><input id="cTransport" data-cost="current" type="number" min="0" value="0">
+                  <label for="cStorage">التخزين</label><input id="cStorage" data-cost="current" type="number" min="0" value="0">
+                  <label for="cLabor">العمالة</label><input id="cLabor" data-cost="current" type="number" min="0" value="0">
+                  <label for="cSafety">معدات السلامة</label><input id="cSafety" data-cost="current" type="number" min="0" value="0">
+                  <label for="cDisposal">التخلص من العبوات</label><input id="cDisposal" data-cost="current" type="number" min="0" value="0">
+                  <label for="cDowntime">التوقفات</label><input id="cDowntime" data-cost="current" type="number" min="0" value="0">
+                  <label for="cTests">التحاليل</label><input id="cTests" data-cost="current" type="number" min="0" value="0">
+                </div>
+              </div>
+              <div class="cost-group">
+                <h3>النظام المقترح</h3>
+                <div class="cost-fields">
+                  <label for="pCapex">الجهاز + التركيب</label><input id="pCapex" data-capex type="number" min="0" value="0">
+                  <label for="pSalt">الملح / سنة</label><input id="pSalt" data-cost="proposed" type="number" min="0" value="0">
+                  <label for="pWater">الماء / سنة</label><input id="pWater" data-cost="proposed" type="number" min="0" value="0">
+                  <label for="pPower">الكهرباء / سنة</label><input id="pPower" data-cost="proposed" type="number" min="0" value="0">
+                  <label for="pMaint">الصيانة / سنة</label><input id="pMaint" data-cost="proposed" type="number" min="0" value="0">
+                  <label for="pSpares">قطع الغيار / سنة</label><input id="pSpares" data-cost="proposed" type="number" min="0" value="0">
+                  <label for="pTests">التحاليل / سنة</label><input id="pTests" data-cost="proposed" type="number" min="0" value="0">
+                  <label for="pTraining">التدريب / سنة</label><input id="pTraining" data-cost="proposed" type="number" min="0" value="0">
+                </div>
+              </div>
+              <div class="results" aria-live="polite">
+                <div class="result"><span>الحالية / سنة</span><strong id="currentTotal">0</strong></div>
+                <div class="result"><span>المقترحة / سنة</span><strong id="proposedTotal">0</strong></div>
+                <div class="result"><span>الفرق السنوي</span><strong id="annualDelta">0</strong></div>
+                <div class="result"><span>الاسترداد التقديري</span><strong id="payback">—</strong></div>
+              </div>
+            </div>
+            <div class="notice" style="margin-top:.7rem">هذه الحسابات تقديرية، ولا تعتمد إلا بعد إدخال بيانات الجهة والتحقق من النطاق الفني. أدخل جميع القيم بالعملة نفسها.</div>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع — الملحق الفني</span><span>19</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">تجميع التكلفة الكلية الحالية والمقترحة مع احتساب فرق سنوي واسترداد تقديري بعد إدخال القيم.</span>
+            <span data-note="opening">أي مقارنة مالية جادة تبدأ بجرد كامل للتكلفة، لا بسعر المادة أو الجهاز منفرداً.</span>
+            <span data-note="transition">بعد استكمال البيانات الفنية والمالية، يمكن إصدار تقرير قرار موثق.</span>
+            <span data-note="avoid">لا تعرض نتائج الآلة الحاسبة كعرض تجاري معتمد قبل مراجعة الافتراضات والنطاق.</span>
+          </aside>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Persistent controls -->
+  <nav class="controls" aria-label="عناصر التحكم في العرض">
+    <button class="control-btn" id="prevBtn" aria-label="الشريحة السابقة" title="السابق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <button class="control-btn" id="menuBtn" aria-label="فتح قائمة الشرائح" title="قائمة الشرائح"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    <span class="counter" id="counter" aria-live="polite">01 / 19</span>
+    <button class="control-btn" id="notesBtn" aria-label="عرض ملاحظات المتحدث" title="ملاحظات المتحدث"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v13H8l-4 4zM8 8h8M8 12h5"/></svg></button>
+    <button class="control-btn" id="nextBtn" aria-label="الشريحة التالية" title="التالي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+  </nav>
+  <div class="utility">
+    <button class="control-btn" id="printBtn" aria-label="طباعة أو حفظ بصيغة PDF" title="طباعة / PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 8V4h10v4M7 17H5a2 2 0 01-2-2v-5a2 2 0 012-2h14a2 2 0 012 2v5a2 2 0 01-2 2h-2M7 14h10v6H7z"/></svg></button>
+    <button class="control-btn" id="fullscreenBtn" aria-label="عرض بملء الشاشة" title="ملء الشاشة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg></button>
+  </div>
+  <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+
+  <!-- Navigation drawer and notes -->
+  <div class="scrim" id="scrim"></div>
+  <aside class="nav-drawer" id="navDrawer" aria-label="قائمة الشرائح" aria-hidden="true">
+    <div class="drawer-head"><strong>الشرائح</strong><button class="close-btn" id="drawerClose" aria-label="إغلاق قائمة الشرائح">×</button></div>
+    <div class="drawer-list" id="drawerList"></div>
+  </aside>
+  <aside class="speaker-notes" id="speakerNotes" aria-live="polite" aria-hidden="true">
+    <button class="notes-close" id="notesClose" aria-label="إغلاق ملاحظات المتحدث">×</button>
+    <div class="notes-grid" id="notesContent"></div>
+  </aside>
+
+  <!-- Technical documents modal -->
+  <div class="modal" id="docsModal" role="dialog" aria-modal="true" aria-labelledby="docsTitle">
+    <div class="modal-card">
+      <div class="modal-head"><h3 id="docsTitle">الوثائق الفنية المطلوبة للتحقق</h3><button class="close-btn" data-close-modal aria-label="إغلاق">×</button></div>
+      <div class="doc-list">
+        <div class="doc-item"><span><span class="latin">ISO 9001:2015</span> — [نسخة الشهادة ونطاقها]</span><a href="https://envirolyte.com/approvals/quality-control/" target="_blank" rel="noopener">مرجع</a></div>
+        <div class="doc-item"><span><span class="latin">NSF/ANSI 61</span> — [الطراز والنطاق حيث ينطبق]</span><a href="https://envirolyte.com/approvals/quality-control/" target="_blank" rel="noopener">مرجع</a></div>
+        <div class="doc-item"><span>الاختبارات الميكروبيولوجية — [رابط التقرير]</span><span class="muted">يضاف</span></div>
+        <div class="doc-item"><span>اختبارات النواتج الثانوية — [رابط التقرير]</span><span class="muted">يضاف</span></div>
+        <div class="doc-item"><span>التشغيل والصيانة — [دليل الطراز]</span><span class="muted">يضاف</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product specifications modal -->
+  <div class="modal" id="specModal" role="dialog" aria-modal="true" aria-labelledby="specTitle">
+    <div class="modal-card">
+      <div class="modal-head"><h3 id="specTitle">المواصفات الفنية — <span id="specProduct" class="latin">[المنتج]</span></h3><button class="close-btn" data-close-modal aria-label="إغلاق">×</button></div>
+      <p class="lead">[تضاف المواصفات المعتمدة من ورقة بيانات الطراز المختار: السعة، التركيز، الاستهلاك، الأبعاد، التحكم، ومتطلبات الموقع.]</p>
+      <div class="notice" style="margin-top:1rem">لا تُستخدم مواصفات عائلة منتجات كبديل عن ورقة بيانات الطراز المحدد.</div>
+    </div>
+  </div>
+
+  <!-- Workshop request modal -->
+  <div class="modal" id="workshopModal" role="dialog" aria-modal="true" aria-labelledby="workshopTitle">
+    <div class="modal-card">
+      <div class="modal-head"><h3 id="workshopTitle">طلب ورشة فنية</h3><button class="close-btn" data-close-modal aria-label="إغلاق">×</button></div>
+      <form id="workshopForm">
+        <div class="form-grid">
+          <div class="field"><label for="orgName">اسم الجهة</label><input id="orgName" name="organization" autocomplete="organization" placeholder="[اسم الجهة]"></div>
+          <div class="field"><label for="personName">اسم الشخص</label><input id="personName" name="name" autocomplete="name" placeholder="[اسم الشخص]"></div>
+          <div class="field"><label for="email">البريد الإلكتروني</label><input id="email" name="email" type="email" autocomplete="email" placeholder="name@example.com" dir="ltr"></div>
+          <div class="field"><label for="phone">رقم الهاتف</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+974" dir="ltr"></div>
+          <div class="field full"><label for="application">التطبيق المطلوب</label><select id="application" name="application"><option value="">اختر تطبيقاً</option><option>أنظمة المياه والخزانات</option><option>أبراج التبريد</option><option>الأغذية والمطابخ وCIP</option><option>تطبيق آخر يحتاج إلى تقييم</option></select></div>
+          <div class="field full"><label for="comments">ملاحظات</label><textarea id="comments" name="comments" placeholder="وصف مختصر للموقع أو التحدي التشغيلي"></textarea></div>
+        </div>
+        <div style="display:flex;gap:.7rem;align-items:center;margin-top:1rem"><button class="cta" type="submit">تجهيز الطلب</button><span class="small" id="formStatus">نموذج Front-End فقط؛ لا يتم الإرسال إلى خادم.</span></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    /* =========================
+       Presentation navigation
+       ========================= */
+    (() => {
+      "use strict";
+
+      const slides = [...document.querySelectorAll(".slide")];
+      const total = slides.length;
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const counter = document.getElementById("counter");
+      const progressBar = document.getElementById("progressBar");
+      const navDrawer = document.getElementById("navDrawer");
+      const drawerList = document.getElementById("drawerList");
+      const scrim = document.getElementById("scrim");
+      const notesPanel = document.getElementById("speakerNotes");
+      const notesContent = document.getElementById("notesContent");
+      let current = 0;
+      let wheelLocked = false;
+      let touchStartX = 0;
+      let touchStartY = 0;
+
+      const pad = n => String(n).padStart(2, "0");
+
+      function updateNotes() {
+        const data = slides[current].querySelector(".notes-data");
+        const labels = { idea: "الفكرة", opening: "الافتتاح", transition: "الانتقال", avoid: "تنبيه" };
+        notesContent.innerHTML = "";
+        if (!data) return;
+        ["idea", "opening", "transition", "avoid"].forEach(key => {
+          const value = data.querySelector(`[data-note="${key}"]`)?.textContent || "";
+          notesContent.insertAdjacentHTML("beforeend", `<div class="note-block"><h4>${labels[key]}</h4><p>${value}</p></div>`);
+        });
+      }
+
+      function resetSteps(slide) {
+        slide.querySelectorAll(".step-item").forEach(item => item.classList.remove("revealed"));
+      }
+
+      function revealNextStep() {
+        const hiddenStep = slides[current].querySelector(".step-item:not(.revealed)");
+        if (hiddenStep) {
+          hiddenStep.classList.add("revealed");
+          return true;
+        }
+        return false;
+      }
+
+      function goTo(index, direction = 0) {
+        const next = Math.max(0, Math.min(index, total - 1));
+        if (next === current && slides[next].classList.contains("active")) return;
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === next);
+          slide.classList.toggle("previous", i < next);
+          if (i !== next) resetSteps(slide);
+        });
+        current = next;
+        counter.textContent = `${pad(current + 1)} / ${pad(total)}`;
+        progressBar.style.width = `${((current + 1) / total) * 100}%`;
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current === total - 1;
+        [...drawerList.children].forEach((item, i) => item.classList.toggle("active", i === current));
+        updateNotes();
+        closeDrawer();
+        slides[current].scrollTop = 0;
+        history.replaceState(null, "", `#slide-${current + 1}`);
+      }
+
+      function next() { goTo(current + 1, 1); }
+      function prev() { goTo(current - 1, -1); }
+
+      slides.forEach((slide, i) => {
+        const button = document.createElement("button");
+        button.className = "drawer-item";
+        button.innerHTML = `<span>${pad(i + 1)}</span><span>${slide.dataset.title}</span>`;
+        button.addEventListener("click", () => goTo(i));
+        drawerList.appendChild(button);
+      });
+
+      function openDrawer() {
+        closeNotes();
+        navDrawer.classList.add("open");
+        navDrawer.setAttribute("aria-hidden", "false");
+        scrim.classList.add("open");
+        navDrawer.querySelector(".drawer-item.active")?.focus();
+      }
+      function closeDrawer() {
+        navDrawer.classList.remove("open");
+        navDrawer.setAttribute("aria-hidden", "true");
+        scrim.classList.remove("open");
+      }
+      function toggleNotes() {
+        closeDrawer();
+        const open = !notesPanel.classList.contains("open");
+        notesPanel.classList.toggle("open", open);
+        notesPanel.setAttribute("aria-hidden", String(!open));
+      }
+      function closeNotes() {
+        notesPanel.classList.remove("open");
+        notesPanel.setAttribute("aria-hidden", "true");
+      }
+
+      prevBtn.addEventListener("click", prev);
+      nextBtn.addEventListener("click", next);
+      document.getElementById("menuBtn").addEventListener("click", openDrawer);
+      document.getElementById("drawerClose").addEventListener("click", closeDrawer);
+      document.getElementById("notesBtn").addEventListener("click", toggleNotes);
+      document.getElementById("notesClose").addEventListener("click", closeNotes);
+      scrim.addEventListener("click", closeDrawer);
+      document.getElementById("printBtn").addEventListener("click", () => window.print());
+      document.getElementById("fullscreenBtn").addEventListener("click", async () => {
+        try {
+          if (!document.fullscreenElement) await document.documentElement.requestFullscreen();
+          else await document.exitFullscreen();
+        } catch (_) { /* Browser may block fullscreen outside a user gesture. */ }
+      });
+
+      document.addEventListener("keydown", event => {
+        if (document.querySelector(".modal.open")) {
+          if (event.key === "Escape") closeAllModals();
+          return;
+        }
+        const tag = document.activeElement?.tagName;
+        if (["INPUT", "TEXTAREA", "SELECT"].includes(tag)) return;
+        if (event.key === "ArrowLeft" || event.key === "PageDown") next();
+        if (event.key === "ArrowRight" || event.key === "PageUp") prev();
+        if (event.key === "Home") goTo(0);
+        if (event.key === "End") goTo(total - 1);
+        if (event.key === " " || event.key === "Enter") {
+          if (revealNextStep()) event.preventDefault();
+        }
+        if (event.key === "Escape") { closeDrawer(); closeNotes(); }
+      });
+
+      document.addEventListener("wheel", event => {
+        if (wheelLocked || document.querySelector(".modal.open") || navDrawer.classList.contains("open")) return;
+        const active = slides[current];
+        const canScroll = active.scrollHeight > active.clientHeight + 4;
+        if (canScroll && ((event.deltaY > 0 && active.scrollTop + active.clientHeight < active.scrollHeight - 3) || (event.deltaY < 0 && active.scrollTop > 3))) return;
+        if (Math.abs(event.deltaY) < 25) return;
+        wheelLocked = true;
+        event.deltaY > 0 ? next() : prev();
+        setTimeout(() => { wheelLocked = false; }, 650);
+      }, { passive: true });
+
+      document.addEventListener("touchstart", event => {
+        touchStartX = event.changedTouches[0].screenX;
+        touchStartY = event.changedTouches[0].screenY;
+      }, { passive: true });
+      document.addEventListener("touchend", event => {
+        const dx = event.changedTouches[0].screenX - touchStartX;
+        const dy = event.changedTouches[0].screenY - touchStartY;
+        if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.25) dx < 0 ? next() : prev();
+      }, { passive: true });
+
+      /* =========================
+         Modals
+         ========================= */
+      const modals = [...document.querySelectorAll(".modal")];
+      let lastFocused = null;
+      function openModal(id, trigger) {
+        const modal = document.getElementById(id);
+        if (!modal) return;
+        lastFocused = trigger || document.activeElement;
+        modal.classList.add("open");
+        modal.querySelector("button, input, a")?.focus();
+      }
+      function closeModal(modal) {
+        modal.classList.remove("open");
+        lastFocused?.focus?.();
+      }
+      function closeAllModals() { modals.forEach(closeModal); }
+      document.querySelectorAll("[data-open-modal]").forEach(button => {
+        button.addEventListener("click", () => {
+          if (button.dataset.product) document.getElementById("specProduct").textContent = button.dataset.product;
+          openModal(button.dataset.openModal, button);
+        });
+      });
+      document.querySelectorAll("[data-close-modal]").forEach(button => button.addEventListener("click", () => closeModal(button.closest(".modal"))));
+      modals.forEach(modal => modal.addEventListener("click", event => { if (event.target === modal) closeModal(modal); }));
+
+      /* =========================
+         KPI dashboard placeholders
+         ========================= */
+      const kpiSets = {
+        "فني": ["العد الميكروبي قبل وبعد", "FAC / المادة الفعالة المتبقية", "ORP", "pH", "زمن التلامس", "جودة المياه والنواتج الثانوية"],
+        "تشغيلي": ["استقرار الجرعات", "ساعات التشغيل", "حالات التوقف", "وقت المشغل", "سهولة التشغيل والصيانة"],
+        "سلامة": ["حجم المواد المخزنة", "عمليات النقل والمناولة", "متطلبات معدات الوقاية", "الملاحظات التشغيلية"],
+        "مالي": ["التكلفة لكل متر مكعب", "استهلاك الملح", "الماء والكهرباء", "الصيانة والمواد الاستهلاكية", "الحالية مقارنة بالمقترحة"]
+      };
+      const kpiBody = document.getElementById("kpiBody");
+      function renderKpis(key) {
+        kpiBody.innerHTML = kpiSets[key].map(item => `<tr><td>${item}</td><td>[القيمة الحالية]</td><td>[الهدف]</td><td>[النتيجة بعد التجربة]</td><td><span class="status-empty" aria-label="لم تحدد"></span></td></tr>`).join("");
+      }
+      document.querySelectorAll(".kpi-tab").forEach(tab => tab.addEventListener("click", () => {
+        document.querySelectorAll(".kpi-tab").forEach(t => t.classList.toggle("active", t === tab));
+        renderKpis(tab.dataset.kpi);
+      }));
+      renderKpis("فني");
+
+      /* =========================
+         Total-cost calculator
+         ========================= */
+      const costInputs = [...document.querySelectorAll("#calculator input")];
+      const number = input => Number.parseFloat(input.value) || 0;
+      const format = value => new Intl.NumberFormat("ar-QA", { maximumFractionDigits: 2 }).format(value);
+      function calculateCosts() {
+        const currentTotal = costInputs.filter(i => i.dataset.cost === "current").reduce((sum, input) => sum + number(input), 0);
+        const proposedTotal = costInputs.filter(i => i.dataset.cost === "proposed").reduce((sum, input) => sum + number(input), 0);
+        const capex = number(document.querySelector("[data-capex]"));
+        const delta = currentTotal - proposedTotal;
+        document.getElementById("currentTotal").textContent = format(currentTotal);
+        document.getElementById("proposedTotal").textContent = format(proposedTotal);
+        document.getElementById("annualDelta").textContent = format(delta);
+        document.getElementById("payback").textContent = delta > 0 && capex > 0 ? `${format(capex / delta)} سنة` : "—";
+      }
+      costInputs.forEach(input => input.addEventListener("input", calculateCosts));
+      calculateCosts();
+
+      /* Front-end-only workshop form */
+      document.getElementById("workshopForm").addEventListener("submit", event => {
+        event.preventDefault();
+        document.getElementById("formStatus").textContent = "تم تجهيز الحقول محلياً. اربط النموذج بخدمة الإرسال المعتمدة عند الجاهزية.";
+      });
+
+      /* Initialize from URL hash if present. */
+      const hashMatch = location.hash.match(/slide-(\d+)/);
+      const initial = hashMatch ? Math.min(Math.max(Number(hashMatch[1]) - 1, 0), total - 1) : 0;
+      current = -1;
+      goTo(initial);
+    })();
+  </script>
+</body>
+</html>
