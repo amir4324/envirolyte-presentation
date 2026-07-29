@@ -181,13 +181,6 @@
       border-radius: 50%;
     }
     .brand-name { font-weight: 850; letter-spacing: .01em; font-size: clamp(.7rem, 1vw, 1rem); }
-    .cover-brand-lockup {
-      padding: .5rem .72rem; border: 1px solid rgba(255,255,255,.68); border-radius: 12px;
-      background: rgba(255,255,255,.96); box-shadow: 0 12px 28px rgba(0,0,0,.16);
-    }
-    .cover-brand-logo {
-      display: block; width: clamp(8rem, 11.5vw, 10.5rem); height: auto; object-fit: contain;
-    }
     .client-logo {
       border: 1px dashed var(--slate-300); border-radius: 10px; padding: .55rem .8rem;
       color: var(--slate-500); font-size: clamp(.62rem, .75vw, .78rem); white-space: nowrap;
@@ -258,26 +251,7 @@
     }
     .cover-sub { max-width: 44rem; margin-top: 1.25rem; color: rgba(255,255,255,.84); font-size: clamp(1.12rem, 1.65vw, 1.65rem); line-height: 1.6; font-weight: 500; }
     .cover-meta { margin-top: 1.8rem; display: flex; gap: .8rem 1.6rem; flex-wrap: wrap; color: rgba(255,255,255,.7); font-size: clamp(.82rem, 1vw, 1.05rem); }
-    .facility-visual {
-      position: relative; aspect-ratio: 1.1; min-height: 18rem; overflow: hidden;
-      border: 1px solid rgba(139,215,223,.28); border-radius: 28px;
-      background: #0b3048; box-shadow: 0 26px 55px rgba(0,0,0,.28);
-    }
-    .facility-photo {
-      width: 100%; height: 100%; display: block; object-fit: cover;
-      object-position: center; transform: scale(1.015);
-    }
-    .facility-visual::after {
-      content: ""; position: absolute; inset: 0; pointer-events: none;
-      background:
-        linear-gradient(90deg, rgba(8,37,58,.52), transparent 38%),
-        linear-gradient(0deg, rgba(8,37,58,.22), transparent 44%);
-    }
-    .facility-caption {
-      position: absolute; z-index: 2; inset-inline: 1rem; bottom: .85rem;
-      color: rgba(255,255,255,.92); font-size: clamp(.7rem, .84vw, .88rem);
-      font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,.48);
-    }
+    .facility-visual { position: relative; aspect-ratio: 1.1; min-height: 18rem; }
     .facility-orbit {
       position: absolute; inset: 7%; border: 1px solid rgba(139,215,223,.26); border-radius: 50%;
       animation: slowSpin 34s linear infinite;
@@ -288,6 +262,7 @@
     .facility-orbit::before { top: 12%; right: 12%; }
     .facility-orbit::after { bottom: 16%; left: 8%; background: var(--green-600); }
     .facility-svg { width: 100%; height: 100%; filter: drop-shadow(0 26px 35px rgba(0,0,0,.24)); }
+    .source-link { display: inline-flex; align-items: center; gap: .35rem; color: #8bd7df; font-size: .84rem; font-weight: 600; }
     .closing-body {
       place-content: center; justify-items: center; text-align: center;
       gap: clamp(1rem, 2.4vw, 2rem);
@@ -622,20 +597,6 @@
       display: grid; place-items: center; text-align: center; padding: 2rem; color: var(--slate-500);
     }
     .placeholder-photo svg { width: 5rem; height: 5rem; margin-bottom: 1rem; color: var(--aqua-600); }
-    .placeholder-photo.device-photo {
-      position: relative; overflow: hidden; padding: 0; border-style: solid;
-      background: #fff; box-shadow: 0 16px 38px rgba(8,37,58,.08);
-    }
-    .device-photo img {
-      width: 100%; height: 100%; min-height: 19rem; display: block;
-      object-fit: contain; object-position: center; padding: 1.1rem 1.1rem 3.2rem;
-    }
-    .device-photo figcaption {
-      position: absolute; inset-inline: 1rem; bottom: .8rem;
-      padding-top: .65rem; border-top: 1px solid var(--slate-200);
-      color: var(--navy-900); font-size: clamp(.72rem, .88vw, .9rem);
-      font-weight: 700; text-align: center;
-    }
     .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
     .product {
       padding: 1rem; border: 1px solid var(--slate-200); border-radius: 15px; background: white;
@@ -658,60 +619,19 @@
     }
     .cert .seal { width: 2.5rem; height: 2.5rem; display: grid; place-items: center; border: 2px solid var(--aqua-500); border-radius: 50%; color: var(--aqua-600); font-weight: 900; }
     .cert p { color: var(--slate-500); font-size: .8rem; line-height: 1.5; }
-    .roi-calculator { display: grid; gap: .72rem; align-content: start; }
-    .roi-assumptions {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: .62rem;
-      padding: .64rem; border: 1px solid var(--slate-200); border-radius: 13px; background: rgba(255,255,255,.82);
+    .calculator { display: grid; grid-template-columns: 1fr 1fr .72fr; gap: var(--space-3); align-items: start; }
+    .cost-group { border: 1px solid var(--slate-200); border-radius: 14px; padding: .8rem; background: white; }
+    .cost-group h3 { margin-bottom: .55rem; color: var(--aqua-600); }
+    .cost-fields { display: grid; grid-template-columns: 1fr 6.3rem; gap: .32rem .55rem; align-items: center; }
+    .cost-fields label { color: var(--slate-700); font-size: .72rem; font-weight: 550; }
+    .cost-fields input {
+      width: 100%; border: 1px solid var(--slate-200); border-radius: 7px; padding: .32rem .4rem;
+      color: var(--navy-900); background: var(--paper); direction: ltr; text-align: left; font-size: .74rem;
     }
-    .roi-field {
-      display: grid; grid-template-columns: 1fr 7.2rem; gap: .55rem; align-items: center;
-      padding: .42rem .62rem; border-inline-start: 3px solid var(--aqua-500); background: var(--paper); border-radius: 8px;
-    }
-    .roi-field label { color: var(--slate-700); font-size: .72rem; font-weight: 750; line-height: 1.3; }
-    .roi-field input {
-      width: 100%; border: 1px solid var(--slate-200); border-radius: 7px; padding: .38rem .46rem;
-      color: var(--navy-900); background: white; direction: ltr; text-align: right; font-size: .78rem; font-weight: 750;
-    }
-    .roi-table-wrap {
-      overflow: hidden; border: 1px solid var(--slate-300); border-radius: 13px; background: white;
-      box-shadow: 0 12px 26px rgba(8,37,58,.055);
-    }
-    .roi-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: clamp(.7rem, .86vw, .86rem); }
-    .roi-table th, .roi-table td {
-      padding: .55rem .58rem; text-align: center; border-inline-start: 1px solid var(--slate-200); border-bottom: 1px solid var(--slate-200);
-    }
-    .roi-table th:first-child, .roi-table td:first-child { border-inline-start: 0; text-align: start; width: 24%; }
-    .roi-table thead th { color: white; background: var(--navy-900); font-weight: 850; }
-    .roi-table thead th:first-child { background: var(--navy-950); }
-    .roi-table tbody th { color: var(--navy-900); background: var(--paper); font-weight: 850; }
-    .roi-table tbody tr:nth-child(2) th { background: #fff5d9; }
-    .roi-table tbody tr:nth-child(3) th { background: #e7f5ee; color: #266e58; }
-    .roi-table tbody tr:nth-child(3) td { background: #eff8f4; color: #266e58; font-weight: 900; }
-    .roi-table tbody tr:first-child td:last-child { background: rgba(11,148,166,.09); font-weight: 900; }
-    .roi-table tbody tr:nth-child(2) td:last-child { background: #fff3c8; font-weight: 900; }
-    .roi-table tbody tr:last-child th, .roi-table tbody tr:last-child td { border-bottom: 0; }
-    .roi-value { direction: ltr; unicode-bidi: isolate; white-space: nowrap; }
-    .roi-value.negative { color: #b76123 !important; }
-    .roi-results { display: grid; grid-template-columns: repeat(4, 1fr); gap: .62rem; }
-    .roi-result {
-      min-height: 4rem; padding: .58rem .72rem; border-radius: 11px; background: var(--navy-900); color: white;
-      display: grid; align-content: center; gap: .14rem;
-    }
-    .roi-result.accent { background: var(--aqua-600); }
-    .roi-result.green { background: #327c65; }
-    .roi-result.amber { background: #b7751b; }
-    .roi-result span { color: rgba(255,255,255,.76); font-size: .65rem; font-weight: 650; }
-    .roi-result strong { direction: ltr; text-align: right; font-size: clamp(.9rem, 1.18vw, 1.15rem); }
-    .roi-payback { display: flex !important; justify-content: flex-end; align-items: baseline; gap: .28rem; white-space: nowrap; }
-    .roi-payback-piece { display: inline-flex; align-items: baseline; gap: .18rem; direction: ltr; color: white !important; font-size: inherit !important; }
-    .roi-payback-piece em { color: rgba(255,255,255,.8); font-size: .72em; font-style: normal; }
-    .roi-separator { color: rgba(255,255,255,.58) !important; font-size: .8em !important; }
-    .roi-notes {
-      display: flex; flex-wrap: wrap; gap: .38rem 1.15rem; align-items: center;
-      padding: .5rem .7rem; border-radius: 9px; background: #fff4d8; border: 1px solid #efdaa7;
-      color: #765018; font-size: .68rem; line-height: 1.45;
-    }
-    .roi-notes span::before { content: "•"; margin-inline-end: .38rem; color: #b7751b; font-weight: 900; }
+    .results { display: grid; gap: .55rem; }
+    .result { padding: .72rem; border-radius: 10px; background: var(--navy-900); color: white; }
+    .result span { display: block; color: rgba(255,255,255,.72); font-size: .7rem; }
+    .result strong { display: block; direction: ltr; text-align: right; font-size: clamp(.85rem, 1.2vw, 1.15rem); margin-top: .15rem; }
 
     /* =========================
        Controls, menu, notes, modals
@@ -909,10 +829,7 @@
       .slide-body { align-content: start; }
       .brand-lockup .brand-name { display: none; }
       .two-col, .three-col, .four-col, .split-60, .cover-grid, .integration, .evidence-layout,
-      .decision-layout, .company-facts, .solution-detail-layout { grid-template-columns: 1fr; }
-      .roi-assumptions, .roi-results { grid-template-columns: 1fr; }
-      .roi-table-wrap { overflow-x: auto; }
-      .roi-table { min-width: 42rem; }
+      .decision-layout, .company-facts, .calculator, .solution-detail-layout { grid-template-columns: 1fr; }
       .cover-grid { align-content: start; }
       .facility-visual { min-height: 14rem; }
       .chain-wrap { overflow-x: auto; padding-top: 3rem; }
@@ -988,22 +905,50 @@
         <!-- 01 | Cover -->
         <section class="slide slide-cover active" data-title="من شراء مواد التعقيم إلى إنتاجها عند الحاجة">
           <div class="slide-head">
-            <div class="brand-lockup cover-brand-lockup">
-              <img class="cover-brand-logo" src="assets/edura-logo.png" alt="Envirolyte Qatar">
+            <div class="brand-lockup" aria-label="مكان شعار Envirolyte">
+              <span class="brand-mark" aria-hidden="true"></span><span class="brand-name">ENVIROLYTE</span>
             </div>
+            <div class="client-logo">[شعار الجهة]</div>
           </div>
           <div class="slide-body cover-grid">
             <div class="cover-copy">
               <p class="cover-kicker">مقترح فني لتقييم فرصة تشغيلية</p>
               <h1 class="cover-title">من شراء مواد التعقيم إلى إنتاجها عند الحاجة</h1>
-              <p class="cover-sub">تقييم تقنية <span class="latin">Envirolyte</span> لإنتاج محاليل التطهير في الموقع بالماء والملح والكهرباء لمختلف المنشآت والقطاعات.</p>
+              <p class="cover-sub">تقييم تقنية <span class="latin">Envirolyte</span> لإنتاج محاليل التطهير في الموقع باستخدام الماء والملح والكهرباء — في منشآت [اسم الجهة].</p>
               <div class="cover-meta">
-                <span>مقدم من: شركة رصين Rassen</span>
+                <span>مقدم من: [اسم الشركة أو الوكيل في قطر]</span>
+                <span>مقدم إلى: [اسم الجهة]</span>
+                <span>التاريخ: [التاريخ]</span>
               </div>
+              <a class="source-link" href="https://www.ashghal.gov.qa/en/Projects/Pages/projectdetails.aspx?pid=231" target="_blank" rel="noopener">مرجع صورة مقترحة: منشأة مياه في قطر ↗</a>
             </div>
-            <div class="facility-visual">
-              <img class="facility-photo" src="assets/envirolyte-factory-real.jpg" alt="المبنى الحقيقي لمصنع Envirolyte في تالين، إستونيا">
-              <span class="facility-caption">مصنع <span class="latin">Envirolyte</span> — تالين، إستونيا</span>
+            <div class="facility-visual" aria-label="رسم تصوري لمنشأة مياه حديثة متصلة بوحدة إنتاج">
+              <div class="facility-orbit" aria-hidden="true"></div>
+              <svg class="facility-svg" viewBox="0 0 600 520" role="img" aria-label="منشأة معالجة مياه ووحدة Envirolyte">
+                <defs>
+                  <filter id="coverShadow"><feDropShadow dx="0" dy="18" stdDeviation="16" flood-opacity=".28"/></filter>
+                </defs>
+                <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M55 397 C155 335, 235 426, 336 362 S503 332, 558 370" stroke="#22aebe" stroke-width="10" opacity=".45"/>
+                  <path d="M52 423 C152 361, 240 452, 340 389 S508 358, 562 394" stroke="#8bd7df" stroke-width="3" opacity=".65" class="flow-dash"/>
+                  <g filter="url(#coverShadow)">
+                    <path d="M110 318V188h232v130" fill="#f8fbfc" stroke="#8bd7df" stroke-width="3"/>
+                    <path d="M90 188h273l-39-54H132z" fill="#154762" stroke="#8bd7df" stroke-width="3"/>
+                    <rect x="142" y="220" width="58" height="98" rx="6" fill="#dff5f6" stroke="#22aebe" stroke-width="3"/>
+                    <rect x="218" y="220" width="92" height="98" rx="6" fill="#edf3f5" stroke="#68808d" stroke-width="3"/>
+                    <path d="M374 318V222h105v96" fill="#f8fbfc" stroke="#8bd7df" stroke-width="3"/>
+                    <path d="M396 220v-50h62v50" fill="#0b3048" stroke="#8bd7df" stroke-width="3"/>
+                    <rect x="405" y="244" width="44" height="42" rx="5" fill="#22aebe" opacity=".25" stroke="#22aebe" stroke-width="2"/>
+                    <circle cx="427" cy="265" r="7" fill="#22aebe"/>
+                    <path d="M310 281h64" stroke="#22aebe" stroke-width="8"/>
+                    <path d="M479 282h58v90" stroke="#22aebe" stroke-width="8"/>
+                    <circle cx="538" cy="373" r="13" fill="#3c8b72" stroke="#e4f2ec" stroke-width="4"/>
+                  </g>
+                  <g stroke="#8bd7df" opacity=".48">
+                    <path d="M91 344h425"/><path d="M123 366h358"/>
+                  </g>
+                </g>
+              </svg>
             </div>
           </div>
           <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>01</span></footer>
@@ -1012,7 +957,6 @@
             <span data-note="opening">اليوم لا نقدم جهازاً فقط؛ بل نناقش ما إذا كان يمكن إنتاج المادة المطلوبة داخل المنشأة بدلاً من الاعتماد الكامل على نقلها وتخزينها.</span>
             <span data-note="transition">نبدأ بنبذة موجزة عن Envirolyte، ثم ننتقل إلى العملية التشغيلية الحالية.</span>
             <span data-note="avoid">تجنب أي ادعاء عن وفر أو سلامة مطلقة قبل جمع بيانات الموقع.</span>
-            <span data-note="source">[Sources] Logo: https://envirolyte-qatar.com/images/edura-logo.png | Factory photo: https://venue-image.waze.com/aaa550b9-adce-4d0e-bcea-6fa5266c7498 | Place verification: https://www.waze.com/live-map/directions/envirolyte-industries-international-ltd.-sarruse-16-tallinn?to=place.w.16319058.162862902.21734906</span>
           </aside>
         </section>
 
@@ -1030,10 +974,9 @@
               <div class="fact-line"><span class="fact-num">04</span><div><h3>الحضور المحلي في قطر</h3><p class="small">[اسم الوكيل] • [نطاق الدعم المحلي] • [بيانات التواصل]</p></div></div>
               <a class="small" href="https://envirolyte.com/" target="_blank" rel="noopener">الموقع الرسمي ومراجع صور الأجهزة ↗</a>
             </div>
-            <figure class="placeholder-photo device-photo">
-              <img src="assets/envirolyte-device.jpg" alt="جهاز Envirolyte ela200 لإنتاج الأنولايت في الموقع">
-              <figcaption>وحدة <span class="latin">Envirolyte ela200</span> لإنتاج المحلول في الموقع</figcaption>
-            </figure>
+            <div class="placeholder-photo">
+              <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M4 18l5-5 4 4 3-3 4 4"/></svg><strong>[صورة معتمدة لجهاز أو منشأة Envirolyte]</strong><p class="small">استبدل هذا الموضع بصورة مرخصة عالية الدقة.</p></div>
+            </div>
           </div>
           <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>02</span></footer>
           <aside class="notes-data" hidden>
@@ -1041,7 +984,6 @@
             <span data-note="opening">هذه نبذة سريعة عن التقنية والخبرة والدعم المحلي المتوقع، ثم ننتقل إلى العملية التشغيلية الحالية.</span>
             <span data-note="transition">لفهم قيمة التقنية، نبدأ بما يحدث قبل وصول المادة المطهرة إلى نقطة الاستخدام.</span>
             <span data-note="avoid">استبدل الحقول المربعة بمعلومات موثقة قبل العرض الرسمي.</span>
-            <span data-note="source">[Sources] Device photo: https://envirolyte.com/wp-content/uploads/2026/04/ela200-scaled.jpg</span>
           </aside>
         </section>
 
@@ -1459,92 +1401,55 @@
           </aside>
         </section>
 
-        <!-- A1 | Three-year ROI -->
-        <section class="slide slide-appendix" data-title="الملحق الفني: العائد على الاستثمار خلال 3 سنوات">
+        <!-- A1 | TCO -->
+        <section class="slide slide-appendix" data-title="الملحق الفني: نموذج التكلفة الكلية">
           <header class="slide-head">
-            <div><span class="appendix-label">الملحق الفني 01</span><h2>العائد على الاستثمار خلال 3 سنوات</h2></div>
+            <div><span class="appendix-label">الملحق الفني 01</span><h2>المقارنة المالية تبدأ ببيانات الجهة، لا بنسبة جاهزة</h2></div>
             <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
           </header>
           <div class="slide-body">
-            <div class="roi-calculator" id="calculator" data-roi-calculator>
-              <div class="roi-assumptions" aria-label="افتراضات الحسبة">
-                <div class="roi-field">
-                  <label for="roiCapex">الجهاز والتركيب</label>
-                  <input id="roiCapex" data-roi-input="capex" type="number" min="0" step="100" value="125000">
-                </div>
-                <div class="roi-field">
-                  <label for="roiOperating">تشغيل النظام / سنة</label>
-                  <input id="roiOperating" data-roi-input="operating" type="number" min="0" step="100" value="4692">
-                </div>
-                <div class="roi-field">
-                  <label for="roiTraditional">التوريد التقليدي / سنة</label>
-                  <input id="roiTraditional" data-roi-input="traditional" type="number" min="0" step="100" value="110000">
-                </div>
-              </div>
-
-              <div class="roi-table-wrap">
-                <table class="roi-table">
-                  <thead>
-                    <tr>
-                      <th scope="col">طريقة التكلفة</th>
-                      <th scope="col">السنة الأولى</th>
-                      <th scope="col">السنة الثانية</th>
-                      <th scope="col">السنة الثالثة</th>
-                      <th scope="col">إجمالي 3 سنوات</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">نظام Envirolyte</th>
-                      <td class="roi-value" data-roi-output="envYear1">129,692</td>
-                      <td class="roi-value" data-roi-output="envYear2">4,692</td>
-                      <td class="roi-value" data-roi-output="envYear3">4,692</td>
-                      <td class="roi-value" data-roi-output="envTotal3">139,076</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">توريد المواد الكيميائية</th>
-                      <td class="roi-value" data-roi-output="tradYear1">110,000</td>
-                      <td class="roi-value" data-roi-output="tradYear2">110,000</td>
-                      <td class="roi-value" data-roi-output="tradYear3">110,000</td>
-                      <td class="roi-value" data-roi-output="tradTotal3">330,000</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">الوفر / (التكلفة الإضافية)</th>
-                      <td class="roi-value negative" data-roi-output="saveYear1">(19,692)</td>
-                      <td class="roi-value" data-roi-output="saveYear2">105,308</td>
-                      <td class="roi-value" data-roi-output="saveYear3">105,308</td>
-                      <td class="roi-value" data-roi-output="savings3">190,924</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div class="roi-results" aria-live="polite">
-                <div class="roi-result"><span>تكلفة Envirolyte / 3 سنوات</span><strong><span data-roi-output="envTotal3">139,076</span> ر.ق</strong></div>
-                <div class="roi-result amber"><span>التوريد التقليدي / 3 سنوات</span><strong><span data-roi-output="tradTotal3">330,000</span> ر.ق</strong></div>
-                <div class="roi-result green"><span>صافي الوفر خلال 3 سنوات</span><strong><span data-roi-output="savings3">190,924</span> ر.ق</strong></div>
-                <div class="roi-result accent">
-                  <span>الاسترداد التقديري / العائد</span>
-                  <strong class="roi-payback">
-                    <span class="roi-payback-piece"><span data-roi-output="paybackMonths">14.2</span><em>شهر</em></span>
-                    <span class="roi-separator">•</span>
-                    <span class="roi-payback-piece"><em>ROI</em><span data-roi-output="roiPct">152.7%</span></span>
-                  </strong>
+            <div class="calculator" id="calculator">
+              <div class="cost-group">
+                <h3>التكلفة الحالية / سنة</h3>
+                <div class="cost-fields">
+                  <label for="cChem">المواد الكيميائية</label><input id="cChem" data-cost="current" type="number" min="0" value="0">
+                  <label for="cTransport">النقل</label><input id="cTransport" data-cost="current" type="number" min="0" value="0">
+                  <label for="cStorage">التخزين</label><input id="cStorage" data-cost="current" type="number" min="0" value="0">
+                  <label for="cLabor">العمالة</label><input id="cLabor" data-cost="current" type="number" min="0" value="0">
+                  <label for="cSafety">معدات السلامة</label><input id="cSafety" data-cost="current" type="number" min="0" value="0">
+                  <label for="cDisposal">التخلص من العبوات</label><input id="cDisposal" data-cost="current" type="number" min="0" value="0">
+                  <label for="cDowntime">التوقفات</label><input id="cDowntime" data-cost="current" type="number" min="0" value="0">
+                  <label for="cTests">التحاليل</label><input id="cTests" data-cost="current" type="number" min="0" value="0">
                 </div>
               </div>
-              <div class="roi-notes">
-                <span>القيم الافتراضية مأخوذة من المثال المرفق ويمكن تعديلها مباشرة.</span>
-                <span>تفترض الحسبة ثبات الأسعار لمدة 3 سنوات.</span>
-                <span>لا تشمل وفورات الماء والعمالة والنقل والتخزين.</span>
+              <div class="cost-group">
+                <h3>النظام المقترح</h3>
+                <div class="cost-fields">
+                  <label for="pCapex">الجهاز + التركيب</label><input id="pCapex" data-capex type="number" min="0" value="0">
+                  <label for="pSalt">الملح / سنة</label><input id="pSalt" data-cost="proposed" type="number" min="0" value="0">
+                  <label for="pWater">الماء / سنة</label><input id="pWater" data-cost="proposed" type="number" min="0" value="0">
+                  <label for="pPower">الكهرباء / سنة</label><input id="pPower" data-cost="proposed" type="number" min="0" value="0">
+                  <label for="pMaint">الصيانة / سنة</label><input id="pMaint" data-cost="proposed" type="number" min="0" value="0">
+                  <label for="pSpares">قطع الغيار / سنة</label><input id="pSpares" data-cost="proposed" type="number" min="0" value="0">
+                  <label for="pTests">التحاليل / سنة</label><input id="pTests" data-cost="proposed" type="number" min="0" value="0">
+                  <label for="pTraining">التدريب / سنة</label><input id="pTraining" data-cost="proposed" type="number" min="0" value="0">
+                </div>
+              </div>
+              <div class="results" aria-live="polite">
+                <div class="result"><span>الحالية / سنة</span><strong id="currentTotal">0</strong></div>
+                <div class="result"><span>المقترحة / سنة</span><strong id="proposedTotal">0</strong></div>
+                <div class="result"><span>الفرق السنوي</span><strong id="annualDelta">0</strong></div>
+                <div class="result"><span>الاسترداد التقديري</span><strong id="payback">—</strong></div>
               </div>
             </div>
+            <div class="notice" style="margin-top:.7rem">هذه الحسابات تقديرية، ولا تعتمد إلا بعد إدخال بيانات الجهة والتحقق من النطاق الفني. أدخل جميع القيم بالعملة نفسها.</div>
           </div>
           <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع — الملحق الفني</span><span>15</span></footer>
           <aside class="notes-data" hidden>
-            <span data-note="idea">مقارنة تكلفة نظام Envirolyte بالتوريد التقليدي عبر ثلاث سنوات، مع إظهار صافي الوفر وفترة الاسترداد والعائد.</span>
-            <span data-note="opening">اعتماداً على قيم المثال المرفق، يصبح الاستثمار الأولي قابلاً للاسترداد خلال نحو أربعة عشر شهراً.</span>
-            <span data-note="transition">تُستبدل القيم الافتراضية ببيانات الجهة الفعلية قبل اعتماد القرار التجاري.</span>
-            <span data-note="avoid">الحسبة تقديرية ولا تشمل التضخم أو التمويل أو الضرائب أو الوفورات التشغيلية الإضافية.</span>
+            <span data-note="idea">تجميع التكلفة الكلية الحالية والمقترحة مع احتساب فرق سنوي واسترداد تقديري بعد إدخال القيم.</span>
+            <span data-note="opening">أي مقارنة مالية جادة تبدأ بجرد كامل للتكلفة، لا بسعر المادة أو الجهاز منفرداً.</span>
+            <span data-note="transition">بعد استكمال البيانات الفنية والمالية، يمكن إصدار تقرير قرار موثق.</span>
+            <span data-note="avoid">لا تعرض نتائج الآلة الحاسبة كعرض تجاري معتمد قبل مراجعة الافتراضات والنطاق.</span>
           </aside>
         </section>
 
@@ -1655,8 +1560,8 @@
         {
           eyebrow: "Technical proposal for an operational opportunity",
           title: "From purchasing disinfectants to producing them on demand",
-          body: `<p class="en-lead">Evaluating Envirolyte technology for on-site production of disinfection solutions from water, salt and electricity across diverse facilities and sectors.</p>
-            <div class="en-flow"><span class="en-node">Prepared by: Rassen — شركة رصين</span></div>`,
+          body: `<p class="en-lead">An evaluation of Envirolyte technology for producing disinfection solutions on site using water, salt and electricity — for the facilities of [Organization Name].</p>
+            <div class="en-flow"><span class="en-node">Prepared by: [Company / Qatar representative]</span><span class="en-node">Prepared for: [Organization Name]</span><span class="en-node">Date: [Date]</span></div>`,
           note: "Open the discussion as a change in how the disinfection process is managed, not as a product catalogue.",
           avoid: "Avoid savings or absolute safety claims before collecting site data."
         },
@@ -1766,10 +1671,12 @@
         },
         {
           eyebrow: "Technical appendix 01",
-          title: "Three-year ROI comparison",
-          body: "",
-          note: "Compare Envirolyte with traditional chemical supply across three years, including net savings, payback and ROI.",
-          avoid: "The calculation is an estimate and excludes inflation, financing, tax and additional operating savings."
+          title: "The financial comparison starts with the organization’s data — not a preset percentage",
+          body: `<div class="en-grid two"><div class="en-panel"><h3>Current annual cost</h3><ul class="en-list"><li>Chemicals and transport</li><li>Storage and labour</li><li>Safety equipment and packaging disposal</li><li>Downtime and testing</li></ul></div><div class="en-panel green"><h3>Proposed annual model</h3><ul class="en-list"><li>Equipment and installation</li><li>Salt, water and electricity</li><li>Maintenance and spare parts</li><li>Testing and training</li></ul></div></div>
+            <div class="en-grid four"><div class="en-callout"><strong>Current / year</strong><br>[Value]</div><div class="en-callout green"><strong>Proposed / year</strong><br>[Value]</div><div class="en-callout"><strong>Annual difference</strong><br>[Value]</div><div class="en-callout amber"><strong>Estimated payback</strong><br>[Value]</div></div>
+            <div class="en-callout amber">Calculations remain estimates until organization data and the technical scope are verified. Use one currency for all inputs.</div>`,
+          note: "Compare complete current and proposed costs before estimating annual difference and payback.",
+          avoid: "Do not present calculator outputs as an approved commercial offer before reviewing assumptions and scope."
         },
         {
           eyebrow: "Closing",
@@ -1786,8 +1693,8 @@
         "مقترح فني لتقييم فرصة تشغيلية": "Technical proposal to evaluate an operational opportunity",
         "من شراء مواد التعقيم إلى إنتاجها عند الحاجة": "From purchasing disinfectants to producing them on demand",
         "تقييم تقنية": "Evaluating",
-        "لإنتاج محاليل التطهير في الموقع بالماء والملح والكهرباء لمختلف المنشآت والقطاعات.": "technology for on-site production of disinfection solutions from water, salt and electricity across diverse facilities and sectors.",
-        "مقدم من: شركة رصين Rassen": "Prepared by: Rassen — شركة رصين",
+        "لإنتاج محاليل التطهير في الموقع باستخدام الماء والملح والكهرباء — في منشآت [اسم الجهة].": "technology for producing disinfection solutions on site using water, salt and electricity — at [Organization Name] facilities.",
+        "مقدم من: [اسم الشركة أو الوكيل في قطر]": "Prepared by: [Company or representative in Qatar]",
         "مقدم إلى: [اسم الجهة]": "Prepared for: [Organization Name]",
         "التاريخ: [التاريخ]": "Date: [Date]",
         "مرجع صورة مقترحة: منشأة مياه في قطر ↗": "Suggested image reference: water facility in Qatar ↗",
@@ -2080,28 +1987,6 @@
         "صفحة الجودة والاعتمادات الرسمية ↗": "Official quality and approvals page ↗",
         "الملحق الفني 05": "Technical appendix 05",
         "المقارنة المالية تبدأ ببيانات الجهة، لا بنسبة جاهزة": "The financial comparison starts with the organization’s data, not a preset percentage",
-        "العائد على الاستثمار خلال 3 سنوات": "Return on investment over 3 years",
-        "ر.ق": "QAR",
-        "افتراضات الحسبة": "Calculation assumptions",
-        "الجهاز والتركيب": "System & installation",
-        "تشغيل النظام / سنة": "System operating cost / year",
-        "التوريد التقليدي / سنة": "Traditional supply / year",
-        "طريقة التكلفة": "Cost method",
-        "السنة الأولى": "Year 1",
-        "السنة الثانية": "Year 2",
-        "السنة الثالثة": "Year 3",
-        "إجمالي 3 سنوات": "3-year total",
-        "نظام Envirolyte": "Envirolyte system",
-        "توريد المواد الكيميائية": "Traditional chemical supply",
-        "الوفر / (التكلفة الإضافية)": "Savings / (additional cost)",
-        "تكلفة Envirolyte / 3 سنوات": "Envirolyte cost / 3 years",
-        "التوريد التقليدي / 3 سنوات": "Traditional supply / 3 years",
-        "صافي الوفر خلال 3 سنوات": "Net savings over 3 years",
-        "الاسترداد التقديري / العائد": "Estimated payback / ROI",
-        "شهر": "months",
-        "القيم الافتراضية مأخوذة من المثال المرفق ويمكن تعديلها مباشرة.": "Default values are taken from the supplied example and can be edited directly.",
-        "تفترض الحسبة ثبات الأسعار لمدة 3 سنوات.": "The calculation assumes stable prices for 3 years.",
-        "لا تشمل وفورات الماء والعمالة والنقل والتخزين.": "Excludes savings in water, labour, transport and storage.",
         "التكلفة الحالية / سنة": "Current annual cost",
         "المواد الكيميائية": "Chemicals",
         "النقل": "Transport",
@@ -2471,53 +2356,24 @@
       modals.forEach(modal => modal.addEventListener("click", event => { if (event.target === modal) closeModal(modal); }));
 
       /* =========================
-         Three-year ROI calculator
+         Total-cost calculator
          ========================= */
-      const roiCalculator = document.querySelector("[data-roi-calculator]");
-      const roiInputs = [...roiCalculator.querySelectorAll("[data-roi-input]")];
-      const number = input => Number.parseFloat(input?.value) || 0;
-      const format = (value, digits = 0) => new Intl.NumberFormat("en-QA", {
-        minimumFractionDigits: digits,
-        maximumFractionDigits: digits
-      }).format(value);
-      function setRoiOutput(name, value, { digits = 0, percent = false, accounting = false } = {}) {
-        const negative = value < 0;
-        const absolute = format(Math.abs(value), digits);
-        const rendered = accounting && negative ? `(${absolute})` : `${negative ? "−" : ""}${absolute}${percent ? "%" : ""}`;
-        document.querySelectorAll(`[data-roi-output="${name}"]`).forEach(element => {
-          element.textContent = rendered;
-          element.classList.toggle("negative", negative);
-        });
-      }
+      const costInputs = [...document.querySelectorAll("#calculator input")];
+      const number = input => Number.parseFloat(input.value) || 0;
+      const format = value => new Intl.NumberFormat(currentLanguage === "en" ? "en-QA" : "ar-QA", { maximumFractionDigits: 2 }).format(value);
       function calculateCosts() {
-        const capex = number(roiCalculator.querySelector('[data-roi-input="capex"]'));
-        const operating = number(roiCalculator.querySelector('[data-roi-input="operating"]'));
-        const traditional = number(roiCalculator.querySelector('[data-roi-input="traditional"]'));
-        const envYear1 = capex + operating;
-        const envTotal3 = capex + (operating * 3);
-        const tradTotal3 = traditional * 3;
-        const saveYear1 = traditional - envYear1;
-        const annualSaving = traditional - operating;
-        const savings3 = tradTotal3 - envTotal3;
-        const paybackMonths = annualSaving > 0 && capex > 0 ? (capex / annualSaving) * 12 : 0;
-        const roiPct = capex > 0 ? (savings3 / capex) * 100 : 0;
-
-        setRoiOutput("envYear1", envYear1);
-        setRoiOutput("envYear2", operating);
-        setRoiOutput("envYear3", operating);
-        setRoiOutput("envTotal3", envTotal3);
-        setRoiOutput("tradYear1", traditional);
-        setRoiOutput("tradYear2", traditional);
-        setRoiOutput("tradYear3", traditional);
-        setRoiOutput("tradTotal3", tradTotal3);
-        setRoiOutput("saveYear1", saveYear1, { accounting: true });
-        setRoiOutput("saveYear2", annualSaving, { accounting: true });
-        setRoiOutput("saveYear3", annualSaving, { accounting: true });
-        setRoiOutput("savings3", savings3, { accounting: true });
-        setRoiOutput("paybackMonths", paybackMonths, { digits: 1 });
-        setRoiOutput("roiPct", roiPct, { digits: 1, percent: true });
+        const currentTotal = costInputs.filter(i => i.dataset.cost === "current").reduce((sum, input) => sum + number(input), 0);
+        const proposedTotal = costInputs.filter(i => i.dataset.cost === "proposed").reduce((sum, input) => sum + number(input), 0);
+        const capex = number(document.querySelector("[data-capex]"));
+        const delta = currentTotal - proposedTotal;
+        document.getElementById("currentTotal").textContent = format(currentTotal);
+        document.getElementById("proposedTotal").textContent = format(proposedTotal);
+        document.getElementById("annualDelta").textContent = format(delta);
+        document.getElementById("payback").textContent = delta > 0 && capex > 0
+          ? `${format(capex / delta)} ${currentLanguage === "en" ? "years" : "سنة"}`
+          : "—";
       }
-      roiInputs.forEach(input => input.addEventListener("input", calculateCosts));
+      costInputs.forEach(input => input.addEventListener("input", calculateCosts));
       calculateCosts();
 
       /* Front-end-only workshop form */
