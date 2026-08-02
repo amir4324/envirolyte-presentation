@@ -256,6 +256,8 @@
       line-height: 1.08; letter-spacing: -.055em; font-weight: 850;
       overflow-wrap: anywhere;
     }
+    .cover-title-stacked { font-size: clamp(1.9rem, 3.25vw, 3.8rem); line-height: 1.02; }
+    .cover-title-stacked span { display: block; }
     .cover-sub { max-width: 44rem; margin-top: 1.25rem; color: rgba(255,255,255,.84); font-size: clamp(1.12rem, 1.65vw, 1.65rem); line-height: 1.6; font-weight: 500; }
     .cover-meta { margin-top: 1.8rem; display: flex; gap: .8rem 1.6rem; flex-wrap: wrap; color: rgba(255,255,255,.7); font-size: clamp(.82rem, 1vw, 1.05rem); }
     .facility-visual {
@@ -420,6 +422,16 @@
     .anolyte .solution-icon { background: var(--aqua-600); }
     .catholyte .solution-icon { background: var(--green-600); }
     .solution-card h3 { font-size: clamp(1.3rem, 2vw, 2rem); margin-bottom: .8rem; }
+    .solution-grid { align-items: stretch; }
+    .solution-grid .solution-card { min-height: 0; padding: clamp(1rem, 1.7vw, 1.6rem); }
+    .solution-grid .solution-icon { width: 3rem; height: 3rem; margin-bottom: .65rem; }
+    .solution-grid .solution-card h3 { margin-bottom: .15rem; }
+    .solution-role {
+      margin: 0 0 .65rem; color: var(--slate-600); font-size: clamp(.82rem, 1vw, 1rem);
+      line-height: 1.4; font-weight: 750;
+    }
+    .solution-grid ul.clean { gap: .4rem; }
+    .solution-grid ul.clean li { line-height: 1.4; }
 
     /* Detailed solution slides */
     .solution-detail-layout {
@@ -559,6 +571,29 @@
     .evidence-step:nth-child(4) { width: 88%; background: var(--aqua-600); }
     .evidence-step:nth-child(5) { width: 100%; background: var(--navy-900); }
 
+    .accreditation-slide-body { align-content: center; }
+    .accreditation-gallery {
+      display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(.55rem, 1vw, .9rem);
+      align-items: stretch;
+    }
+    .accreditation-doc {
+      min-width: 0; padding: .55rem; display: grid; grid-template-rows: auto auto auto; gap: .32rem;
+      color: inherit; text-decoration: none; background: white; border: 1px solid var(--slate-200);
+      border-radius: 14px; box-shadow: 0 12px 28px rgba(8,37,58,.06); transition: transform .2s ease, border-color .2s ease;
+    }
+    .accreditation-doc:hover, .accreditation-doc:focus-visible { transform: translateY(-3px); border-color: var(--aqua-500); }
+    .accreditation-doc img {
+      width: 100%; height: clamp(9.5rem, 22vh, 12.5rem); object-fit: contain; border-radius: 9px;
+      background: #f7fafb; border: 1px solid #edf2f4;
+    }
+    .accreditation-doc strong { color: var(--navy-900); font-size: clamp(.72rem, .88vw, .9rem); line-height: 1.3; }
+    .accreditation-doc small { color: var(--slate-500); font-size: clamp(.62rem, .72vw, .75rem); line-height: 1.35; }
+    .accreditation-summary {
+      margin-top: .8rem; display: grid; grid-template-columns: 1.15fr .85fr; gap: var(--space-3); align-items: center;
+    }
+    .accreditation-summary h3 { margin-bottom: .25rem; }
+    .accreditation-summary p { color: var(--slate-500); font-size: clamp(.75rem, .9vw, .9rem); line-height: 1.45; }
+
     /* Guardrails */
     .guardrails { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
     .guardrail { display: flex; gap: .75rem; align-items: flex-start; padding: .85rem .95rem; border-bottom: 1px solid var(--slate-200); }
@@ -615,6 +650,7 @@
     .company-facts { display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--space-5); align-items: center; }
     .fact-lines { display: grid; gap: .85rem; }
     .fact-line { display: grid; grid-template-columns: 2.1rem 1fr; gap: .85rem; align-items: start; }
+    .fact-line a.latin, .en-panel a { overflow-wrap: anywhere; word-break: break-word; }
     .fact-num { font-weight: 900; color: var(--aqua-600); font-size: 1.25rem; border-top: 2px solid var(--aqua-500); padding-top: .25rem; }
     .placeholder-photo {
       min-height: 19rem; border: 1px dashed var(--slate-300); border-radius: 20px; background:
@@ -846,6 +882,7 @@
     .en-panel.amber { border-top-color: var(--amber-500); color: var(--navy-900); }
     .en-panel h3 { margin-bottom: .5rem; font-size: clamp(1.05rem, 1.45vw, 1.5rem); }
     .en-panel p, .en-panel li { color: var(--slate-700); font-size: clamp(.8rem, 1vw, 1rem); line-height: 1.52; }
+    .en-panel .en-panel-role { margin: -.2rem 0 .65rem; color: var(--slate-600); font-weight: 750; }
     .en-list { margin: 0; padding-left: 1.2rem; display: grid; gap: .45rem; }
     .en-list li::marker { color: var(--aqua-500); }
     .en-flow {
@@ -924,6 +961,8 @@
       .route { grid-template-columns: 1fr; }
       .route-track { overflow-x: auto; padding-bottom: .35rem; }
       .guardrails, .cert-grid, .product-grid { grid-template-columns: 1fr 1fr; }
+      .accreditation-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .accreditation-summary { grid-template-columns: 1fr; }
       .timeline { grid-template-columns: 1fr 1fr; }
       .timeline::before { display: none; }
       .orbit-grid { min-height: auto; display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
@@ -944,6 +983,7 @@
       .en-head h2, .slide-cover .en-head h2 { font-size: 1.65rem; }
       .client-logo { display: none; }
       .guardrails, .cert-grid, .product-grid, .timeline, .orbit-grid, .form-grid { grid-template-columns: 1fr; }
+      .accreditation-gallery { grid-template-columns: 1fr; }
       .use-grid { grid-template-columns: 1fr 1fr; }
       .stage-block { grid-template-columns: 1fr; }
       .orbit-center { grid-column: auto; }
@@ -986,7 +1026,7 @@
       <div class="slides">
 
         <!-- 01 | Cover -->
-        <section class="slide slide-cover active" data-title="من شراء مواد التعقيم إلى إنتاجها عند الحاجة">
+        <section class="slide slide-cover active" data-title="نفتح آفاقًا جديدة في التعقيم والتطهير وتنقية المياه">
           <div class="slide-head">
             <div class="brand-lockup cover-brand-lockup">
               <img class="cover-brand-logo" src="assets/edura-logo.png" alt="Envirolyte Qatar">
@@ -995,7 +1035,7 @@
           <div class="slide-body cover-grid">
             <div class="cover-copy">
               <p class="cover-kicker">مقترح فني لتقييم فرصة تشغيلية</p>
-              <h1 class="cover-title">من شراء مواد التعقيم إلى إنتاجها عند الحاجة</h1>
+              <h1 class="cover-title cover-title-stacked"><span>نفتح آفاقًا جديدة في</span><span>التعقيم</span><span>التطهير</span><span>تنقية المياه</span></h1>
               <p class="cover-sub">تقييم تقنية <span class="latin">Envirolyte</span> لإنتاج محاليل التطهير في الموقع بالماء والملح والكهرباء لمختلف المنشآت والقطاعات.</p>
               <div class="cover-meta">
                 <span>مقدم من: شركة رصين Rassen</span>
@@ -1024,10 +1064,10 @@
           </header>
           <div class="slide-body company-facts">
             <div class="fact-lines">
-              <div class="fact-line"><span class="fact-num">01</span><div><h3>مجال الشركة</h3><p class="small">أنظمة إنتاج محاليل وظيفية في الموقع لمعالجة المياه والتطهير والنظافة التشغيلية.</p></div></div>
+              <div class="fact-line"><span class="fact-num">01</span><div><h3>مجال الشركة</h3><p class="small">أنظمة إنتاج محاليل وظيفية في الموقع لمعالجة وتعقيم المياه والتطهير والنظافة التشغيلية.</p></div></div>
               <div class="fact-line"><span class="fact-num">02</span><div><h3>التنشيط الكهروكيميائي</h3><p class="small">تقنية تعتمد على الماء والملح والكهرباء وخلية ذات غشاء فاصل.</p></div></div>
-              <div class="fact-line"><span class="fact-num">03</span><div><h3>الخبرة والدعم</h3><p class="small">[تضاف خبرة الشركة الدولية المعتمدة] • [تفاصيل دعم المصنع]</p></div></div>
-              <div class="fact-line"><span class="fact-num">04</span><div><h3>الحضور المحلي في قطر</h3><p class="small">[اسم الوكيل] • [نطاق الدعم المحلي] • [بيانات التواصل]</p></div></div>
+              <div class="fact-line"><span class="fact-num">03</span><div><h3>الخبرة والدعم</h3><p class="small">خبرة دولية موثقة في أكثر من 50 دولة • <span class="latin">ISO 9001:2015</span> و<span class="latin">NSF/ANSI 61</span> • دعم المصنع في دراسة المشروع، اختيار الجهاز، الوثائق الفنية والتنسيق مع الموزع.</p></div></div>
+              <div class="fact-line"><span class="fact-num">04</span><div><h3>الحضور المحلي في قطر</h3><p class="small">رصين أكوا سوليوشنز – الموزع المعتمد لـ<span class="latin">Envirolyte</span> في قطر • توريد وتنسيق فني واختبارات محلية • <span class="latin">+974 3000 8254</span> • <a class="latin" href="mailto:m.soliman@envirolyte-qatar.com">m.soliman@envirolyte-qatar.com</a></p></div></div>
               <a class="small" href="https://envirolyte.com/" target="_blank" rel="noopener">الموقع الرسمي ومراجع صور الأجهزة ↗</a>
             </div>
             <figure class="placeholder-photo device-photo">
@@ -1040,8 +1080,8 @@
             <span data-note="idea">تقديم الشركة بإيجاز قبل الانتقال إلى التحدي التشغيلي وفرصة الإنتاج في الموقع.</span>
             <span data-note="opening">هذه نبذة سريعة عن التقنية والخبرة والدعم المحلي المتوقع، ثم ننتقل إلى العملية التشغيلية الحالية.</span>
             <span data-note="transition">لفهم قيمة التقنية، نبدأ بما يحدث قبل وصول المادة المطهرة إلى نقطة الاستخدام.</span>
-            <span data-note="avoid">استبدل الحقول المربعة بمعلومات موثقة قبل العرض الرسمي.</span>
-            <span data-note="source">[Sources] Device photo: https://envirolyte.com/wp-content/uploads/2026/04/ela200-scaled.jpg</span>
+            <span data-note="avoid">تأكد من بقاء الشهادات ونطاق الاعتماد وبيانات الموزع محدثة قبل العرض الرسمي.</span>
+            <span data-note="source">[Sources] Device photo: https://envirolyte.com/wp-content/uploads/2026/04/ela200-scaled.jpg | Experience, certifications, manufacturer support and Qatar distributor/contact details: user-provided company information.</span>
           </aside>
         </section>
 
@@ -1133,16 +1173,18 @@
             <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
           </header>
           <div class="slide-body">
-            <div class="two-col">
+            <div class="two-col solution-grid">
               <article class="solution-card anolyte">
                 <div class="solution-icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3s6 7 6 12a6 6 0 11-12 0c0-5 6-12 6-12z"/><path d="M9 15l2 2 4-5"/></svg></div>
-                <h3 class="latin">Anolyte</h3>
-                <ul class="clean"><li>تطهير المياه.</li><li>التحكم الميكروبي.</li><li>تطهير الأسطح والمعدات المتوافقة.</li><li>دعم بعض عمليات التصنيع والتنظيف.</li></ul>
+                <h3 class="latin">ANOLYTE</h3>
+                <p class="solution-role">التطهير والتحكم الميكروبي</p>
+                <ul class="clean"><li>تطهير المياه والتحكم في الأحياء الدقيقة المتبقية.</li><li>مطهّر مؤكسد سريع المفعول.</li><li>تطهير الأسطح والمعدات المتوافقة.</li><li>دعم التحكم في الأغشية الحيوية والطحالب.</li><li>جرعات مستمرة أو دفعية مع مراقبة <span class="latin">FAC/ORP</span>.</li><li>دعم عمليات تصنيع ونظافة صحية مختارة.</li></ul>
               </article>
               <article class="solution-card catholyte">
                 <div class="solution-icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 18h16M7 18v-4h10v4M9 14V8h6v6M8 5h8M12 5v3"/></svg></div>
-                <h3 class="latin">Catholyte</h3>
-                <ul class="clean"><li>الغسيل والتنظيف.</li><li>دعم إزالة بعض الرواسب والأوساخ.</li><li>بعض عمليات <span class="latin">CIP</span>.</li><li>بعض تطبيقات تعديل الأس الهيدروجيني.</li></ul>
+                <h3 class="latin">CATHOLYTE</h3>
+                <p class="solution-role">التنظيف وإزالة الأوساخ</p>
+                <ul class="clean"><li>الغسيل والتنظيف القلوي.</li><li>إزالة الشحوم من الأسطح والمعدات المتوافقة.</li><li>دعم إزالة أنواع مختارة من الأوساخ والرواسب.</li><li>تنظيف تمهيدي قبل التطهير.</li><li>تطبيقات مختارة للتنظيف المكاني <span class="latin">CIP</span> وتنظيف المعدات.</li><li>تطبيقات مختارة لضبط الرقم الهيدروجيني.</li></ul>
               </article>
             </div>
             <div class="notice" style="margin-top:1rem">يعتمد الاستخدام النهائي والتركيز والجرعة على التطبيق، وجودة المياه، والمواد الملامسة، ومتطلبات الجهة.</div>
@@ -1153,6 +1195,7 @@
             <span data-note="opening">قيمة الفصل بين المسارين أن وظيفة التطهير تختلف عن وظيفة الغسيل القلوي.</span>
             <span data-note="transition">القيمة لا تتحقق إلا عند ربط التقنية بتطبيق محدد لدى الجهة.</span>
             <span data-note="avoid">لا تقل إن المحلولين يناسبان كل سطح أو عملية، ولا تستخدم وصف «آمن 100%».</span>
+            <span data-note="source">[Sources] Functional descriptions for Anolyte and Catholyte: user-provided technical content.</span>
           </aside>
         </section>
 
@@ -1406,24 +1449,37 @@
         </section>
 
         <!-- 12 | Evidence -->
-        <section class="slide" data-title="القرار يجب أن يعتمد على الأدلة لا على الادعاءات">
+        <section class="slide" data-title="اعتمادات واختبارات تدعم التقييم الفني">
           <header class="slide-head">
-            <div><span class="eyebrow">الدليل والثقة</span><h2>القرار يجب أن يعتمد على الأدلة، لا على الادعاءات</h2></div>
+            <div><span class="eyebrow">الاعتمادات والاختبارات</span><h2>اعتمادات واختبارات تدعم التقييم الفني</h2></div>
             <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
           </header>
-          <div class="slide-body evidence-layout">
-            <div class="evidence-stairs" aria-label="من اعتماد المصنع إلى إثبات النتائج داخل الموقع">
-              <div class="evidence-step">نظام الجودة والتصنيع</div>
-              <div class="evidence-step">الاختبارات الفنية والمخبرية</div>
-              <div class="evidence-step">التحقق من ملاءمة التطبيق</div>
-              <div class="evidence-step">التجربة داخل موقع الجهة</div>
-              <div class="evidence-step">قرار مبني على النتائج</div>
+          <div class="slide-body accreditation-slide-body">
+            <div class="accreditation-gallery" aria-label="معاينات الاعتمادات وتقارير الاختبار">
+              <a class="accreditation-doc" href="Accreditations/ACES%20Lab..pdf" target="_blank" rel="noopener">
+                <img src="assets/accreditations/aces-lab-report.png" alt="تقرير اختبار من المركز العربي للدراسات الهندسية ACES">
+                <strong>تقرير اختبار <span class="latin">ACES</span></strong><small>الفعالية الميكروبيولوجية للأنولايت</small>
+              </a>
+              <a class="accreditation-doc" href="Accreditations/Qatar%20Univercity%20Eng..pdf" target="_blank" rel="noopener">
+                <img src="assets/accreditations/qatar-university-engineering.png" alt="خطاب كلية الهندسة بجامعة قطر">
+                <strong>كلية الهندسة - جامعة قطر</strong><small>تجارب مخبرية على محلول <span class="latin">ANOX</span></small>
+              </a>
+              <a class="accreditation-doc" href="Accreditations/WhatsApp%20Image%202026-08-01%20at%206.04.07%20PM(1).jpeg" target="_blank" rel="noopener">
+                <img src="assets/accreditations/iso-9001-2015.jpeg" alt="شهادة ISO 9001:2015 لشركة Envirolyte Industries International">
+                <strong><span class="latin">ISO 9001:2015</span></strong><small><span class="latin">Bureau Veritas</span> - نظام إدارة الجودة</small>
+              </a>
+              <a class="accreditation-doc" href="Accreditations/WhatsApp%20Image%202026-08-01%20at%206.04.07%20PM.jpeg" target="_blank" rel="noopener">
+                <img src="assets/accreditations/nsf-ansi-61-company.jpeg" alt="اعتماد NSF ANSI 61 لشركة Envirolyte Industries International">
+                <strong><span class="latin">NSF/ANSI 61</span></strong><small>اعتماد الشركة المصنعة</small>
+              </a>
+              <a class="accreditation-doc" href="Accreditations/WhatsApp%20Image%202026-08-01%20at%206.04.08%20PM.jpeg" target="_blank" rel="noopener">
+                <img src="assets/accreditations/nsf-ansi-61-tallinn.jpeg" alt="اعتماد NSF ANSI 61 لمنشأة Envirolyte في تالين">
+                <strong><span class="latin">NSF/ANSI 61</span></strong><small>اعتماد منشأة تالين</small>
+              </a>
             </div>
-            <div class="stack">
-              <h3>من اعتماد المصنع إلى إثبات النتائج داخل الموقع</h3>
-              <ul class="clean check-list"><li><span class="latin">ISO 9001:2015</span>.</li><li><span class="latin">NSF/ANSI 61</span> حيث ينطبق.</li><li>اختبارات ميكروبيولوجية ونواتج ثانوية.</li><li>وثائق التشغيل والصيانة.</li><li>بيانات الجرعات والمراقبة.</li></ul>
-              <button class="secondary-btn" data-open-modal="docsModal">عرض الوثائق الفنية</button>
-              <a class="small" href="https://envirolyte.com/approvals/quality-control/" target="_blank" rel="noopener">مرجع الاعتمادات الرسمي ↗</a>
+            <div class="accreditation-summary">
+              <div><h3>اعتمادات دولية وأدلة اختبار محلية</h3><p>انقر على أي وثيقة لفتح النسخة الأصلية بالحجم الكامل.</p></div>
+              <div class="notice">تُراجع كل وثيقة وفق نطاقها، وتاريخها، والطراز أو التطبيق المرتبط بها.</div>
             </div>
           </div>
           <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>10</span></footer>
@@ -1432,6 +1488,7 @@
             <span data-note="opening">الشهادة مهمة، لكنها لا تعوض إثبات أن التطبيق يعمل في مياه وظروف الجهة.</span>
             <span data-note="transition">هذا النهج يفرض علينا أيضاً أن نكون واضحين بشأن حدود ما ندعيه.</span>
             <span data-note="avoid">تحقق من نطاق كل شهادة وطراز وتطبيق قبل استخدامها في ملف اعتماد رسمي.</span>
+            <span data-note="source">[Sources] Local accreditation assets: Accreditations/ACES Lab..pdf | Accreditations/Qatar Univercity Eng..pdf | Accreditations/WhatsApp Image 2026-08-01 at 6.04.07 PM(1).jpeg | Accreditations/WhatsApp Image 2026-08-01 at 6.04.07 PM.jpeg | Accreditations/WhatsApp Image 2026-08-01 at 6.04.08 PM.jpeg</span>
           </aside>
         </section>
 
@@ -1654,7 +1711,7 @@
       const englishSlides = [
         {
           eyebrow: "Technical proposal for an operational opportunity",
-          title: "From purchasing disinfectants to producing them on demand",
+          title: "Bringing new ground in — Sterilisation, Disinfecting, Water purification",
           body: `<p class="en-lead">Evaluating Envirolyte technology for on-site production of disinfection solutions from water, salt and electricity across diverse facilities and sectors.</p>
             <div class="en-flow"><span class="en-node">Prepared by: Rassen — شركة رصين</span></div>`,
           note: "Open the discussion as a change in how the disinfection process is managed, not as a product catalogue.",
@@ -1663,10 +1720,9 @@
         {
           eyebrow: "Company overview",
           title: "About Envirolyte",
-          body: `<div class="en-grid four"><div class="en-panel"><h3>Company focus</h3><p>Systems that produce functional solutions on site for water treatment, disinfection and operational hygiene.</p></div><div class="en-panel green"><h3>Electrochemical activation</h3><p>Water, salt, electricity and a membrane-separated cell.</p></div><div class="en-panel"><h3>Experience & support</h3><p>[Verified international experience] • [Manufacturer support details]</p></div><div class="en-panel amber"><h3>Local presence in Qatar</h3><p>[Representative] • [Local support scope] • [Contact details]</p></div></div>
-            <div class="en-callout amber">Replace all bracketed fields and the image placeholder with licensed, verified material before formal presentation.</div>`,
+          body: `<div class="en-grid four"><div class="en-panel"><h3>Company focus</h3><p>Systems that produce functional solutions on site for water treatment and disinfection, plus operational hygiene.</p></div><div class="en-panel green"><h3>Electrochemical activation</h3><p>Water, salt, electricity and a membrane-separated cell.</p></div><div class="en-panel"><h3>Experience & support</h3><p>Documented international experience in more than 50 countries • ISO 9001:2015 and NSF/ANSI 61 • Manufacturer support for project studies, unit selection, technical documentation and distributor coordination.</p></div><div class="en-panel amber"><h3>Local presence in Qatar</h3><p>Rassen Aqua Solutions — Envirolyte’s authorized distributor in Qatar • Supply, technical coordination and local testing • +974 3000 8254 • <a href="mailto:m.soliman@envirolyte-qatar.com">m.soliman@envirolyte-qatar.com</a></p></div></div>`,
           note: "Introduce the company briefly before moving to the current operating challenge and the on-site production opportunity.",
-          avoid: "Replace every bracketed field with verified information before external use."
+          avoid: "Confirm that certifications, approval scope and distributor contact details remain current before external use."
         },
         {
           eyebrow: "A possible future state",
@@ -1687,7 +1743,7 @@
         {
           eyebrow: "Outputs",
           title: "Two solutions, with two distinct functions",
-          body: `<div class="en-grid two"><div class="en-panel"><h3>Anolyte</h3><ul class="en-list"><li>Water disinfection</li><li>Microbial control</li><li>Compatible surfaces and equipment</li><li>Selected process applications</li></ul></div><div class="en-panel green"><h3>Catholyte</h3><ul class="en-list"><li>Washing and cleaning</li><li>Support for removing selected deposits and soils</li><li>Selected CIP processes</li><li>Selected pH-adjustment applications</li></ul></div></div>
+          body: `<div class="en-grid two"><div class="en-panel"><h3>ANOLYTE</h3><p class="en-panel-role">Disinfection and microbial control</p><ul class="en-list"><li>Water disinfection and residual microbial control.</li><li>Fast-acting oxidizing disinfectant.</li><li>Disinfection of compatible surfaces and equipment.</li><li>Support for biofilm and algae control.</li><li>Continuous or batch dosing with FAC/ORP monitoring.</li><li>Support for selected manufacturing and sanitation processes.</li></ul></div><div class="en-panel green"><h3>CATHOLYTE</h3><p class="en-panel-role">Cleaning and soil removal</p><ul class="en-list"><li>Alkaline washing and cleaning.</li><li>Degreasing of compatible surfaces and equipment.</li><li>Support for removing selected soils and deposits.</li><li>Pre-cleaning before disinfection.</li><li>Selected CIP and equipment-cleaning applications.</li><li>Selected pH-adjustment applications.</li></ul></div></div>
             <div class="en-callout amber">Final use, concentration and dose depend on the application, water quality, contact materials and the organization’s requirements.</div>`,
           note: "Separate the general functions of the two outputs while keeping final selection subject to technical validation.",
           avoid: "Do not claim that both solutions suit every surface or process."
@@ -1750,9 +1806,8 @@
         },
         {
           eyebrow: "Evidence & confidence",
-          title: "The decision should be built on evidence, not claims",
-          body: `<div class="en-steps"><div class="en-step"><b>01</b><strong>Quality & manufacturing system</strong></div><div class="en-step"><b>02</b><strong>Technical and laboratory tests</strong></div><div class="en-step"><b>03</b><strong>Application-fit review</strong></div><div class="en-step"><b>04</b><strong>On-site pilot and decision</strong></div></div>
-            <div class="en-grid two"><div class="en-panel"><h3>Documented evidence</h3><ul class="en-list"><li>ISO 9001:2015</li><li>NSF/ANSI 61 where applicable</li><li>Microbiological and by-product testing</li></ul></div><div class="en-panel green"><h3>Site evidence</h3><ul class="en-list"><li>Operating and maintenance documentation</li><li>Dosing and monitoring data</li><li>Measured pilot results under site conditions</li></ul></div></div>`,
+          title: "Accreditations and tests supporting technical evaluation",
+          body: `<div class="en-callout">Five source documents are presented: ISO 9001:2015, two NSF/ANSI 61 recognitions, an ACES microbiological test report and a Qatar University College of Engineering letter.</div>`,
           note: "Build confidence from factory quality systems through to evidence generated at the organization’s site.",
           avoid: "Verify the scope, model, application and validity date of every certificate before formal use."
         },
@@ -1784,7 +1839,10 @@
       const textTranslations = {
         "[شعار الجهة]": "[Organization logo]",
         "مقترح فني لتقييم فرصة تشغيلية": "Technical proposal to evaluate an operational opportunity",
-        "من شراء مواد التعقيم إلى إنتاجها عند الحاجة": "From purchasing disinfectants to producing them on demand",
+        "نفتح آفاقًا جديدة في": "Bringing new ground in",
+        "التعقيم": "Sterilisation",
+        "التطهير": "Disinfecting",
+        "تنقية المياه": "Water purification",
         "تقييم تقنية": "Evaluating",
         "لإنتاج محاليل التطهير في الموقع بالماء والملح والكهرباء لمختلف المنشآت والقطاعات.": "technology for on-site production of disinfection solutions from water, salt and electricity across diverse facilities and sectors.",
         "مقدم من: شركة رصين Rassen": "Prepared by: Rassen — شركة رصين",
@@ -1854,6 +1912,20 @@
         "للغسيل والتنظيف القلوي": "For washing and alkaline cleaning",
         "المخرجات": "Outputs",
         "محلولان، بوظيفتين مختلفتين": "Two solutions with different functions",
+        "التطهير والتحكم الميكروبي": "Disinfection and microbial control",
+        "تطهير المياه والتحكم في الأحياء الدقيقة المتبقية.": "Water disinfection and residual microbial control.",
+        "مطهّر مؤكسد سريع المفعول.": "Fast-acting oxidizing disinfectant.",
+        "دعم التحكم في الأغشية الحيوية والطحالب.": "Support for biofilm and algae control.",
+        "جرعات مستمرة أو دفعية مع مراقبة": "Continuous or batch dosing with monitoring of",
+        "دعم عمليات تصنيع ونظافة صحية مختارة.": "Support for selected manufacturing and sanitation processes.",
+        "التنظيف وإزالة الأوساخ": "Cleaning and soil removal",
+        "الغسيل والتنظيف القلوي.": "Alkaline washing and cleaning.",
+        "إزالة الشحوم من الأسطح والمعدات المتوافقة.": "Degreasing of compatible surfaces and equipment.",
+        "دعم إزالة أنواع مختارة من الأوساخ والرواسب.": "Support for removing selected soils and deposits.",
+        "تنظيف تمهيدي قبل التطهير.": "Pre-cleaning before disinfection.",
+        "تطبيقات مختارة للتنظيف المكاني": "Selected clean-in-place applications",
+        "وتنظيف المعدات.": "and equipment cleaning.",
+        "تطبيقات مختارة لضبط الرقم الهيدروجيني.": "Selected pH-adjustment applications.",
         "تطهير المياه.": "Water disinfection.",
         "التحكم الميكروبي.": "Microbial control.",
         "تحكم ميكروبي.": "Microbial control.",
@@ -1953,6 +2025,24 @@
         "لا توجد نسبة وفر معتمدة قبل بناء خط أساس وإدخال بيانات الجهة.": "No savings percentage is valid before establishing a baseline and entering the organization’s data.",
         "الدليل والثقة": "Evidence and confidence",
         "القرار يجب أن يعتمد على الأدلة، لا على الادعاءات": "The decision should be based on evidence, not claims",
+        "الاعتمادات والاختبارات": "Accreditations and tests",
+        "اعتمادات واختبارات تدعم التقييم الفني": "Accreditations and tests supporting technical evaluation",
+        "معاينات الاعتمادات وتقارير الاختبار": "Accreditation and test-report previews",
+        "تقرير اختبار من المركز العربي للدراسات الهندسية ACES": "Test report from the Arab Center for Engineering Studies (ACES)",
+        "تقرير اختبار": "Test report",
+        "الفعالية الميكروبيولوجية للأنولايت": "Microbiological efficacy of Anolyte",
+        "خطاب كلية الهندسة بجامعة قطر": "Qatar University College of Engineering letter",
+        "كلية الهندسة - جامعة قطر": "College of Engineering - Qatar University",
+        "تجارب مخبرية على محلول": "Laboratory experiments on",
+        "شهادة ISO 9001:2015 لشركة Envirolyte Industries International": "ISO 9001:2015 certificate for Envirolyte Industries International",
+        "- نظام إدارة الجودة": "- Quality management system",
+        "اعتماد NSF ANSI 61 لشركة Envirolyte Industries International": "NSF/ANSI 61 recognition for Envirolyte Industries International",
+        "اعتماد الشركة المصنعة": "Manufacturer recognition",
+        "اعتماد NSF ANSI 61 لمنشأة Envirolyte في تالين": "NSF/ANSI 61 recognition for Envirolyte's Tallinn facility",
+        "اعتماد منشأة تالين": "Tallinn facility recognition",
+        "اعتمادات دولية وأدلة اختبار محلية": "International accreditations and local test evidence",
+        "انقر على أي وثيقة لفتح النسخة الأصلية بالحجم الكامل.": "Select any document to open the full-size original.",
+        "تُراجع كل وثيقة وفق نطاقها، وتاريخها، والطراز أو التطبيق المرتبط بها.": "Review each document against its scope, date, and associated model or application.",
         "نظام الجودة والتصنيع": "Quality and manufacturing system",
         "الاختبارات الفنية والمخبرية": "Technical and laboratory tests",
         "التحقق من ملاءمة التطبيق": "Application-fit verification",
@@ -2022,13 +2112,13 @@
         "نبذة عن الشركة": "Company overview",
         "نبذة عن": "About",
         "مجال الشركة": "Company focus",
-        "أنظمة إنتاج محاليل وظيفية في الموقع لمعالجة المياه والتطهير والنظافة التشغيلية.": "Systems that produce functional solutions on site for water treatment, disinfection and operational hygiene.",
+        "أنظمة إنتاج محاليل وظيفية في الموقع لمعالجة وتعقيم المياه والتطهير والنظافة التشغيلية.": "Systems that produce functional solutions on site for water treatment and disinfection, plus operational hygiene.",
         "التنشيط الكهروكيميائي": "Electrochemical activation",
         "تقنية تعتمد على الماء والملح والكهرباء وخلية ذات غشاء فاصل.": "Technology based on water, salt, electricity and a membrane-separated cell.",
         "الخبرة والدعم": "Experience and support",
-        "[تضاف خبرة الشركة الدولية المعتمدة] • [تفاصيل دعم المصنع]": "[Verified international experience] • [Manufacturer support details]",
+        "خبرة دولية موثقة في أكثر من 50 دولة • ISO 9001:2015 وNSF/ANSI 61 • دعم المصنع في دراسة المشروع، اختيار الجهاز، الوثائق الفنية والتنسيق مع الموزع.": "Documented international experience in more than 50 countries • ISO 9001:2015 and NSF/ANSI 61 • Manufacturer support for project studies, unit selection, technical documentation and distributor coordination.",
         "الحضور المحلي في قطر": "Local presence in Qatar",
-        "[اسم الوكيل] • [نطاق الدعم المحلي] • [بيانات التواصل]": "[Representative] • [Local support scope] • [Contact details]",
+        "رصين أكوا سوليوشنز – الموزع المعتمد لـEnvirolyte في قطر • توريد وتنسيق فني واختبارات محلية • +974 3000 8254 • m.soliman@envirolyte-qatar.com": "Rassen Aqua Solutions — Envirolyte’s authorized distributor in Qatar • Supply, technical coordination and local testing • +974 3000 8254 • m.soliman@envirolyte-qatar.com",
         "الموقع الرسمي ومراجع صور الأجهزة ↗": "Official website and equipment image references ↗",
         "[صورة معتمدة لجهاز أو منشأة Envirolyte]": "[Approved image of an Envirolyte unit or facility]",
         "استبدل هذا الموضع بصورة مرخصة عالية الدقة.": "Replace this placeholder with a licensed high-resolution image.",
