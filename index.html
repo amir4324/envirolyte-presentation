@@ -182,11 +182,25 @@
     }
     .brand-name { font-weight: 850; letter-spacing: .01em; font-size: clamp(.7rem, 1vw, 1rem); }
     .cover-brand-lockup {
-      padding: .5rem .72rem; border: 1px solid rgba(255,255,255,.68); border-radius: 12px;
-      background: rgba(255,255,255,.96); box-shadow: 0 12px 28px rgba(0,0,0,.16);
+      align-items: stretch; gap: .72rem; padding: 0; border: 0; border-radius: 0;
+      background: transparent; box-shadow: none;
     }
+    .cover-logo-card {
+      min-height: clamp(5.4rem, 7.4vw, 7rem); padding: .5rem .72rem;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      border: 1px solid rgba(255,255,255,.68); border-radius: 13px;
+      background: rgba(255,255,255,.97); box-shadow: 0 12px 28px rgba(0,0,0,.16);
+    }
+    .cover-logo-card.raseen { min-width: clamp(10.5rem, 15.5vw, 14.5rem); }
+    .cover-logo-card.edura { min-width: clamp(8rem, 11vw, 10.5rem); }
     .cover-brand-logo {
-      display: block; width: clamp(10rem, 15vw, 14rem); height: auto; object-fit: contain;
+      display: block; width: clamp(9.5rem, 14vw, 13rem); max-height: clamp(3.8rem, 5vw, 4.8rem);
+      height: auto; object-fit: contain;
+    }
+    .cover-brand-logo.edura-logo { width: clamp(7.3rem, 9.5vw, 9rem); max-height: 3.25rem; }
+    .cover-brand-caption {
+      margin-top: .3rem; color: var(--navy-900); font-size: clamp(.62rem, .72vw, .78rem);
+      line-height: 1.15; font-weight: 750; letter-spacing: .01em; white-space: nowrap;
     }
     .client-logo {
       border: 1px dashed var(--slate-300); border-radius: 10px; padding: .55rem .8rem;
@@ -253,7 +267,7 @@
 
     /* Cover */
     .cover-grid {
-      display: grid; grid-template-columns: 1.04fr .96fr; gap: clamp(2rem, 5vw, 5rem); align-items: center;
+      display: grid; grid-template-columns: 1.08fr .92fr; gap: clamp(2rem, 4vw, 4rem); align-items: center;
     }
     .cover-copy { position: relative; z-index: 2; min-width: 0; }
     .cover-kicker { color: #8bd7df; font-weight: 700; margin-bottom: 1rem; }
@@ -263,7 +277,25 @@
       overflow-wrap: anywhere;
     }
     .cover-title-stacked { font-size: clamp(1.9rem, 3.25vw, 3.8rem); line-height: 1.02; }
-    .cover-title-stacked span { display: block; }
+    .cover-title-refined {
+      position: relative; display: flex; flex-direction: column; align-items: flex-start;
+      gap: .12em; padding-inline-start: clamp(.85rem, 1.25vw, 1.25rem);
+      max-width: 41rem; line-height: .98; letter-spacing: -.045em;
+    }
+    .cover-title-refined::before {
+      content: ""; position: absolute; inset-block: .08em .05em; inset-inline-start: 0;
+      width: 5px; border-radius: 99px;
+      background: linear-gradient(180deg, var(--aqua-500), var(--green-500));
+    }
+    .cover-title-refined .cover-title-intro {
+      display: block; margin-bottom: .16em; color: rgba(255,255,255,.72);
+      font-size: .48em; line-height: 1.25; letter-spacing: -.015em; font-weight: 700;
+    }
+    .cover-title-refined .cover-title-main {
+      display: flex; align-items: baseline; gap: .22em; flex-wrap: wrap;
+    }
+    .cover-title-refined .cover-title-divider { color: rgba(255,255,255,.35); font-weight: 500; }
+    .cover-title-refined .cover-title-accent { display: block; color: #8bd7df; }
     .cover-sub { max-width: 44rem; margin-top: 1.25rem; color: rgba(255,255,255,.84); font-size: clamp(1.12rem, 1.65vw, 1.65rem); line-height: 1.6; font-weight: 500; }
     .cover-meta { margin-top: 1.8rem; display: flex; gap: .8rem 1.6rem; flex-wrap: wrap; color: rgba(255,255,255,.7); font-size: clamp(.82rem, 1vw, 1.05rem); }
     .facility-visual {
@@ -408,8 +440,13 @@
     .process-svg { width: 100%; height: min(38vh, 25rem); overflow: visible; }
     .flow-dash { stroke-dasharray: 10 10; animation: flowDash 2.2s linear infinite; }
     @keyframes flowDash { to { stroke-dashoffset: -40; } }
-    .process-legend { display: flex; justify-content: center; gap: 1.5rem; color: var(--slate-600); font-size: clamp(.65rem, .86vw, .84rem); }
-    .legend-dot { display: inline-block; width: .65rem; height: .65rem; border-radius: 50%; margin-inline-end: .35rem; }
+    .process-legend {
+      display: flex; justify-content: center; align-items: center; flex-wrap: wrap;
+      gap: .65rem 2.5rem; color: var(--slate-600);
+      font-size: clamp(1.1rem, 1.45vw, 1.4rem); line-height: 1.35; font-weight: 650;
+    }
+    .process-legend .latin { color: var(--navy-900); font-weight: 850; }
+    .legend-dot { display: inline-block; width: .78rem; height: .78rem; border-radius: 50%; margin-inline-end: .45rem; }
 
     /* Solution cards */
     .solution-card {
@@ -608,7 +645,8 @@
       align-items: stretch;
     }
     .international-badge {
-      min-width: 0; min-height: 18rem; padding: 1.15rem .75rem; display: grid; place-items: center; align-content: center; gap: 1.05rem;
+      min-width: 0; min-height: 18rem; padding: 1.15rem .75rem; display: grid;
+      grid-template-rows: 6.2rem minmax(3.8rem, auto) 2.6rem; place-items: center; align-content: center; gap: .8rem;
       text-align: center; background: white; border: 1px solid var(--slate-200); border-top: 5px solid var(--aqua-500);
       border-radius: 0 0 16px 16px; box-shadow: 0 12px 28px rgba(8,37,58,.06);
     }
@@ -624,6 +662,16 @@
     .international-badge:nth-child(3) .badge-mark { background: #b7751b; }
     .international-badge h3 { color: var(--navy-900); font-size: clamp(.9rem, 1.05vw, 1.08rem); }
     .international-badge p { color: var(--slate-500); font-size: clamp(.68rem, .82vw, .84rem); line-height: 1.45; }
+    .badge-doc-links {
+      min-height: 2.6rem; display: flex; flex-wrap: wrap; align-content: center;
+      align-items: center; justify-content: center; gap: .25rem .55rem;
+    }
+    .badge-doc-link {
+      color: var(--aqua-700); font-size: clamp(.72rem, .82vw, .86rem); line-height: 1.25;
+      font-weight: 800; text-decoration: none; border-bottom: 1px solid rgba(11,148,166,.35);
+    }
+    .badge-doc-link:hover, .badge-doc-link:focus-visible { color: var(--navy-900); border-bottom-color: currentColor; }
+    .badge-doc-spacer { display: block; min-height: 2.6rem; }
     .accreditation-gallery.local-two { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.8rem); max-width: 58rem; margin-inline: auto; }
     .accreditation-gallery.local-two .accreditation-doc { padding: .8rem; gap: .45rem; }
     .accreditation-gallery.local-two .accreditation-doc img { height: clamp(14rem, 31vh, 17rem); }
@@ -679,12 +727,67 @@
       background: white; color: var(--navy-900); cursor: pointer; font-weight: 750;
     }
 
+    /* Completed projects in Qatar */
+    .case-study {
+      display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(18rem, .92fr);
+      gap: clamp(1.4rem, 3vw, 3rem); align-items: stretch;
+      min-height: clamp(22rem, 33vw, 29rem);
+    }
+    .case-gallery {
+      min-width: 0; min-height: 0; display: grid; gap: .8rem;
+    }
+    .case-gallery.dual { grid-template-columns: 1.12fr .88fr; }
+    .case-photo {
+      position: relative; min-width: 0; min-height: 0; margin: 0; overflow: hidden;
+      border: 1px solid rgba(8,37,58,.12); border-radius: 20px;
+      background: #e7eef1; box-shadow: 0 16px 38px rgba(8,37,58,.11);
+    }
+    .case-photo img {
+      display: block; width: 100%; height: 100%; min-height: clamp(22rem, 33vw, 29rem);
+      object-fit: cover; object-position: center;
+    }
+    .case-photo.contain img { object-fit: contain; }
+    .case-photo::after {
+      content: ""; position: absolute; inset: auto 0 0; height: 32%; pointer-events: none;
+      background: linear-gradient(0deg, rgba(8,37,58,.72), transparent);
+    }
+    .case-photo figcaption {
+      position: absolute; z-index: 1; inset-inline: 1rem; bottom: .8rem;
+      color: white; font-size: clamp(.7rem, .86vw, .9rem); font-weight: 750;
+      text-shadow: 0 2px 8px rgba(0,0,0,.45);
+    }
+    .case-copy { display: grid; align-content: center; gap: 1rem; min-width: 0; }
+    .case-intro {
+      color: var(--slate-600); font-size: clamp(.86rem, 1.08vw, 1.08rem);
+      line-height: 1.55; font-weight: 650;
+    }
+    .case-results { margin: 0; padding: 0; list-style: none; display: grid; gap: .72rem; }
+    .case-results li {
+      position: relative; padding: .72rem .85rem .72rem 2.55rem;
+      border-bottom: 1px solid var(--slate-200); color: var(--navy-900);
+      font-size: clamp(.82rem, 1.08vw, 1.08rem); line-height: 1.48; font-weight: 650;
+    }
+    [dir="rtl"] .case-results li { padding: .72rem 2.55rem .72rem .85rem; }
+    .case-results li::before {
+      content: "✓"; position: absolute; inset-inline-start: .35rem; top: .68rem;
+      width: 1.55rem; height: 1.55rem; display: grid; place-items: center;
+      border-radius: 50%; background: var(--green-100); color: var(--green-600); font-weight: 900;
+    }
+    .case-results li:last-child { border-bottom: 0; }
+    .case-results strong { color: var(--aqua-600); font-size: 1.2em; margin-inline-end: .3rem; }
+    .impact-quote {
+      padding: clamp(1.25rem, 2.4vw, 2.15rem); border-inline-start: 6px solid var(--aqua-500);
+      border-radius: 14px; background: linear-gradient(135deg, var(--aqua-100), rgba(255,255,255,.9));
+      color: var(--navy-900); font-size: clamp(1.2rem, 2vw, 2.05rem); line-height: 1.55; font-weight: 800;
+      box-shadow: 0 14px 34px rgba(8,37,58,.07);
+    }
+
     /* Appendix */
     .appendix-label {
       color: var(--green-600); font-weight: 700; font-size: clamp(.78rem, 1vw, 1rem); margin-bottom: .4rem;
     }
-    .company-facts { display: grid; grid-template-columns: 1.1fr .9fr; gap: var(--space-5); align-items: center; }
-    .fact-lines { display: grid; gap: .85rem; }
+    .company-facts { display: grid; grid-template-columns: .94fr 1.06fr; gap: clamp(1.8rem, 3.4vw, 3.5rem); align-items: center; }
+    .fact-lines { display: grid; gap: .72rem; }
     .fact-line { display: grid; grid-template-columns: 2.1rem 1fr; gap: .85rem; align-items: start; }
     .fact-line a.latin, .en-panel a { overflow-wrap: anywhere; word-break: break-word; }
     .fact-num { font-weight: 900; color: var(--aqua-600); font-size: 1.25rem; border-top: 2px solid var(--aqua-500); padding-top: .25rem; }
@@ -698,9 +801,13 @@
       position: relative; overflow: hidden; padding: 0; border-style: solid;
       background: #fff; box-shadow: 0 16px 38px rgba(8,37,58,.08);
     }
+    .company-facts .device-photo { min-height: clamp(22rem, 30vw, 24.5rem); }
     .device-photo img {
       width: 100%; height: 100%; min-height: 19rem; display: block;
       object-fit: contain; object-position: center; padding: 1.1rem 1.1rem 3.2rem;
+    }
+    .company-facts .device-photo img {
+      min-height: clamp(22rem, 30vw, 24.5rem); padding: .75rem .75rem 3rem;
     }
     .device-photo figcaption {
       position: absolute; inset-inline: 1rem; bottom: .8rem;
@@ -1033,6 +1140,10 @@
       .accreditation-summary { grid-template-columns: 1fr; }
       .timeline { grid-template-columns: 1fr 1fr; }
       .timeline::before { display: none; }
+      .case-study { grid-template-columns: 1fr; min-height: auto; align-content: start; }
+      .case-gallery { min-height: 18rem; }
+      .case-gallery.dual { grid-template-columns: 1fr 1fr; }
+      .case-photo img { min-height: 18rem; }
       .orbit-grid { min-height: auto; display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
       .orbit-center { position: relative; inset: auto; transform: none; width: auto; aspect-ratio: auto; border-radius: 16px; grid-column: 1 / -1; min-height: 6rem; }
       .orbit-center::after { display: none; }
@@ -1052,6 +1163,9 @@
       .client-logo { display: none; }
       .guardrails, .cert-grid, .product-grid, .timeline, .orbit-grid, .form-grid { grid-template-columns: 1fr; }
       .accreditation-gallery { grid-template-columns: 1fr; }
+      .case-gallery.dual { grid-template-columns: 1fr; }
+      .case-gallery.dual .case-photo { min-height: 15rem; }
+      .case-photo img { min-height: 15rem; }
       .use-grid { grid-template-columns: 1fr 1fr; }
       .stage-block { grid-template-columns: 1fr; }
       .orbit-center { grid-column: auto; }
@@ -1096,18 +1210,25 @@
         <!-- 01 | Cover -->
         <section class="slide slide-cover active" data-title="نفتح آفاقًا جديدة في التعقيم والتطهير وتنقية المياه">
           <div class="slide-head">
-            <div class="brand-lockup cover-brand-lockup">
-              <img class="cover-brand-logo" src="assets/rassen-Logo.jpeg" alt="شعار رصين أكوا سوليوشنز">
+            <div class="brand-lockup cover-brand-lockup" aria-label="شعارات الشركاء">
+              <div class="cover-logo-card raseen">
+                <img class="cover-brand-logo" src="assets/rassen-Logo.jpeg" alt="شعار رصين أكوا سوليوشنز">
+                <span class="cover-brand-caption" dir="auto">رصين أكوا سوليوشنز</span>
+              </div>
+              <div class="cover-logo-card edura">
+                <img class="cover-brand-logo edura-logo" src="assets/edura-logo.png" alt="شعار Edura">
+              </div>
             </div>
           </div>
           <div class="slide-body cover-grid">
             <div class="cover-copy">
               <p class="cover-kicker">مقترح فني لتقييم فرصة تشغيلية</p>
-              <h1 class="cover-title cover-title-stacked"><span>نفتح آفاقًا جديدة في</span><span>التعقيم</span><span>التطهير</span><span>تنقية المياه</span></h1>
+              <h1 class="cover-title cover-title-stacked cover-title-refined">
+                <span class="cover-title-intro">نفتح آفاقًا جديدة في</span>
+                <span class="cover-title-main"><span>التعقيم</span><span class="cover-title-divider" aria-hidden="true">/</span><span>التطهير</span></span>
+                <span class="cover-title-accent">تنقية المياه</span>
+              </h1>
               <p class="cover-sub">تقييم تقنية <span class="latin">Envirolyte</span> لإنتاج محاليل التطهير في الموقع بالماء والملح والكهرباء لمختلف المنشآت والقطاعات.</p>
-              <div class="cover-meta">
-                <span>رصين أكوا سوليوشنز</span>
-              </div>
             </div>
             <div class="facility-visual">
               <img class="facility-photo" src="assets/envirolyte-factory-real.jpg" alt="المبنى الحقيقي لمصنع Envirolyte في تالين، إستونيا">
@@ -1120,7 +1241,7 @@
             <span data-note="opening">اليوم لا نقدم جهازاً فقط؛ بل نناقش ما إذا كان يمكن إنتاج المادة المطلوبة داخل المنشأة بدلاً من الاعتماد الكامل على نقلها وتخزينها.</span>
             <span data-note="transition">نبدأ بنبذة موجزة عن Envirolyte، ثم ننتقل إلى العملية التشغيلية الحالية.</span>
             <span data-note="avoid">تجنب أي ادعاء عن وفر أو سلامة مطلقة قبل جمع بيانات الموقع.</span>
-            <span data-note="source">[Sources] Logo: assets/rassen-Logo.jpeg (user-provided) | Factory photo: https://venue-image.waze.com/aaa550b9-adce-4d0e-bcea-6fa5266c7498 | Place verification: https://www.waze.com/live-map/directions/envirolyte-industries-international-ltd.-sarruse-16-tallinn?to=place.w.16319058.162862902.21734906</span>
+            <span data-note="source">[Sources] Logos: assets/rassen-Logo.jpeg and assets/edura-logo.png (user-provided) | Factory photo: https://venue-image.waze.com/aaa550b9-adce-4d0e-bcea-6fa5266c7498 | Place verification: https://www.waze.com/live-map/directions/envirolyte-industries-international-ltd.-sarruse-16-tallinn?to=place.w.16319058.162862902.21734906</span>
           </aside>
         </section>
 
@@ -1132,9 +1253,9 @@
           </header>
           <div class="slide-body company-facts">
             <div class="fact-lines">
-              <div class="fact-line"><span class="fact-num">01</span><div><h3>مجال الشركة</h3><p class="small">أنظمة إنتاج محاليل وظيفية في الموقع لمعالجة وتعقيم المياه والتطهير والنظافة التشغيلية.</p></div></div>
+              <div class="fact-line"><span class="fact-num">01</span><div><h3>مجال الشركة</h3><p class="small only-ar">تقدم الشركة أنظمة لإنتاج حلول وظيفية في الموقع لمجالات التعقيم والتطهير وتنقية المياه، إلى جانب دعم النظافة التشغيلية.</p><p class="small only-en" lang="en" dir="ltr">The company provides on-site functional-solution systems for Sterilisation, Disinfecting, and Water purification, alongside operational hygiene support.</p></div></div>
               <div class="fact-line"><span class="fact-num">02</span><div><h3>التنشيط الكهروكيميائي</h3><p class="small">تقنية تعتمد على الماء والملح والكهرباء وخلية ذات غشاء فاصل.</p></div></div>
-              <div class="fact-line"><span class="fact-num">03</span><div><h3>الخبرة والدعم</h3><p class="small only-ar">خبرة دولية موثقة في أكثر من 50 دولة • <span class="latin">ISO 9001:2015</span> و<span class="latin">NSF/ANSI 61</span> • دعم المصنع في دراسة المشروع، اختيار الجهاز، الوثائق الفنية والتنسيق مع الموزع.</p><p class="small only-en" lang="en" dir="ltr">Documented international experience in more than 50 countries • ISO 9001:2015 and NSF/ANSI 61 • Manufacturer support for project assessment, unit selection, technical documentation, and distributor coordination.</p></div></div>
+              <div class="fact-line"><span class="fact-num">03</span><div><h3>الخبرة والدعم</h3><p class="small only-ar">خبرة دولية موثقة في أكثر من 50 دولة • <span class="latin">ISO 9001:2015</span> و<span class="latin">NSF/ANSI 61</span> • اختيار الجهاز، الوثائق الفنية والتنسيق مع الموزع.</p><p class="small only-en" lang="en" dir="ltr">Documented international experience in more than 50 countries • ISO 9001:2015 and NSF/ANSI 61 • Unit selection, technical documentation, and distributor coordination.</p></div></div>
               <div class="fact-line"><span class="fact-num">04</span><div><h3>الحضور المحلي في قطر</h3><p class="small only-ar">رصين أكوا سوليوشنز – الموزع المعتمد لـ<span class="latin">Envirolyte</span> في قطر • توريد وتنسيق فني واختبارات محلية • <span class="latin">+974 3000 8254</span> • <a class="latin" href="mailto:m.soliman@envirolyte-qatar.com">m.soliman@envirolyte-qatar.com</a></p><p class="small only-en" lang="en" dir="ltr">Raseen Aqua Solutions — Envirolyte’s authorized distributor in Qatar • Supply, technical coordination, and local testing • +974 3000 8254 • <a class="latin" href="mailto:m.soliman@envirolyte-qatar.com">m.soliman@envirolyte-qatar.com</a></p></div></div>
               <a class="small" href="https://envirolyte.com/" target="_blank" rel="noopener">الموقع الرسمي ومراجع صور الأجهزة ↗</a>
             </div>
@@ -1361,38 +1482,6 @@
           </aside>
         </section>
 
-        <!-- 08 | Hidden problem -->
-        <section class="slide" data-title="التعقيم التقليدي لا يبدأ عند نقطة الاستخدام">
-          <header class="slide-head">
-            <div><span class="eyebrow">الوضع الحالي</span><h2>التعقيم التقليدي لا يبدأ عند نقطة الاستخدام</h2></div>
-            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
-          </header>
-          <div class="slide-body">
-            <div class="chain-wrap" aria-label="سلسلة توريد المواد الكيميائية الحالية">
-              <div class="chain-line"></div>
-              <div class="chain">
-                <div class="chain-step" tabindex="0"><span class="tooltip">التزام تعاقدي وتقلب محتمل في التوافر والسعر.</span><div class="chain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16v13H4zM8 7V4h8v3M8 12h8"/></svg></div><div class="chain-label">شراء</div></div>
-                <div class="chain-step" tabindex="0"><span class="tooltip">جدولة نقل، متطلبات امتثال، واحتمال تأخر.</span><div class="chain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h11v11H3zM14 10h4l3 3v4h-7z"/><circle cx="7" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg></div><div class="chain-label">نقل</div></div>
-                <div class="chain-step" tabindex="0"><span class="tooltip">فحص مستندات وكميات وحالة العبوات.</span><div class="chain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h14v16H5zM8 8h8M8 12h5M8 16h7"/></svg></div><div class="chain-label">استلام</div></div>
-                <div class="chain-step" tabindex="0"><span class="tooltip">مساحة مخصصة، جرد، فصل مواد، واشتراطات سلامة.</span><div class="chain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10l9-6 9 6v10H3zM8 20v-6h8v6"/></svg></div><div class="chain-label">تخزين</div></div>
-                <div class="chain-step" tabindex="0"><span class="tooltip">تعرض تشغيلي وحاجة إلى تدريب ومعدات وقاية.</span><div class="chain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 11V6a2 2 0 014 0v4M11 10V5a2 2 0 014 0v5M15 10V7a2 2 0 014 0v7c0 4-3 7-7 7H9c-3 0-5-2-5-5v-4a2 2 0 014 0v2"/></svg></div><div class="chain-label">مناولة</div></div>
-                <div class="chain-step" tabindex="0"><span class="tooltip">احتمال خطأ في النسبة أو التسلسل أو التوثيق.</span><div class="chain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3h6v6l4 8a3 3 0 01-3 4H8a3 3 0 01-3-4l4-8zM8 15h8"/></svg></div><div class="chain-label">تخفيف</div></div>
-                <div class="chain-step" tabindex="0"><span class="tooltip">تتطلب ضبط الجرعة وزمن التلامس والتحقق من المتبقي.</span><div class="chain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3s6 7 6 12a6 6 0 11-12 0c0-5 6-12 6-12zM9 16h6"/></svg></div><div class="chain-label">جرعات</div></div>
-                <div class="chain-step" tabindex="0"><span class="tooltip">عبوات تحتاج إلى فرز ونقل وتخلص وفق الإجراء.</span><div class="chain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"/></svg></div><div class="chain-label">تخلص</div></div>
-              </div>
-            </div>
-            <div class="risk-strip"><span>تكلفة تشغيلية</span><span>اعتماد على المورد</span><span>إجراءات سلامة</span><span>خطأ بشري محتمل</span><span>مخزون ومساحة</span></div>
-            <div class="message-band" style="margin-top:1.15rem">المشكلة ليست في سعر المادة الكيميائية فقط؛ بل في سلسلة الإجراءات التي تسبق استخدامها.</div>
-          </div>
-          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>08</span></footer>
-          <aside class="notes-data" hidden>
-            <span data-note="idea">إظهار التكلفة التشغيلية والمخاطر موزعة عبر السلسلة، وليس في فاتورة المادة وحدها.</span>
-            <span data-note="opening">قبل أن تصل المادة إلى نقطة الحقن، تكون قد مرّت بسلسلة كاملة من القرارات والإجراءات.</span>
-            <span data-note="transition">وحين تتكرر هذه السلسلة، تصبح القضية قضية استمرارية تشغيل.</span>
-            <span data-note="avoid">لا تفترض أن كل مرحلة تمثل مشكلة لدى الجهة؛ استخدمها كأسئلة تحقق.</span>
-          </aside>
-        </section>
-
         <!-- 09 | Why reconsider -->
         <section class="slide" data-title="القضية ليست التعقيم فقط بل استمرارية العملية">
           <header class="slide-head">
@@ -1426,11 +1515,11 @@
           </header>
           <div class="slide-body accreditation-slide-body">
             <div class="international-accreditation-grid" aria-label="الاعتمادات الدولية">
-              <article class="international-badge"><span class="badge-mark latin">ECHA</span><div><h3 class="latin">ECHA</h3><p>الوكالة الأوروبية للمواد الكيميائية</p></div></article>
-              <article class="international-badge"><span class="badge-mark latin">NSF</span><div><h3 class="latin">NSF</h3><p>معايير الصحة والسلامة للمياه</p></div></article>
-              <article class="international-badge"><span class="badge-mark latin">FDA</span><div><h3 class="latin">FDA</h3><p>إدارة الغذاء والدواء الأمريكية</p></div></article>
-              <article class="international-badge"><span class="badge-mark latin">CE</span><div><h3 class="latin">CE</h3><p>المطابقة الأوروبية</p></div></article>
-              <article class="international-badge"><span class="badge-mark latin">WHO</span><div><h3 class="latin">WHO</h3><p>منظمة الصحة العالمية</p></div></article>
+              <article class="international-badge"><span class="badge-mark latin">ISO</span><div><h3 class="latin">ISO 9001:2015</h3><p>نظام إدارة الجودة</p></div><div class="badge-doc-links"><a class="badge-doc-link" href="assets/accreditations/iso-9001-2015.jpeg" target="_blank" rel="noopener">فتح شهادة ISO ↗</a></div></article>
+              <article class="international-badge"><span class="badge-mark latin">EPA</span><div><h3 class="latin">EPA</h3><p>وكالة حماية البيئة الأمريكية</p></div><div class="badge-doc-links"><a class="badge-doc-link" href="Accreditations/Envirolyte%20EPA%20approval.pdf" target="_blank" rel="noopener">فتح اعتماد EPA ↗</a></div></article>
+              <article class="international-badge"><span class="badge-mark latin">FDA</span><div><h3 class="latin">FDA</h3><p>إدارة الغذاء والدواء الأمريكية</p></div><div class="badge-doc-links"><a class="badge-doc-link" href="Accreditations/WhatsApp%20Image%202026-08-03%20at%205.39.48%20PM.jpeg" target="_blank" rel="noopener">فتح خطاب FDA ↗</a></div></article>
+              <article class="international-badge"><span class="badge-mark latin">NSF</span><div><h3 class="latin">NSF</h3><p>معايير الصحة والسلامة للمياه</p></div><div class="badge-doc-links"><a class="badge-doc-link" href="Accreditations/WhatsApp%20Image%202026-08-01%20at%206.04.07%20PM.jpeg" target="_blank" rel="noopener">اعتماد الشركة ↗</a><a class="badge-doc-link" href="Accreditations/WhatsApp%20Image%202026-08-01%20at%206.04.08%20PM.jpeg" target="_blank" rel="noopener">منشأة تالين ↗</a></div></article>
+              <article class="international-badge"><span class="badge-mark latin">ECHA</span><div><h3 class="latin">ECHA</h3><p>الوكالة الأوروبية للمواد الكيميائية</p></div><div class="badge-doc-links"><a class="badge-doc-link" href="Accreditations/ECHA%20Approval%20-%202016.pdf" target="_blank" rel="noopener">فتح مستند ECHA ↗</a></div></article>
             </div>
           </div>
           <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>10</span></footer>
@@ -1439,7 +1528,7 @@
             <span data-note="opening">تدعم هذه المراجع الدولية مسار التقييم الفني والامتثال بحسب نطاق كل جهة أو معيار.</span>
             <span data-note="transition">بعد المستوى الدولي، ننتقل إلى الأدلة والاختبارات المحلية في قطر.</span>
             <span data-note="avoid">لا تُوصف أي جهة بأنها شهادة منتج شاملة دون الرجوع إلى وثيقة النطاق المرتبطة بها.</span>
-            <span data-note="source">[Sources] International accreditation names supplied by the user: ECHA | NSF | FDA | CE | WHO.</span>
+            <span data-note="source">[Sources] International accreditation names supplied by the user: ISO 9001:2015 | EPA | FDA | NSF | ECHA. Linked user-provided documents: assets/accreditations/iso-9001-2015.jpeg | Accreditations/Envirolyte EPA approval.pdf | Accreditations/WhatsApp Image 2026-08-03 at 5.39.48 PM.jpeg | Accreditations/WhatsApp Image 2026-08-01 at 6.04.07 PM.jpeg | Accreditations/WhatsApp Image 2026-08-01 at 6.04.08 PM.jpeg | Accreditations/ECHA Approval - 2016.pdf.</span>
           </aside>
         </section>
 
@@ -1469,36 +1558,106 @@
           <aside class="notes-data" hidden>
             <span data-note="idea">إبراز الاختبارات والمراجعات المحلية من ACES وكلية الهندسة بجامعة قطر.</span>
             <span data-note="opening">تكمل الأدلة المحلية الاعتمادات الدولية بإظهار نتائج ومراجعات مرتبطة بسياق قطر.</span>
-            <span data-note="transition">بعد مراجعة الاعتمادات والأدلة، ننتقل إلى العرض التوضيحي العملي.</span>
+            <span data-note="transition">بعد مراجعة الاعتمادات والأدلة، ننتقل إلى المقارنة الفنية بين الأنولايت وهيبوكلوريت الصوديوم.</span>
             <span data-note="avoid">تُقرأ كل وثيقة وفق نطاقها وتاريخها وطبيعة الاختبار الوارد فيها.</span>
             <span data-note="source">[Sources] Local accreditation assets: Accreditations/ACES Lab..pdf | Accreditations/Qatar Univercity Eng..pdf.</span>
           </aside>
         </section>
 
-        <!-- 12 | Demonstration -->
-        <section class="slide" data-title="لا نطلب قرار شراء اليوم بل عرضاً توضيحياً عملياً">
+        <!-- 11 | Qatar project: poultry farm -->
+        <section class="slide" data-title="مزرعة دواجن — نتائج التشغيل في قطر">
           <header class="slide-head">
-            <div><span class="eyebrow">عرض توضيحي عملي</span><h2>لا نطلب قرار شراء اليوم… نطلب عرضاً توضيحياً عملياً</h2></div>
+            <div><span class="eyebrow">أعمال منفذة في قطر</span><h2>مزرعة دواجن — نتائج التشغيل في قطر</h2></div>
             <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
           </header>
           <div class="slide-body">
-            <div class="timeline">
-              <article class="phase"><div class="phase-no">1</div><h3>تحديد سيناريو العرض</h3><p>التطبيق المستهدف • موقع العرض • الحضور • الأسئلة المطلوب توضيحها</p></article>
-              <article class="phase"><div class="phase-no">2</div><h3>تجهيز الـ Demonstration</h3><p>النظام والمستلزمات • نقطة التشغيل • إجراءات السلامة • أدوات القياس</p></article>
-              <article class="phase"><div class="phase-no">3</div><h3>التنفيذ أمام الفريق</h3><p>إنتاج المحلول • شرح التحكم • عرض القياسات • الإجابة عن الأسئلة</p></article>
-              <article class="phase"><div class="phase-no">4</div><h3>مراجعة الملاحظات</h3><p>ملاءمة التطبيق • المتطلبات الفنية • البيانات الإضافية • الخطوة التالية</p></article>
+            <div class="case-study">
+              <div class="case-gallery dual">
+                <figure class="case-photo"><img src="assets/اعمال منفذة/مزرعة%20-01.jpeg" alt="وحدة Envirolyte المنفذة في مزرعة دواجن في قطر"><figcaption>وحدة الإنتاج في الموقع</figcaption></figure>
+                <figure class="case-photo"><img src="assets/اعمال منفذة/مزرعة%20-%2002.jpeg" alt="تجهيزات وحدة Envirolyte وخزاناتها في مزرعة دواجن في قطر"><figcaption>التجهيز وربط الخزانات</figcaption></figure>
+              </div>
+              <div class="case-copy">
+                <p class="case-intro">النتائج التشغيلية المُبلّغ عنها بعد تطبيق النظام:</p>
+                <ul class="case-results">
+                  <li>تشغيل تحت ظروف التربية المكثفة.</li>
+                  <li><strong>50%</strong> انخفاض في معدل النفوق.</li>
+                  <li><strong>70%</strong> انخفاض كبير في استخدام الأدوية.</li>
+                  <li>تحسنت حيوية الكتاكيت؛ وأصبحت الطيور أكثر نشاطًا وقوة.</li>
+                  <li>تحسنت الاستفادة من العلف وتسارعت زيادة الوزن مع تقليل أيام التغذية.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>11</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">عرض النتائج التشغيلية التي أبلغ عنها العميل لمشروع مزرعة الدواجن المنفذ في قطر.</span>
+            <span data-note="opening">توضح هذه الحالة أثر التطبيق في بيئة تربية مكثفة، مع نتائج مرتبطة بالنفوق والأدوية وحيوية الطيور وكفاءة التغذية.</span>
+            <span data-note="transition">بعد قطاع الدواجن، ننتقل إلى تطبيق منفذ لمعالجة مياه حمام سباحة.</span>
+            <span data-note="avoid">تُعرض النتائج كنسب مُبلّغ عنها للحالة المحددة، ولا تُعمم على مواقع أخرى دون قياس ومقارنة خط أساس.</span>
+            <span data-note="source">[Sources] User-provided claims and project photos: assets/اعمال منفذة/مزرعة -01.jpeg | assets/اعمال منفذة/مزرعة - 02.jpeg.</span>
+          </aside>
+        </section>
+
+        <!-- 12 | Qatar project: swimming pool -->
+        <section class="slide" data-title="حمام سباحة — مياه أنظف وراحة أكبر">
+          <header class="slide-head">
+            <div><span class="eyebrow">أعمال منفذة في قطر</span><h2>حمام سباحة — مياه أنظف وراحة أكبر</h2></div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body">
+            <div class="case-study">
+              <div class="case-gallery">
+                <figure class="case-photo contain"><img src="assets/اعمال منفذة/مسبح%20.jpeg" alt="وحدة Envirolyte المنفذة لمعالجة مياه حمام سباحة في قطر"><figcaption>وحدة معالجة مياه المسبح</figcaption></figure>
+              </div>
+              <div class="case-copy">
+                <p class="case-intro">النتائج المُبلّغ عنها في جودة المياه وتجربة المستخدم:</p>
+                <ul class="case-results">
+                  <li>لا تهيج للعينين أو الجلد.</li>
+                  <li>اختفاء رائحة الكلور.</li>
+                  <li>القضاء الكامل على الكائنات الدقيقة.</li>
+                  <li>إزالة الأغشية الحيوية والطحالب.</li>
+                </ul>
+              </div>
             </div>
           </div>
           <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>12</span></footer>
           <aside class="notes-data" hidden>
-            <span data-note="idea">تقديم التقنية عملياً أمام فريق الجهة ضمن عرض توضيحي محدد النطاق.</span>
-            <span data-note="opening">بدلاً من الانتقال مباشرة إلى قرار شراء، نقترح عرضاً عملياً يوضح طريقة الإنتاج والتحكم والقياس.</span>
-            <span data-note="transition">بعد العرض، نراجع الملاحظات والمتطلبات الفنية لتحديد الخطوة المناسبة.</span>
-            <span data-note="avoid">العرض التوضيحي لا يُعد إثبات أداء نهائياً أو بديلاً عن التحقق في ظروف الموقع.</span>
+            <span data-note="idea">عرض نتائج مشروع حمام السباحة المنفذ في قطر كما قدمها العميل.</span>
+            <span data-note="opening">تركز هذه الحالة على راحة المستخدم، والرائحة، والتحكم الميكروبي، وإزالة الأغشية الحيوية والطحالب.</span>
+            <span data-note="transition">ننتقل من تطبيق المياه الترفيهية إلى تطبيق صناعي داخل مصنع منظفات.</span>
+            <span data-note="avoid">تُراجع ادعاءات الإزالة الكاملة وفق بروتوكول القياس وظروف التشغيل الخاصة بالموقع.</span>
+            <span data-note="source">[Sources] User-provided claims and project photo: assets/اعمال منفذة/مسبح .jpeg.</span>
           </aside>
         </section>
 
-        <!-- 13 | Anolyte vs sodium hypochlorite -->
+        <!-- 13 | Qatar project: detergent factory -->
+        <section class="slide" data-title="مصنع منظفات — خفض استخدام المواد الكيميائية">
+          <header class="slide-head">
+            <div><span class="eyebrow">أعمال منفذة في قطر</span><h2>مصنع منظفات — خفض استخدام المواد الكيميائية</h2></div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body">
+            <div class="case-study">
+              <div class="case-gallery">
+                <figure class="case-photo"><img src="assets/اعمال منفذة/مصنع%20منظفات.jpeg" alt="وحدة Envirolyte المنفذة داخل مصنع منظفات في قطر"><figcaption>وحدة الإنتاج داخل المصنع</figcaption></figure>
+              </div>
+              <div class="case-copy">
+                <p class="case-intro">الأثر التشغيلي في عملية التصنيع:</p>
+                <div class="impact-quote">قلّل النظام بدرجة كبيرة استخدام المواد الكيميائية في صناعة المنظفات.</div>
+              </div>
+            </div>
+          </div>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>13</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">إبراز الأثر الأساسي لمشروع مصنع المنظفات المنفذ في قطر: خفض استخدام المواد الكيميائية في الصناعة.</span>
+            <span data-note="opening">في هذه الحالة الصناعية، كان الأثر الأبرز هو تقليل استخدام المواد الكيميائية بدرجة كبيرة داخل عملية تصنيع المنظفات.</span>
+            <span data-note="transition">بعد حالات التنفيذ المحلية، نراجع المقارنة الفنية بين الأنولايت وهيبوكلوريت الصوديوم.</span>
+            <span data-note="avoid">لا تُذكر نسبة خفض محددة ما لم تتوفر بيانات قياس موثقة من المصنع.</span>
+            <span data-note="source">[Sources] User-provided project description and photo: assets/اعمال منفذة/مصنع منظفات.jpeg.</span>
+          </aside>
+        </section>
+
+        <!-- 14 | Anolyte vs sodium hypochlorite -->
         <section class="slide slide-appendix" data-title="مقارنة الأنولايت وهيبوكلوريت الصوديوم">
           <header class="slide-head">
             <div>
@@ -1554,7 +1713,7 @@
               </div>
             </div>
           </div>
-          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع — الملحق الفني</span><span>13</span></footer>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع — الملحق الفني</span><span>14</span></footer>
           <aside class="notes-data" hidden>
             <span data-note="idea">مقارنة الخصائص الواردة في المرجع المقدم بين الأنولايت القائم على حمض الهيبوكلوروس وهيبوكلوريت الصوديوم.</span>
             <span data-note="opening">يوضح الجدول الفروق المعلنة في المادة الفعالة والرقم الهيدروجيني والسلامة وزمن التلامس والخصائص التشغيلية.</span>
@@ -1564,7 +1723,7 @@
           </aside>
         </section>
 
-        <!-- 14 | Closing -->
+        <!-- 15 | Closing -->
         <section class="slide slide-cover" data-title="شكراً لكم — الخطوة التالية تبدأ بورشة فنية">
           <div class="slide-head">
             <div class="brand-lockup" aria-label="مكان شعار Envirolyte">
@@ -1579,7 +1738,7 @@
             <p class="closing-action">الخطوة التالية تبدأ بورشة فنية وزيارة ميدانية لتحديد تطبيق تجريبي قابل للقياس.</p>
             <p class="closing-contact">رصين أكوا سوليوشنز • <span class="latin">+974 3000 8254</span> • <a class="latin" href="mailto:m.soliman@envirolyte-qatar.com">m.soliman@envirolyte-qatar.com</a></p>
           </div>
-          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>14</span></footer>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>15</span></footer>
           <aside class="notes-data" hidden>
             <span data-note="idea">إنهاء العرض بطلب واضح ومحدود يربط النقاش بورشة فنية وزيارة ميدانية.</span>
             <span data-note="opening">شكراً لكم. نقترح أن تكون الخطوة التالية ورشة فنية قصيرة، تليها زيارة للموقع وتحديد تطبيق تجريبي مناسب.</span>
@@ -1595,7 +1754,7 @@
   <nav class="controls" aria-label="عناصر التحكم في العرض">
     <button class="control-btn" id="prevBtn" aria-label="الشريحة السابقة" title="السابق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
     <button class="control-btn" id="menuBtn" aria-label="فتح قائمة الشرائح" title="قائمة الشرائح"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
-    <span class="counter" id="counter" aria-live="polite">01 / 14</span>
+    <span class="counter" id="counter" aria-live="polite">01 / 15</span>
     <button class="control-btn" id="notesBtn" aria-label="عرض ملاحظات المتحدث" title="ملاحظات المتحدث"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v13H8l-4 4zM8 8h8M8 12h5"/></svg></button>
     <button class="control-btn" id="nextBtn" aria-label="الشريحة التالية" title="التالي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
   </nav>
@@ -1679,7 +1838,7 @@
         {
           eyebrow: "Company overview",
           title: "About Envirolyte",
-          body: `<div class="en-grid four"><div class="en-panel"><h3>Company focus</h3><p>Systems that produce functional solutions on site for water treatment and disinfection, plus operational hygiene.</p></div><div class="en-panel green"><h3>Electrochemical activation</h3><p>Water, salt, electricity and a membrane-separated cell.</p></div><div class="en-panel"><h3>Experience and support</h3><p>Documented international experience in more than 50 countries • ISO 9001:2015 and NSF/ANSI 61 • Manufacturer support for project assessment, unit selection, technical documentation, and distributor coordination.</p></div><div class="en-panel amber"><h3>Local presence in Qatar</h3><p>Raseen Aqua Solutions — Envirolyte’s authorized distributor in Qatar • Supply, technical coordination, and local testing • +974 3000 8254 • <a href="mailto:m.soliman@envirolyte-qatar.com">m.soliman@envirolyte-qatar.com</a></p></div></div>`,
+          body: `<div class="en-grid four"><div class="en-panel"><h3>Company focus</h3><p>Systems that produce functional solutions on site for water treatment and disinfection, plus operational hygiene.</p></div><div class="en-panel green"><h3>Electrochemical activation</h3><p>Water, salt, electricity and a membrane-separated cell.</p></div><div class="en-panel"><h3>Experience and support</h3><p>Documented international experience in more than 50 countries • ISO 9001:2015 and NSF/ANSI 61 • Unit selection, technical documentation, and distributor coordination.</p></div><div class="en-panel amber"><h3>Local presence in Qatar</h3><p>Raseen Aqua Solutions — Envirolyte’s authorized distributor in Qatar • Supply, technical coordination, and local testing • +974 3000 8254 • <a href="mailto:m.soliman@envirolyte-qatar.com">m.soliman@envirolyte-qatar.com</a></p></div></div>`,
           note: "Introduce the company briefly before moving to the current operating challenge and the on-site production opportunity.",
           avoid: "Confirm that certifications, approval scope and distributor contact details remain current before external use."
         },
@@ -1724,14 +1883,6 @@
           avoid: "Do not assume Catholyte suits every deposit or surface; validate compatibility through a pilot."
         },
         {
-          eyebrow: "Current state",
-          title: "Conventional disinfection starts long before the point of use",
-          body: `<div class="en-flow"><span class="en-node">Purchase</span><span class="en-arrow">→</span><span class="en-node">Transport</span><span class="en-arrow">→</span><span class="en-node">Receive</span><span class="en-arrow">→</span><span class="en-node">Store</span><span class="en-arrow">→</span><span class="en-node">Handle</span><span class="en-arrow">→</span><span class="en-node">Dilute</span><span class="en-arrow">→</span><span class="en-node">Dose</span><span class="en-arrow">→</span><span class="en-node">Dispose</span></div>
-            <div class="en-grid three"><div class="en-panel"><h3>Operational burden</h3><p>Repeated ordering, receiving, inventory and handling procedures.</p></div><div class="en-panel amber"><h3>Risk exposure</h3><p>Potential delays, human error, safety controls and packaging waste.</p></div><div class="en-panel green"><h3>The real issue</h3><p>The cost is not only the chemical price; it is the full chain that precedes use.</p></div></div>`,
-          note: "Show that cost and risk are distributed across the full supply chain.",
-          avoid: "Use each stage as a validation question; do not assume every stage is a problem for the organization."
-        },
-        {
           eyebrow: "Why now?",
           title: "The issue is not disinfection alone — it is continuity under control",
           body: `<div class="en-grid four"><div class="en-panel"><h3>Supply readiness</h3><p>Required quantities are provided according to the agreed supply schedule.</p></div><div class="en-panel green"><h3>Solution quality</h3><p>Solution type, concentration and batch documentation are verified before delivery.</p></div><div class="en-panel amber"><h3>Safe delivery</h3><p>Suitable containers, transport and handling follow applicable safety requirements.</p></div><div class="en-panel"><h3>Coordination & support</h3><p>Delivery dates, technical documents and usage support are coordinated with the customer.</p></div></div>
@@ -1742,8 +1893,8 @@
         {
           eyebrow: "International accreditations",
           title: "International accreditations",
-          body: `<div class="international-accreditation-grid"><article class="international-badge"><span class="badge-mark">ECHA</span><div><h3>ECHA</h3><p>European Chemicals Agency</p></div></article><article class="international-badge"><span class="badge-mark">NSF</span><div><h3>NSF</h3><p>Water health and safety standards</p></div></article><article class="international-badge"><span class="badge-mark">FDA</span><div><h3>FDA</h3><p>U.S. Food and Drug Administration</p></div></article><article class="international-badge"><span class="badge-mark">CE</span><div><h3>CE</h3><p>European conformity</p></div></article><article class="international-badge"><span class="badge-mark">WHO</span><div><h3>WHO</h3><p>World Health Organization</p></div></article></div>`,
-          note: "Present the international bodies and standards supplied by the client: ECHA, NSF, FDA, CE and WHO.",
+          body: `<div class="international-accreditation-grid"><article class="international-badge"><span class="badge-mark">ISO</span><div><h3>ISO 9001:2015</h3><p>Quality management system</p></div><div class="badge-doc-links"><a class="badge-doc-link" href="assets/accreditations/iso-9001-2015.jpeg" target="_blank" rel="noopener">Open ISO certificate ↗</a></div></article><article class="international-badge"><span class="badge-mark">EPA</span><div><h3>EPA</h3><p>U.S. Environmental Protection Agency</p></div><div class="badge-doc-links"><a class="badge-doc-link" href="Accreditations/Envirolyte%20EPA%20approval.pdf" target="_blank" rel="noopener">Open EPA approval ↗</a></div></article><article class="international-badge"><span class="badge-mark">FDA</span><div><h3>FDA</h3><p>U.S. Food and Drug Administration</p></div><div class="badge-doc-links"><a class="badge-doc-link" href="Accreditations/WhatsApp%20Image%202026-08-03%20at%205.39.48%20PM.jpeg" target="_blank" rel="noopener">Open FDA letter ↗</a></div></article><article class="international-badge"><span class="badge-mark">NSF</span><div><h3>NSF</h3><p>Water health and safety standards</p></div><div class="badge-doc-links"><a class="badge-doc-link" href="Accreditations/WhatsApp%20Image%202026-08-01%20at%206.04.07%20PM.jpeg" target="_blank" rel="noopener">Company approval ↗</a><a class="badge-doc-link" href="Accreditations/WhatsApp%20Image%202026-08-01%20at%206.04.08%20PM.jpeg" target="_blank" rel="noopener">Tallinn facility ↗</a></div></article><article class="international-badge"><span class="badge-mark">ECHA</span><div><h3>ECHA</h3><p>European Chemicals Agency</p></div><div class="badge-doc-links"><a class="badge-doc-link" href="Accreditations/ECHA%20Approval%20-%202016.pdf" target="_blank" rel="noopener">Open ECHA document ↗</a></div></article></div>`,
+          note: "Present the international bodies and standards supplied by the client: ISO 9001:2015, EPA, FDA, NSF and ECHA.",
           avoid: "Do not describe a body as a comprehensive product certificate without reviewing the associated scope document."
         },
         {
@@ -1754,11 +1905,25 @@
           avoid: "Read each document according to its scope, date and stated test conditions."
         },
         {
-          eyebrow: "Practical demonstration",
-          title: "We are not asking for a purchase decision today — we are asking for a practical demonstration",
-          body: `<div class="en-steps"><div class="en-step"><b>01</b><strong>Define the demonstration scenario</strong><p>Target application, location, attendees and questions to address.</p></div><div class="en-step"><b>02</b><strong>Prepare the demonstration</strong><p>System, supplies, operating point, safety procedures and measurement tools.</p></div><div class="en-step"><b>03</b><strong>Demonstrate to the team</strong><p>Produce the solution, explain controls, show measurements and answer questions.</p></div><div class="en-step"><b>04</b><strong>Review observations</strong><p>Application fit, technical requirements, additional data and the next step.</p></div></div>`,
-          note: "Present the technology to the organization’s team through a focused, practical demonstration.",
-          avoid: "A demonstration is not final proof of performance or a substitute for validation under site conditions."
+          eyebrow: "Completed projects in Qatar",
+          title: "Poultry farm — operating outcomes in Qatar",
+          body: `<ul><li>Operation under intensive rearing conditions.</li><li>50% lower mortality rate.</li><li>70% less medication use.</li><li>Improved chick vigor.</li><li>Better feed utilization and faster weight gain.</li></ul>`,
+          note: "Present the client-reported operating outcomes from the completed poultry-farm project in Qatar.",
+          avoid: "Treat the percentages as results reported for this specific case; do not generalize them without a baseline and measured validation."
+        },
+        {
+          eyebrow: "Completed projects in Qatar",
+          title: "Swimming pool — cleaner water, greater comfort",
+          body: `<ul><li>No eye or skin irritation.</li><li>No chlorine odor.</li><li>Complete destruction of microorganisms.</li><li>Elimination of biofilms and algae.</li></ul>`,
+          note: "Present the client-reported water-quality and user-comfort outcomes from the completed swimming-pool project in Qatar.",
+          avoid: "Review complete-elimination claims against the site’s measurement protocol and operating conditions."
+        },
+        {
+          eyebrow: "Completed projects in Qatar",
+          title: "Detergent factory — reduced chemical use",
+          body: `<p>Significantly reduced the use of chemicals in detergent manufacturing.</p>`,
+          note: "Highlight the main reported impact of the completed detergent-factory project in Qatar: substantially reduced chemical use in manufacturing.",
+          avoid: "Do not state a reduction percentage unless documented plant measurements are available."
         },
         {
           eyebrow: "Technical comparison",
@@ -1796,14 +1961,45 @@
         "حلول التطهير والإنتاج في الموقع — الملحق الفني": "On-site disinfection and production solutions — technical appendix",
         "الاعتمادات الدولية": "International accreditations",
         "اعتمادات دولية تدعم التقييم الفني": "International accreditations",
+        "نظام إدارة الجودة": "Quality management system",
+        "وكالة حماية البيئة الأمريكية": "U.S. Environmental Protection Agency",
         "الوكالة الأوروبية للمواد الكيميائية": "European Chemicals Agency",
         "معايير الصحة والسلامة للمياه": "Water health and safety standards",
         "إدارة الغذاء والدواء الأمريكية": "U.S. Food and Drug Administration",
-        "المطابقة الأوروبية": "European conformity",
-        "منظمة الصحة العالمية": "World Health Organization",
+        "فتح شهادة ISO ↗": "Open ISO certificate ↗",
+        "فتح اعتماد EPA ↗": "Open EPA approval ↗",
+        "فتح مستند ECHA ↗": "Open ECHA document ↗",
+        "اعتماد الشركة ↗": "Company document ↗",
+        "منشأة تالين ↗": "Tallinn facility ↗",
+        "فتح خطاب FDA ↗": "Open FDA letter ↗",
         "الاعتمادات المحلية": "Local accreditations",
         "وجامعة قطر": "and Qatar University",
         "أدلة اختبار ومراجعة محلية تدعم التقييم الفني في قطر.": "Local test and review evidence supporting technical evaluation in Qatar.",
+        "أعمال منفذة في قطر": "Completed projects in Qatar",
+        "مزرعة دواجن — نتائج التشغيل في قطر": "Poultry farm — operating outcomes in Qatar",
+        "وحدة Envirolyte المنفذة في مزرعة دواجن في قطر": "Envirolyte unit installed at a poultry farm in Qatar",
+        "تجهيزات وحدة Envirolyte وخزاناتها في مزرعة دواجن في قطر": "Envirolyte unit and tank installation at a poultry farm in Qatar",
+        "وحدة الإنتاج في الموقع": "On-site production unit",
+        "التجهيز وربط الخزانات": "Equipment and tank connections",
+        "النتائج التشغيلية المُبلّغ عنها بعد تطبيق النظام:": "Reported operating outcomes after system implementation:",
+        "تشغيل تحت ظروف التربية المكثفة.": "Operation under intensive rearing conditions.",
+        "انخفاض في معدل النفوق.": "lower mortality rate.",
+        "انخفاض كبير في استخدام الأدوية.": "less medication use.",
+        "تحسنت حيوية الكتاكيت؛ وأصبحت الطيور أكثر نشاطًا وقوة.": "Improved chick vigor, with livelier and more robust birds.",
+        "تحسنت الاستفادة من العلف وتسارعت زيادة الوزن مع تقليل أيام التغذية.": "Better feed utilization, faster weight gain, and fewer days on feed.",
+        "حمام سباحة — مياه أنظف وراحة أكبر": "Swimming pool — cleaner water, greater comfort",
+        "وحدة Envirolyte المنفذة لمعالجة مياه حمام سباحة في قطر": "Envirolyte unit installed for swimming-pool water treatment in Qatar",
+        "وحدة معالجة مياه المسبح": "Swimming-pool water treatment unit",
+        "النتائج المُبلّغ عنها في جودة المياه وتجربة المستخدم:": "Reported outcomes for water quality and user experience:",
+        "لا تهيج للعينين أو الجلد.": "No eye or skin irritation.",
+        "اختفاء رائحة الكلور.": "No chlorine odor.",
+        "القضاء الكامل على الكائنات الدقيقة.": "Complete destruction of microorganisms.",
+        "إزالة الأغشية الحيوية والطحالب.": "Elimination of biofilms and algae.",
+        "مصنع منظفات — خفض استخدام المواد الكيميائية": "Detergent factory — reduced chemical use",
+        "وحدة Envirolyte المنفذة داخل مصنع منظفات في قطر": "Envirolyte unit installed inside a detergent factory in Qatar",
+        "وحدة الإنتاج داخل المصنع": "Production unit inside the factory",
+        "الأثر التشغيلي في عملية التصنيع:": "Operating impact on the manufacturing process:",
+        "قلّل النظام بدرجة كبيرة استخدام المواد الكيميائية في صناعة المنظفات.": "The system significantly reduced chemical use in detergent manufacturing.",
         "الوضع الحالي": "Current state",
         "التعقيم التقليدي لا يبدأ عند نقطة الاستخدام": "Conventional disinfection does not start at the point of use",
         "التزام تعاقدي وتقلب محتمل في التوافر والسعر.": "Contractual commitment and possible variation in availability and price.",
@@ -2089,7 +2285,7 @@
         "التنشيط الكهروكيميائي": "Electrochemical activation",
         "تقنية تعتمد على الماء والملح والكهرباء وخلية ذات غشاء فاصل.": "Technology based on water, salt, electricity and a membrane-separated cell.",
         "الخبرة والدعم": "Experience and support",
-        "خبرة دولية موثقة في أكثر من 50 دولة • ISO 9001:2015 وNSF/ANSI 61 • دعم المصنع في دراسة المشروع، اختيار الجهاز، الوثائق الفنية والتنسيق مع الموزع.": "Documented international experience in more than 50 countries • ISO 9001:2015 and NSF/ANSI 61 • Manufacturer support for project assessment, unit selection, technical documentation, and distributor coordination.",
+        "خبرة دولية موثقة في أكثر من 50 دولة • ISO 9001:2015 وNSF/ANSI 61 • اختيار الجهاز، الوثائق الفنية والتنسيق مع الموزع.": "Documented international experience in more than 50 countries • ISO 9001:2015 and NSF/ANSI 61 • Unit selection, technical documentation, and distributor coordination.",
         "الحضور المحلي في قطر": "Local presence in Qatar",
         "رصين أكوا سوليوشنز – الموزع المعتمد لـEnvirolyte في قطر • توريد وتنسيق فني واختبارات محلية • +974 3000 8254 • m.soliman@envirolyte-qatar.com": "Raseen Aqua Solutions — Envirolyte’s authorized distributor in Qatar • Supply, technical coordination, and local testing • +974 3000 8254 • m.soliman@envirolyte-qatar.com",
         "الموقع الرسمي ومراجع صور الأجهزة ↗": "Official website and equipment image references ↗",
