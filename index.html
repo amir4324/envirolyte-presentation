@@ -192,12 +192,15 @@
       background: rgba(255,255,255,.97); box-shadow: 0 12px 28px rgba(0,0,0,.16);
     }
     .cover-logo-card.raseen { min-width: clamp(10.5rem, 15.5vw, 14.5rem); }
-    .cover-logo-card.edura { min-width: clamp(8rem, 11vw, 10.5rem); }
+    .cover-logo-card.edura { min-width: clamp(9.5rem, 13vw, 12rem); }
     .cover-brand-logo {
       display: block; width: clamp(9.5rem, 14vw, 13rem); max-height: clamp(3.8rem, 5vw, 4.8rem);
       height: auto; object-fit: contain;
     }
-    .cover-brand-logo.edura-logo { width: clamp(7.3rem, 9.5vw, 9rem); max-height: 3.25rem; }
+    .cover-brand-logo.edura-logo {
+      width: clamp(8.8rem, 11.5vw, 10.75rem); max-height: 4.25rem;
+      image-rendering: auto;
+    }
     .cover-brand-caption {
       margin-top: .3rem; color: var(--navy-900); font-size: clamp(.62rem, .72vw, .78rem);
       line-height: 1.15; font-weight: 750; letter-spacing: .01em; white-space: nowrap;
@@ -288,8 +291,22 @@
       background: linear-gradient(180deg, var(--aqua-500), var(--green-500));
     }
     .cover-title-refined .cover-title-intro {
-      display: block; margin-bottom: .16em; color: rgba(255,255,255,.72);
-      font-size: .48em; line-height: 1.25; letter-spacing: -.015em; font-weight: 700;
+      display: inline-flex; position: relative; isolation: isolate; width: fit-content;
+      margin-bottom: .34em; padding: .16em .42em .2em; color: #082f43;
+      font-size: .66em; line-height: 1.12; letter-spacing: -.025em; font-weight: 900;
+      white-space: nowrap; text-shadow: none;
+    }
+    .cover-title-refined .cover-title-intro::before {
+      content: ""; position: absolute; z-index: -1;
+      inset: -.02em -.16em -.04em;
+      background: linear-gradient(105deg, #8bd7df 0%, #70d8c8 54%, #9be782 100%);
+      clip-path: polygon(1.5% 7%, 100% 0, 98.5% 92%, 0 100%);
+      box-shadow: 0 10px 24px rgba(73,193,205,.3), 0 0 0 1px rgba(255,255,255,.14);
+    }
+    .cover-title-refined .cover-title-intro::after {
+      content: ""; position: absolute; z-index: 1;
+      inset-inline-end: .16em; top: .08em; width: 1.15em; height: 2px;
+      border-radius: 99px; background: rgba(255,255,255,.72);
     }
     .cover-title-refined .cover-title-main {
       display: flex; align-items: baseline; gap: .22em; flex-wrap: wrap;
@@ -782,6 +799,58 @@
       box-shadow: 0 14px 34px rgba(8,37,58,.07);
     }
 
+    /* Completed projects outside Qatar */
+    .international-case .slide-head h2 {
+      max-width: 68rem; font-size: clamp(1.55rem, 2.6vw, 2.85rem); line-height: 1.2;
+    }
+    .international-case .case-study {
+      grid-template-columns: minmax(0, 1.03fr) minmax(19rem, .97fr);
+      min-height: clamp(22rem, 31vw, 27rem);
+    }
+    .international-case .case-photo img { min-height: clamp(22rem, 31vw, 27rem); }
+    .international-case .case-copy { gap: clamp(.58rem, 1vw, .9rem); }
+    .project-metrics {
+      display: grid; grid-template-columns: repeat(var(--metric-count, 3), minmax(0, 1fr));
+      border-block: 1px solid var(--slate-200); background: rgba(255,255,255,.64);
+    }
+    .project-metric {
+      min-width: 0; padding: clamp(.68rem, 1.1vw, 1rem) clamp(.48rem, .8vw, .78rem);
+      border-inline-end: 1px solid var(--slate-200); text-align: center;
+    }
+    .project-metric:last-child { border-inline-end: 0; }
+    .project-metric strong {
+      display: block; color: var(--aqua-600); font-size: clamp(1rem, 1.55vw, 1.52rem);
+      line-height: 1.15; font-weight: 850; direction: ltr; unicode-bidi: isolate;
+    }
+    .project-metric span {
+      display: block; margin-top: .26rem; color: var(--slate-600);
+      font-size: clamp(.68rem, .78vw, .82rem); line-height: 1.3; font-weight: 700;
+    }
+    .project-metric span.only-en { display: none; }
+    html[data-language="en"] .project-metric span.only-en { display: block; }
+    .project-block { display: grid; gap: .22rem; }
+    .project-label {
+      color: var(--green-600); font-size: clamp(.7rem, .82vw, .86rem);
+      line-height: 1.35; font-weight: 850;
+    }
+    .project-text {
+      color: var(--navy-900); font-size: clamp(.79rem, .94vw, .98rem);
+      line-height: 1.5; font-weight: 620;
+    }
+    .project-result {
+      padding: clamp(.68rem, 1vw, .9rem) clamp(.78rem, 1.2vw, 1.05rem);
+      border-inline-start: 5px solid var(--aqua-500); border-radius: 10px;
+      background: linear-gradient(135deg, var(--aqua-100), rgba(255,255,255,.9));
+      color: var(--navy-900); font-size: clamp(.82rem, 1vw, 1.04rem);
+      line-height: 1.48; font-weight: 800;
+    }
+    .project-detail {
+      color: var(--slate-700); font-size: clamp(.68rem, .8vw, .84rem);
+      line-height: 1.48;
+    }
+    .international-case.kurbad-case .case-photo img { object-position: center 58%; }
+    .international-case.hospital-case .case-photo img { object-position: center; }
+
     /* Appendix */
     .appendix-label {
       color: var(--green-600); font-weight: 700; font-size: clamp(.78rem, 1vw, 1rem); margin-bottom: .4rem;
@@ -1216,7 +1285,7 @@
                 <span class="cover-brand-caption" dir="auto">رصين أكوا سوليوشنز</span>
               </div>
               <div class="cover-logo-card edura">
-                <img class="cover-brand-logo edura-logo" src="assets/edura-logo.png" alt="شعار Edura">
+                <img class="cover-brand-logo edura-logo" src="assets/edura-logo.png" alt="شعار Envirolyte">
               </div>
             </div>
           </div>
@@ -1271,35 +1340,6 @@
             <span data-note="transition">لفهم قيمة التقنية، نبدأ بما يحدث قبل وصول المادة المطهرة إلى نقطة الاستخدام.</span>
             <span data-note="avoid">تأكد من بقاء الشهادات ونطاق الاعتماد وبيانات الموزع محدثة قبل العرض الرسمي.</span>
             <span data-note="source">[Sources] Device photo: https://envirolyte.com/wp-content/uploads/2026/04/ela200-scaled.jpg | Experience, certifications, manufacturer support and Qatar distributor/contact details: user-provided company information.</span>
-          </aside>
-        </section>
-
-        <!-- 04 | Big idea -->
-        <section class="slide" data-title="ماذا لو أنتجت الجهة محلول التطهير داخل منشآتها؟">
-          <header class="slide-head">
-            <div><span class="eyebrow">ما يمكن أن يكون</span><h2>ماذا لو أنتجت الجهة محلول التطهير داخل منشآتها؟</h2></div>
-            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
-          </header>
-          <div class="slide-body">
-            <div class="input-formula"><span>ماء</span><b class="plus">+</b><span>ملح</span><b class="plus">+</b><span>كهرباء</span><b class="plus">←</b><span style="border-color:var(--aqua-500)">محاليل وظيفية عند الحاجة</span></div>
-            <div class="state-compare">
-              <div class="state current">
-                <div class="state-title"><strong>الوضع الحالي</strong><span class="amber">سلسلة متكررة</span></div>
-                <div class="state-flow"><span class="flow-node">شراء</span><span class="flow-node">نقل</span><span class="flow-node">تخزين</span><span class="flow-node">إعادة طلب</span><span class="flow-node">مناولة</span><span class="flow-node">عبوات</span></div>
-              </div>
-              <div class="compare-arrow">←</div>
-              <div class="state future">
-                <div class="state-title"><strong>ما يمكن أن يكون</strong><span class="green">عملية محلية</span></div>
-                <div class="state-flow"><span class="flow-node">إنتاج في الموقع</span><span class="flow-node">وفق الاحتياج</span><span class="flow-node">جرعة مضبوطة</span><span class="flow-node">بيانات تشغيل</span></div>
-              </div>
-            </div>
-          </div>
-          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>04</span></footer>
-          <aside class="notes-data" hidden>
-            <span data-note="idea">عرض التباين بين سلسلة توريد طويلة وعملية إنتاج محلية أبسط من دون ادعاء إلغائها بالكامل.</span>
-            <span data-note="opening">الفكرة ليست استبدال كل شيء دفعة واحدة، بل دراسة نقل جزء من السيطرة إلى داخل الموقع.</span>
-            <span data-note="transition">كيف تتحول هذه المدخلات البسيطة إلى محلولين وظيفيين؟</span>
-            <span data-note="avoid">استخدم عبارة «قد يساعد على تقليل الاعتماد» لا «يلغي المواد المنقولة».</span>
           </aside>
         </section>
 
@@ -1630,7 +1670,146 @@
           </aside>
         </section>
 
-        <!-- 13 | Qatar project: detergent factory -->
+        <!-- 13 | International project: Puente Romano Marbella -->
+        <section class="slide international-case" data-title="حماية مياه أحد أشهر فنادق Marbella من Legionella">
+          <header class="slide-head">
+            <div>
+              <span class="eyebrow">Puente Romano Marbella | Spain</span>
+              <h2 class="only-ar">حماية مياه أحد أشهر فنادق <span class="latin">Marbella</span> من <span class="latin">Legionella</span></h2>
+              <h2 class="only-en" lang="en" dir="ltr">Protecting the water at one of Marbella’s most renowned hotels from Legionella</h2>
+            </div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body">
+            <div class="case-study">
+              <div class="case-gallery">
+                <figure class="case-photo"><img src="assets/Puente%20Romano%20Marbella%20—%20Spain.jpg" alt="Puente Romano Marbella | Spain"><figcaption>Puente Romano Marbella | Spain</figcaption></figure>
+              </div>
+              <div class="case-copy">
+                <div class="project-block">
+                  <div class="project-metrics" style="--metric-count:3">
+                    <div class="project-metric"><strong>274</strong><span class="only-ar">غرفة</span><span class="only-en" lang="en" dir="ltr">rooms</span></div>
+                    <div class="project-metric"><strong>270 m³/day</strong><span class="only-ar">استهلاك مياه</span><span class="only-en" lang="en" dir="ltr">water consumption</span></div>
+                    <div class="project-metric"><strong>0.5–0.9 ppm</strong><span class="only-ar">كلور نشط</span><span class="only-en" lang="en" dir="ltr">active chlorine</span></div>
+                  </div>
+                </div>
+                <div class="project-block">
+                  <p class="project-text only-ar">نظام <span class="latin">Envirolyte</span> لمعالجة شبكة المياه الساخنة والتحكم المستمر في <span class="latin">Legionella</span> و<span class="latin">Biofilm</span>.</p>
+                  <p class="project-text only-en" lang="en" dir="ltr">Envirolyte system for treating the hot-water network and continuously controlling Legionella and Biofilm.</p>
+                </div>
+                <div class="project-block">
+                  <p class="project-label only-ar">النتيجة:</p><p class="project-label only-en" lang="en" dir="ltr">Result:</p>
+                  <p class="project-result only-ar">الحفاظ على مستوى التطهير حتى أبعد نقطة في شبكة المياه.</p>
+                  <p class="project-result only-en" lang="en" dir="ltr">Maintaining the disinfection level through to the furthest point in the water network.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="slide-foot"><span class="series-title"><span class="only-ar">الأعمال المنفذة خارج الدولة</span><span class="only-en" lang="en" dir="ltr">Completed projects outside Qatar</span></span><span>13</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">عرض تطبيق Envirolyte في فندق Puente Romano Marbella لحماية شبكة المياه من Legionella وBiofilm.</span>
+            <span data-note="opening">توضح الحالة قدرة النظام على الحفاظ على مستوى التطهير عبر شبكة المياه الساخنة حتى أبعد نقطة.</span>
+            <span data-note="transition">ننتقل من تطبيق فندقي في إسبانيا إلى منشأة صحية في النمسا.</span>
+            <span data-note="avoid">تُعرض الأرقام والنتيجة ضمن نطاق دراسة الحالة المقدمة.</span>
+            <span data-note="source">[Sources] User-provided project text and image: assets/Puente Romano Marbella — Spain.jpg.</span>
+          </aside>
+        </section>
+
+        <!-- 14 | International project: Kurbad Bad Vöslau -->
+        <section class="slide international-case kurbad-case" data-title="القضاء على Legionella في منشأة صحية بالنمسا">
+          <header class="slide-head">
+            <div>
+              <span class="eyebrow">Kurbad Bad Vöslau | Austria</span>
+              <h2 class="only-ar">القضاء على <span class="latin">Legionella</span> في منشأة صحية بالنمسا</h2>
+              <h2 class="only-en" lang="en" dir="ltr">Eliminating Legionella in a healthcare facility in Austria</h2>
+            </div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body">
+            <div class="case-study">
+              <div class="case-gallery">
+                <figure class="case-photo"><img src="assets/Kurbad%20Vivea%20Bad%20Vöslau%20—%20Austria.png" alt="Kurbad Bad Vöslau | Austria"><figcaption>Kurbad Bad Vöslau | Austria</figcaption></figure>
+              </div>
+              <div class="case-copy">
+                <div class="project-block">
+                  <div class="project-metrics" style="--metric-count:4">
+                    <div class="project-metric"><strong>220</strong><span class="only-ar">غرفة</span><span class="only-en" lang="en" dir="ltr">rooms</span></div>
+                    <div class="project-metric"><strong>12,000 L/day</strong><span class="only-ar">استهلاك مياه</span><span class="only-en" lang="en" dir="ltr">water consumption</span></div>
+                    <div class="project-metric"><strong>ELA 400</strong></div>
+                    <div class="project-metric"><strong>≤ 0.5 ppm</strong></div>
+                  </div>
+                </div>
+                <div class="project-block">
+                  <p class="project-text only-ar">معالجة المياه الساخنة والباردة باستخدام <span class="latin">Envirolyte Anolyte</span>.</p>
+                  <p class="project-text only-en" lang="en" dir="ltr">Hot- and cold-water treatment using Envirolyte Anolyte.</p>
+                </div>
+                <div class="project-block">
+                  <p class="project-label only-ar">النتيجة:</p><p class="project-label only-en" lang="en" dir="ltr">Result:</p>
+                  <p class="project-result only-ar">تم القضاء بالكامل على <span class="latin">Legionella</span> الموجودة مسبقًا.</p>
+                  <p class="project-result only-en" lang="en" dir="ltr">Pre-existing Legionella was completely eliminated.</p>
+                </div>
+                <p class="project-detail only-ar">المنشأة تضم 220 غرفة، واستهلاكها اليومي نحو 12,000 لتر، وتم تركيب وحدة <span class="latin">ELA 400</span> في سبتمبر 2013. كما تذكر دراسة الحالة أن <span class="latin">Legionella</span> الموجودة مسبقًا تم القضاء عليها بإضافة <span class="latin">Anolyte</span>.</p>
+                <p class="project-detail only-en" lang="en" dir="ltr">The facility has 220 rooms, consumes approximately 12,000 liters per day, and an ELA 400 unit was installed in September 2013. The case study also states that pre-existing Legionella was eliminated by dosing Anolyte.</p>
+              </div>
+            </div>
+          </div>
+          <footer class="slide-foot"><span class="series-title"><span class="only-ar">الأعمال المنفذة خارج الدولة</span><span class="only-en" lang="en" dir="ltr">Completed projects outside Qatar</span></span><span>14</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">عرض حالة منشأة Kurbad Bad Vöslau الصحية في النمسا ومعالجة المياه الساخنة والباردة.</span>
+            <span data-note="opening">تجمع الحالة بين بيانات التشغيل ووحدة ELA 400 والنتيجة المعلنة للقضاء على Legionella الموجودة مسبقًا.</span>
+            <span data-note="transition">ننتقل من منشأة صحية في النمسا إلى بيئة مستشفى عالية الحساسية في ألمانيا.</span>
+            <span data-note="avoid">تُعرض الأرقام والنتيجة ضمن نطاق دراسة الحالة المقدمة.</span>
+            <span data-note="source">[Sources] User-provided project text and image: assets/Kurbad Vivea Bad Vöslau — Austria.png; case-study document: assets/Use Case/Health Home Bad Vöslau AT-1.pdf.</span>
+          </aside>
+        </section>
+
+        <!-- 15 | International project: St. Marien-Hospital -->
+        <section class="slide international-case hospital-case" data-title="Envirolyte داخل بيئة مستشفى حقيقية">
+          <header class="slide-head">
+            <div>
+              <span class="eyebrow">St. Marien-Hospital | Germany</span>
+              <h2 class="only-ar"><span class="latin">Envirolyte</span> داخل بيئة مستشفى حقيقية</h2>
+              <h2 class="only-en" lang="en" dir="ltr">Envirolyte in a real hospital environment</h2>
+            </div>
+            <div class="brand-lockup"><span class="brand-mark"></span><span class="brand-name">ENVIROLYTE</span></div>
+          </header>
+          <div class="slide-body">
+            <div class="case-study">
+              <div class="case-gallery">
+                <figure class="case-photo"><img src="assets/St.%20Marien-Hospital%20Düren%20—%20Germany.jpg" alt="St. Marien-Hospital | Germany"><figcaption>St. Marien-Hospital | Germany</figcaption></figure>
+              </div>
+              <div class="case-copy">
+                <div class="project-block">
+                  <div class="project-metrics" style="--metric-count:3">
+                    <div class="project-metric"><strong>381</strong><span class="only-ar">سرير</span><span class="only-en" lang="en" dir="ltr">beds</span></div>
+                    <div class="project-metric"><strong>1,100+</strong><span class="only-ar">موظف</span><span class="only-en" lang="en" dir="ltr">employees</span></div>
+                    <div class="project-metric"><strong>75,000+</strong><span class="only-ar">مريض سنويًا</span><span class="only-en" lang="en" dir="ltr">patients annually</span></div>
+                  </div>
+                </div>
+                <div class="project-block">
+                  <p class="project-label only-ar">الحل:</p><p class="project-label only-en" lang="en" dir="ltr">Solution:</p>
+                  <p class="project-text only-ar"><span class="latin">ELA-3000ANW</span> لمعالجة مياه المستشفى والوقاية من <span class="latin">Legionella</span>.</p>
+                  <p class="project-text only-en" lang="en" dir="ltr">ELA-3000ANW for treating hospital water and preventing Legionella.</p>
+                </div>
+                <div class="project-block">
+                  <p class="project-label only-ar">الرسالة الختامية:</p><p class="project-label only-en" lang="en" dir="ltr">Closing message:</p>
+                  <p class="project-result only-ar">تطبيق فعلي لتقنية <span class="latin">Envirolyte</span> في منشأة صحية عالية الحساسية.</p>
+                  <p class="project-result only-en" lang="en" dir="ltr">A real-world application of Envirolyte technology in a highly sensitive healthcare facility.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="slide-foot"><span class="series-title"><span class="only-ar">الأعمال المنفذة خارج الدولة</span><span class="only-en" lang="en" dir="ltr">Completed projects outside Qatar</span></span><span>15</span></footer>
+          <aside class="notes-data" hidden>
+            <span data-note="idea">إبراز تطبيق Envirolyte الفعلي داخل مستشفى St. Marien-Hospital في ألمانيا.</span>
+            <span data-note="opening">توضح الحالة استخدام وحدة ELA-3000ANW في منشأة صحية عالية الحساسية ذات حجم تشغيلي كبير.</span>
+            <span data-note="transition">بعد حالات التنفيذ الدولية، ننتقل إلى التطبيق الصناعي المحلي.</span>
+            <span data-note="avoid">تُعرض الأرقام والحل ضمن نطاق المعلومات المقدمة عن المشروع.</span>
+            <span data-note="source">[Sources] User-provided project text and image: assets/St. Marien-Hospital Düren — Germany.jpg.</span>
+          </aside>
+        </section>
+
+        <!-- 12 | Qatar project: detergent factory -->
         <section class="slide" data-title="مصنع منظفات — خفض استخدام المواد الكيميائية">
           <header class="slide-head">
             <div><span class="eyebrow">أعمال منفذة في قطر</span><h2>مصنع منظفات — خفض استخدام المواد الكيميائية</h2></div>
@@ -1643,11 +1822,11 @@
               </div>
               <div class="case-copy">
                 <p class="case-intro">الأثر التشغيلي في عملية التصنيع:</p>
-                <div class="impact-quote">قلّل النظام بدرجة كبيرة استخدام المواد الكيميائية في صناعة المنظفات.</div>
+                <div class="impact-quote">ساهم النظام في الحد من استخدام المواد الكيميائية القاسية في تصنيع المنظفات.</div>
               </div>
             </div>
           </div>
-          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>13</span></footer>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>12</span></footer>
           <aside class="notes-data" hidden>
             <span data-note="idea">إبراز الأثر الأساسي لمشروع مصنع المنظفات المنفذ في قطر: خفض استخدام المواد الكيميائية في الصناعة.</span>
             <span data-note="opening">في هذه الحالة الصناعية، كان الأثر الأبرز هو تقليل استخدام المواد الكيميائية بدرجة كبيرة داخل عملية تصنيع المنظفات.</span>
@@ -1657,7 +1836,7 @@
           </aside>
         </section>
 
-        <!-- 14 | Anolyte vs sodium hypochlorite -->
+        <!-- 16 | Anolyte vs sodium hypochlorite -->
         <section class="slide slide-appendix" data-title="مقارنة الأنولايت وهيبوكلوريت الصوديوم">
           <header class="slide-head">
             <div>
@@ -1713,7 +1892,7 @@
               </div>
             </div>
           </div>
-          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع — الملحق الفني</span><span>14</span></footer>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع — الملحق الفني</span><span>16</span></footer>
           <aside class="notes-data" hidden>
             <span data-note="idea">مقارنة الخصائص الواردة في المرجع المقدم بين الأنولايت القائم على حمض الهيبوكلوروس وهيبوكلوريت الصوديوم.</span>
             <span data-note="opening">يوضح الجدول الفروق المعلنة في المادة الفعالة والرقم الهيدروجيني والسلامة وزمن التلامس والخصائص التشغيلية.</span>
@@ -1723,7 +1902,7 @@
           </aside>
         </section>
 
-        <!-- 15 | Closing -->
+        <!-- 17 | Closing -->
         <section class="slide slide-cover" data-title="شكراً لكم — الخطوة التالية تبدأ بورشة فنية">
           <div class="slide-head">
             <div class="brand-lockup" aria-label="مكان شعار Envirolyte">
@@ -1738,7 +1917,7 @@
             <p class="closing-action">الخطوة التالية تبدأ بورشة فنية وزيارة ميدانية لتحديد تطبيق تجريبي قابل للقياس.</p>
             <p class="closing-contact">رصين أكوا سوليوشنز • <span class="latin">+974 3000 8254</span> • <a class="latin" href="mailto:m.soliman@envirolyte-qatar.com">m.soliman@envirolyte-qatar.com</a></p>
           </div>
-          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>15</span></footer>
+          <footer class="slide-foot"><span class="series-title">حلول التطهير والإنتاج في الموقع</span><span>17</span></footer>
           <aside class="notes-data" hidden>
             <span data-note="idea">إنهاء العرض بطلب واضح ومحدود يربط النقاش بورشة فنية وزيارة ميدانية.</span>
             <span data-note="opening">شكراً لكم. نقترح أن تكون الخطوة التالية ورشة فنية قصيرة، تليها زيارة للموقع وتحديد تطبيق تجريبي مناسب.</span>
@@ -1754,7 +1933,7 @@
   <nav class="controls" aria-label="عناصر التحكم في العرض">
     <button class="control-btn" id="prevBtn" aria-label="الشريحة السابقة" title="السابق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
     <button class="control-btn" id="menuBtn" aria-label="فتح قائمة الشرائح" title="قائمة الشرائح"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
-    <span class="counter" id="counter" aria-live="polite">01 / 15</span>
+    <span class="counter" id="counter" aria-live="polite">01 / 17</span>
     <button class="control-btn" id="notesBtn" aria-label="عرض ملاحظات المتحدث" title="ملاحظات المتحدث"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v13H8l-4 4zM8 8h8M8 12h5"/></svg></button>
     <button class="control-btn" id="nextBtn" aria-label="الشريحة التالية" title="التالي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
   </nav>
@@ -1824,6 +2003,14 @@
     (() => {
       "use strict";
 
+      // Keep the three international case studies immediately after the existing slide 12.
+      const slideHost = document.querySelector(".slides");
+      const internationalSlides = [...slideHost.querySelectorAll(".international-case")];
+      const detergentSlide = [...slideHost.querySelectorAll(".slide")].find(slide =>
+        slide.dataset.title === "مصنع منظفات — خفض استخدام المواد الكيميائية"
+      );
+      if (detergentSlide && internationalSlides.length) detergentSlide.after(...internationalSlides);
+
       const slides = [...document.querySelectorAll(".slide")];
       const arabicTitles = slides.map(slide => slide.dataset.title);
       const englishSlides = [
@@ -1841,14 +2028,6 @@
           body: `<div class="en-grid four"><div class="en-panel"><h3>Company focus</h3><p>Systems that produce functional solutions on site for water treatment and disinfection, plus operational hygiene.</p></div><div class="en-panel green"><h3>Electrochemical activation</h3><p>Water, salt, electricity and a membrane-separated cell.</p></div><div class="en-panel"><h3>Experience and support</h3><p>Documented international experience in more than 50 countries • ISO 9001:2015 and NSF/ANSI 61 • Unit selection, technical documentation, and distributor coordination.</p></div><div class="en-panel amber"><h3>Local presence in Qatar</h3><p>Raseen Aqua Solutions — Envirolyte’s authorized distributor in Qatar • Supply, technical coordination, and local testing • +974 3000 8254 • <a href="mailto:m.soliman@envirolyte-qatar.com">m.soliman@envirolyte-qatar.com</a></p></div></div>`,
           note: "Introduce the company briefly before moving to the current operating challenge and the on-site production opportunity.",
           avoid: "Confirm that certifications, approval scope and distributor contact details remain current before external use."
-        },
-        {
-          eyebrow: "A possible future state",
-          title: "What if the organization produced its disinfection solution on site?",
-          body: `<div class="en-grid two"><div class="en-panel amber"><h3>Repeated supply chain</h3><div class="en-flow"><span class="en-node">Order</span><span class="en-arrow">→</span><span class="en-node">Transport</span><span class="en-arrow">→</span><span class="en-node">Store</span><span class="en-arrow">→</span><span class="en-node">Reorder</span></div></div><div class="en-panel green"><h3>Local production process</h3><div class="en-flow"><span class="en-node">Water + salt + power</span><span class="en-arrow">→</span><span class="en-node primary">On-site production</span><span class="en-arrow">→</span><span class="en-node">Controlled dose</span><span class="en-arrow">→</span><span class="en-node">Operating data</span></div></div></div>
-            <div class="en-callout green">The goal is not to replace everything at once; it is to evaluate whether part of the process can move closer to the point of use.</div>`,
-          note: "Contrast a long supply chain with a simpler local production process.",
-          avoid: "Say “may reduce dependence” rather than “eliminates transported chemicals.”"
         },
         {
           eyebrow: "Technology in brief",
@@ -1919,9 +2098,30 @@
           avoid: "Review complete-elimination claims against the site’s measurement protocol and operating conditions."
         },
         {
+          eyebrow: "Completed projects outside Qatar",
+          title: "Protecting the water at one of Marbella’s most renowned hotels from Legionella",
+          body: `<p>274 rooms • 270 m³/day water consumption • 0.5–0.9 ppm active chlorine</p><p>Envirolyte system for treating the hot-water network and continuously controlling Legionella and Biofilm.</p><p>Maintaining the disinfection level through to the furthest point in the water network.</p>`,
+          note: "Present the Puente Romano Marbella case and the reported ability to maintain disinfection through to the furthest point in the water network.",
+          avoid: "Present the figures and outcome within the scope of the supplied case study."
+        },
+        {
+          eyebrow: "Completed projects outside Qatar",
+          title: "Eliminating Legionella in a healthcare facility in Austria",
+          body: `<p>220 rooms • 12,000 L/day water consumption • ELA 400 • ≤ 0.5 ppm</p><p>Hot- and cold-water treatment using Envirolyte Anolyte.</p><p>Pre-existing Legionella was completely eliminated.</p>`,
+          note: "Present the Kurbad Bad Vöslau healthcare-facility case, its operating figures and the reported elimination of pre-existing Legionella.",
+          avoid: "Present the figures and outcome within the scope of the supplied case study."
+        },
+        {
+          eyebrow: "Completed projects outside Qatar",
+          title: "Envirolyte in a real hospital environment",
+          body: `<p>381 beds • 1,100+ employees • 75,000+ patients annually</p><p>ELA-3000ANW for treating hospital water and preventing Legionella.</p><p>A real-world application of Envirolyte technology in a highly sensitive healthcare facility.</p>`,
+          note: "Present the real-world use of Envirolyte at St. Marien-Hospital in Germany.",
+          avoid: "Present the figures and solution within the scope of the supplied project information."
+        },
+        {
           eyebrow: "Completed projects in Qatar",
           title: "Detergent factory — reduced chemical use",
-          body: `<p>Significantly reduced the use of chemicals in detergent manufacturing.</p>`,
+          body: `<p>The system contributed to the reduction of harsh chemicals in detergent manufacturing.</p>`,
           note: "Highlight the main reported impact of the completed detergent-factory project in Qatar: substantially reduced chemical use in manufacturing.",
           avoid: "Do not state a reduction percentage unless documented plant measurements are available."
         },
@@ -1942,6 +2142,9 @@
         }
       ];
 
+      const [detergentEnglishSlide] = englishSlides.splice(14, 1);
+      englishSlides.splice(11, 0, detergentEnglishSlide);
+
       const textTranslations = {
         "مقترح فني لتقييم فرصة تشغيلية": "Technical proposal to evaluate an operational opportunity",
         "نفتح آفاقًا جديدة في": "Breaking new ground in",
@@ -1952,6 +2155,7 @@
         "لإنتاج محاليل التطهير في الموقع بالماء والملح والكهرباء لمختلف المنشآت والقطاعات.": "technology for on-site production of disinfection solutions from water, salt and electricity across diverse facilities and sectors.",
         "رصين أكوا سوليوشنز": "Raseen Aqua Solutions",
         "شعار رصين أكوا سوليوشنز": "Raseen Aqua Solutions logo",
+        "شعار Envirolyte": "Envirolyte logo",
         "المبنى الحقيقي لمصنع Envirolyte في تالين، إستونيا": "Envirolyte factory building in Tallinn, Estonia",
         "جهاز Envirolyte ela200 لإنتاج الأنولايت في الموقع": "Envirolyte ela200 unit for on-site Anolyte production",
         "مقدم إلى: [اسم الجهة]": "Prepared for: [Organization Name]",
@@ -1999,7 +2203,7 @@
         "وحدة Envirolyte المنفذة داخل مصنع منظفات في قطر": "Envirolyte unit installed inside a detergent factory in Qatar",
         "وحدة الإنتاج داخل المصنع": "Production unit inside the factory",
         "الأثر التشغيلي في عملية التصنيع:": "Operating impact on the manufacturing process:",
-        "قلّل النظام بدرجة كبيرة استخدام المواد الكيميائية في صناعة المنظفات.": "The system significantly reduced chemical use in detergent manufacturing.",
+        "ساهم النظام في الحد من استخدام المواد الكيميائية القاسية في تصنيع المنظفات.": "The system contributed to the reduction of harsh chemicals in detergent manufacturing.",
         "الوضع الحالي": "Current state",
         "التعقيم التقليدي لا يبدأ عند نقطة الاستخدام": "Conventional disinfection does not start at the point of use",
         "التزام تعاقدي وتقلب محتمل في التوافر والسعر.": "Contractual commitment and possible variation in availability and price.",
@@ -2046,7 +2250,6 @@
         "الشراء والنقل والتخزين والعبوات تتكرر مع كل دورة توريد.": "Purchasing, transport, storage and packaging repeat with every supply cycle.",
         "اضغط المسافة لإظهار المحاور تدريجيًا": "Press Space to reveal the dimensions progressively",
         "ما يمكن أن يكون": "What could be",
-        "ماذا لو أنتجت الجهة محلول التطهير داخل منشآتها؟": "What if the organization produced its disinfection solution on site?",
         "ماء": "Water",
         "ملح": "Salt",
         "كهرباء": "Electricity",
