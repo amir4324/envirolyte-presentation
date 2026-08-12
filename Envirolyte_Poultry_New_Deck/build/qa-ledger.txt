@@ -1,0 +1,4 @@
+﻿Slide 1: PASS sources block; visually reviewed at full-size PNG; no clipping or unintended overlap observed.
+Slides 2–15: PASS sources blocks; each visually reviewed at full-size PNG; no clipping or unintended overlap observed.
+slides_test.py: PASS — no overflow detected.
+Exported PPTX re-render: PASS — 15 slides match the final design.

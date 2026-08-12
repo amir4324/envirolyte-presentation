@@ -1,0 +1,376 @@
+{
+    "outputSlides":  [
+                         {
+                             "narrativeRole":  "opening thesis",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/ts7md4r2",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/al0vqh8r",
+                                                     "action":  "replace"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/bm9wjmpc",
+                                                     "action":  "replace"
+                                                 }
+                                             ],
+                             "outputSlide":  1,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  1
+                         },
+                         {
+                             "narrativeRole":  "problem evidence",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/d0jax03i",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/7ut4nih0",
+                                                     "action":  "replace"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/6tknud0f",
+                                                     "action":  "replace"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/twvmpszq",
+                                                     "action":  "replace"
+                                                 }
+                                             ],
+                             "outputSlide":  2,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  3
+                         },
+                         {
+                             "narrativeRole":  "risk pathway synthesis",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/wbydknq1",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/xc7eds76",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/jepwf2pc",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeIds":  [
+                                                                      "sh/5grehs7i",
+                                                                      "sh/ehwvat8n",
+                                                                      "sh/y5wjitgj",
+                                                                      "sh/4vmh0vq5",
+                                                                      "sh/3udg7q9k"
+                                                                  ],
+                                                     "action":  "keep"
+                                                 }
+                                             ],
+                             "outputSlide":  3,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  14
+                         },
+                         {
+                             "narrativeRole":  "solution thesis",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/sna103ap",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/y5cbel0j",
+                                                     "action":  "replace"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/z6lc7q1o",
+                                                     "action":  "replace"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/fed47q18",
+                                                     "action":  "replace"
+                                                 }
+                                             ],
+                             "outputSlide":  4,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  4
+                         },
+                         {
+                             "narrativeRole":  "process explanation",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/cf2tcr61",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/yhkbe1o7",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/g7atobq5",
+                                                     "action":  "replace"
+                                                 }
+                                             ],
+                             "outputSlide":  5,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  5
+                         },
+                         {
+                             "narrativeRole":  "solution comparison",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/dcbud0ra",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/zedcfa9g",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/5s3mtk7e",
+                                                     "action":  "replace"
+                                                 }
+                                             ],
+                             "outputSlide":  6,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  7
+                         },
+                         {
+                             "narrativeRole":  "application portfolio",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/wbih4b6d",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/72t03qp0",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/nml0bqh8",
+                                                     "action":  "replace"
+                                                 }
+                                             ],
+                             "outputSlide":  7,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  11
+                         },
+                         {
+                             "narrativeRole":  "performance proof",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/0b65obm9",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/mdonql4z",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/ofmpgve5",
+                                                     "action":  "replace"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/9gvq9gfq",
+                                                     "action":  "replace"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/aho72lwb",
+                                                     "action":  "replace"
+                                                 }
+                                             ],
+                             "outputSlide":  8,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  9
+                         },
+                         {
+                             "narrativeRole":  "business comparison",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/q903ad4n",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/0f2lgnmp",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/83at8zyl",
+                                                     "action":  "replace"
+                                                 }
+                                             ],
+                             "outputSlide":  9,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  12
+                         },
+                         {
+                             "narrativeRole":  "safety synthesis",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/bq9orito",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/32ponyts",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/p8bm9k72",
+                                                     "action":  "replace"
+                                                 }
+                                             ],
+                             "outputSlide":  10,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  13
+                         },
+                         {
+                             "narrativeRole":  "market evidence",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/8v2pobax",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/6t8vi5kn",
+                                                     "action":  "replace"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/7uhcra18",
+                                                     "action":  "replace"
+                                                 }
+                                             ],
+                             "outputSlide":  11,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  19
+                         },
+                         {
+                             "narrativeRole":  "Qatar metrics proof",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/1gbmxs7a",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/ra9kryp8",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/ve9w7ux0",
+                                                     "action":  "replace"
+                                                 }
+                                             ],
+                             "outputSlide":  12,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  21
+                         },
+                         {
+                             "narrativeRole":  "global acceptance evidence",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/bq9orito",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/32ponyts",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/p8bm9k72",
+                                                     "action":  "replace"
+                                                 }
+                                             ],
+                             "outputSlide":  13,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  13
+                         },
+                         {
+                             "narrativeRole":  "strategic synthesis",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/rq50vmp8",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/l8bylwzu",
+                                                     "action":  "replace"
+                                                 }
+                                             ],
+                             "outputSlide":  14,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  20
+                         },
+                         {
+                             "narrativeRole":  "action close",
+                             "editTargets":  [
+                                                 {
+                                                     "shapeId":  "sh/1sfqxsv6",
+                                                     "action":  "rewrite"
+                                                 },
+                                                 {
+                                                     "shapeId":  "sh/ov6p8nux",
+                                                     "action":  "delete"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/6hc3m947",
+                                                     "action":  "replace"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/ril4vels",
+                                                     "action":  "replace"
+                                                 },
+                                                 {
+                                                     "shapeId":  "im/bqpsjqhk",
+                                                     "action":  "replace"
+                                                 }
+                                             ],
+                             "outputSlide":  15,
+                             "reuseMode":  "duplicate-slide",
+                             "sourceSlide":  24
+                         }
+                     ],
+    "omittedSourceSlides":  [
+                                {
+                                    "reason":  "Pattern or detail not required in the 15-slide narrative",
+                                    "sourceSlide":  2
+                                },
+                                {
+                                    "reason":  "Pattern or detail not required in the 15-slide narrative",
+                                    "sourceSlide":  6
+                                },
+                                {
+                                    "reason":  "Pattern or detail not required in the 15-slide narrative",
+                                    "sourceSlide":  8
+                                },
+                                {
+                                    "reason":  "Pattern or detail not required in the 15-slide narrative",
+                                    "sourceSlide":  10
+                                },
+                                {
+                                    "reason":  "Pattern or detail not required in the 15-slide narrative",
+                                    "sourceSlide":  15
+                                },
+                                {
+                                    "reason":  "Pattern or detail not required in the 15-slide narrative",
+                                    "sourceSlide":  16
+                                },
+                                {
+                                    "reason":  "Pattern or detail not required in the 15-slide narrative",
+                                    "sourceSlide":  17
+                                },
+                                {
+                                    "reason":  "Pattern or detail not required in the 15-slide narrative",
+                                    "sourceSlide":  18
+                                },
+                                {
+                                    "reason":  "Pattern or detail not required in the 15-slide narrative",
+                                    "sourceSlide":  22
+                                },
+                                {
+                                    "reason":  "Pattern or detail not required in the 15-slide narrative",
+                                    "sourceSlide":  23
+                                }
+                            ]
+}

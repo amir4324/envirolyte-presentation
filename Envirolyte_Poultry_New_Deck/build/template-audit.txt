@@ -1,0 +1,7 @@
+Source deck: 24 slides, 16:9 (1280x720), legacy Envirolyte poultry presentation.
+Reusable design language: cool gray canvas, forest/lime green diagonal left rail, navy typography, occasional burnt-orange emphasis, full-bleed poultry and equipment photography.
+Reusable patterns selected: cover split image, problem hero, stepped contamination path, text/image solution slide, process strip, two-solution comparison, application list with photo, metric proof, business comparison, safety proof, market imagery, Qatar metric slide, global acceptance slide, strategic image thesis, question/closing slide.
+Typography in source: mixed legacy serif and sans-serif. The requested visual improvement will retain navy/green brand cues while standardizing new text to Aptos/Aptos Display for legibility.
+Content contract: English audience-facing copy from the supplied 15-slide structure. Reported performance figures are attributed to the supplied Envirolyte material in speaker notes and visibly qualified where needed.
+Insertion contract: duplicate mapped source slides, keep or intentionally replace source photographs/logos, then revise inherited text and media targets; no source file overwrite.
+

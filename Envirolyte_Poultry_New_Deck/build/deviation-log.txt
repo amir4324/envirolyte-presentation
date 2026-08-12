@@ -1,0 +1,8 @@
+Intentional visual improvements from the source deck:
+- Standardized typography, title sizes, margins, and page markers.
+- Replaced crowded legacy bullets with concise evidence-led copy and metric emphasis.
+- Added restrained flat shapes only inside explicit editable content zones to support hierarchy.
+- Retained Envirolyte/Raseen brand palette and authentic source-deck installation photography.
+- Added three web-sourced supporting images: modern drinking system, barn biosecurity, and a world map; all are cited in slide notes.
+- Removed/covered unsupported or low-quality clip art where it weakened the narrative.
+

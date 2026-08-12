@@ -1,0 +1,1258 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/gnmp4jqx",
+    "id": "gnmp4jqx",
+    "slide": 7,
+    "layoutId": "/ppt/slideLayouts/slideLayout7.xml",
+    "layoutName": "Blank",
+    "layoutType": "blank",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "Parallax",
+    "colors": {
+      "accent1": "#8BB434",
+      "accent2": "#33A583",
+      "accent3": "#3594B4",
+      "accent4": "#6063B4",
+      "accent5": "#D35731",
+      "accent6": "#EBAC4B",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#212121",
+      "lt2": "#CDD0D1",
+      "hlink": "#65AD30",
+      "folHlink": "#8ED25B"
+    },
+    "fontScheme": {
+      "name": "Parallax",
+      "majorFont": {
+        "latinTypeface": "Corbel"
+      },
+      "minorFont": {
+        "latinTypeface": "Corbel"
+      }
+    },
+    "typefaces": [
+      "Bell MT",
+      "Corbel"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout7.xml",
+      "name": "Blank",
+      "type": "blank",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout7.xml/2",
+          "id": "2",
+          "name": "Date Placeholder 1",
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "text": "12/27/25",
+          "textPreview": "12/27/25",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "12/27/25",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "12/27/25"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 2,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout7.xml/3",
+          "id": "3",
+          "name": "Footer Placeholder 2",
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "order": 3,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout7.xml/4",
+          "id": "4",
+          "name": "Slide Number Placeholder 3",
+          "bbox": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "text": "‹#›",
+          "textPreview": "‹#›",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "‹#›",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "‹#›"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/8",
+          "id": "8",
+          "name": "Freeform 6",
+          "bbox": [
+            48,
+            0,
+            117.83,
+            559.5
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "fillColor": "accent1",
+          "lineWidth": 0
+        },
+        {
+          "order": 2,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/9",
+          "id": "9",
+          "name": "Freeform 7",
+          "bbox": [
+            15.83,
+            0,
+            117.33,
+            554
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "fillColor": {
+            "type": "theme",
+            "value": "tx1",
+            "transform": {
+              "lighten": 0.35
+            }
+          },
+          "lineWidth": 0
+        },
+        {
+          "order": 3,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/10",
+          "id": "10",
+          "name": "Freeform 8",
+          "bbox": [
+            15.83,
+            550,
+            129,
+            170
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "fillColor": {
+            "type": "theme",
+            "value": "tx1",
+            "transform": {
+              "lighten": 0.15
+            }
+          },
+          "lineWidth": 0
+        },
+        {
+          "order": 4,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/11",
+          "id": "11",
+          "name": "Freeform 9",
+          "bbox": [
+            48,
+            555.5,
+            157,
+            164.5
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "fillColor": {
+            "type": "theme",
+            "value": "accent1",
+            "transform": {
+              "darken": 0.5
+            }
+          },
+          "lineWidth": 0
+        },
+        {
+          "order": 5,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/12",
+          "id": "12",
+          "name": "Freeform 10",
+          "bbox": [
+            48,
+            555,
+            223.67,
+            165
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "fillColor": {
+            "type": "theme",
+            "value": "accent1",
+            "transform": {
+              "darken": 0.25
+            }
+          },
+          "lineWidth": 0
+        },
+        {
+          "order": 6,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/13",
+          "id": "13",
+          "name": "Freeform 11",
+          "bbox": [
+            15.83,
+            550,
+            178,
+            170
+          ],
+          "rotation": 0,
+          "geometry": "custom",
+          "fillColor": {
+            "type": "theme",
+            "value": "tx1",
+            "transform": {
+              "lighten": 0.25
+            }
+          },
+          "lineWidth": 0
+        },
+        {
+          "order": 7,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/2",
+          "id": "2",
+          "name": "Title Placeholder 1",
+          "bbox": [
+            155.83,
+            72,
+            1051.83,
+            184
+          ],
+          "geometry": "rect",
+          "text": "Click to edit Master title style",
+          "textPreview": "Click to edit Master title style",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "vertical": 1,
+            "verticalAlignment": "middle",
+            "autoFit": "shrinkText",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            }
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Click to edit Master title style",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Click to edit Master title style"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 8,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/3",
+          "id": "3",
+          "name": "Text Placeholder 2",
+          "bbox": [
+            155.83,
+            280,
+            1051.83,
+            328
+          ],
+          "geometry": "rect",
+          "text": "Click to edit Master text styles\nSecond level\nThird level\nFourth level\nFifth level",
+          "textPreview": "Click to edit Master text styles | Second level | Third level | Fourth level | Fifth level",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "vertical": 1,
+            "verticalAlignment": "middle",
+            "autoFit": "shrinkText",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            }
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "Click to edit Master text styles",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Click to edit Master text styles"
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "text": "Second level",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Second level"
+                }
+              ]
+            },
+            {
+              "index": 3,
+              "text": "Third level",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Third level"
+                }
+              ]
+            },
+            {
+              "index": 4,
+              "text": "Fourth level",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Fourth level"
+                }
+              ]
+            },
+            {
+              "index": 5,
+              "text": "Fifth level",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "Fifth level"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 9,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/4",
+          "id": "4",
+          "name": "Date Placeholder 3",
+          "bbox": [
+            1021.8,
+            617.67,
+            120,
+            38.33
+          ],
+          "geometry": "rect",
+          "text": "12/27/25",
+          "textPreview": "12/27/25",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "vertical": 1,
+            "verticalAlignment": "middle",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            }
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "12/27/25",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "12/27/25"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "order": 10,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/5",
+          "id": "5",
+          "name": "Footer Placeholder 4",
+          "bbox": [
+            270.06,
+            617.67,
+            743.75,
+            38.33
+          ],
+          "geometry": "rect",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "vertical": 1,
+            "verticalAlignment": "middle",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            }
+          }
+        },
+        {
+          "order": 11,
+          "kind": "shape",
+          "scope": "master",
+          "aid": "template/master//ppt/slideMasters/slideMaster1.xml/6",
+          "id": "6",
+          "name": "Slide Number Placeholder 5",
+          "bbox": [
+            1149.8,
+            617.67,
+            57.87,
+            38.33
+          ],
+          "geometry": "rect",
+          "text": "‹#›",
+          "textPreview": "‹#›",
+          "resolvedTextStyle": {
+            "anchor": 2,
+            "vertical": 1,
+            "verticalAlignment": "middle",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            }
+          },
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "‹#›",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "‹#›"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dcbud0ra",
+      "id": "3",
+      "name": "TextBox 2",
+      "bbox": [
+        183.26,
+        52.71,
+        981.05,
+        113.09
+      ],
+      "geometry": "rect",
+      "text": "Two Types of\tElectrolyzed Water Produced by Envirolyte Systems",
+      "textPreview": "Two Types of\tElectrolyzed Water Produced by Envirolyte Systems",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Corbel",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "qTwo Types ofElectrolyzed Water Produced by"
+          },
+          {
+            "index": 2,
+            "text": "Envirolyte Systems"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Two Types of\tElectrolyzed Water Produced by Envirolyte Systems",
+          "runs": [
+            {
+              "index": 1,
+              "text": "Two",
+              "fontSize": 42.67,
+              "typeface": "Bell MT",
+              "color": {
+                "type": "theme",
+                "value": "accent4",
+                "transform": {
+                  "darken": 0.5
+                }
+              },
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": " ",
+              "fontSize": 42.67,
+              "typeface": "Bell MT",
+              "color": {
+                "type": "theme",
+                "value": "accent4",
+                "transform": {
+                  "darken": 0.5
+                }
+              },
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "Types",
+              "fontSize": 42.67,
+              "typeface": "Bell MT",
+              "color": {
+                "type": "theme",
+                "value": "accent4",
+                "transform": {
+                  "darken": 0.5
+                }
+              },
+              "bold": true
+            },
+            {
+              "index": 4,
+              "text": " ",
+              "fontSize": 42.67,
+              "typeface": "Bell MT",
+              "color": {
+                "type": "theme",
+                "value": "accent4",
+                "transform": {
+                  "darken": 0.5
+                }
+              },
+              "bold": true
+            },
+            {
+              "index": 5,
+              "text": "of",
+              "fontSize": 42.67,
+              "typeface": "Bell MT",
+              "color": {
+                "type": "theme",
+                "value": "accent4",
+                "transform": {
+                  "darken": 0.5
+                }
+              },
+              "bold": true
+            },
+            {
+              "index": 6,
+              "text": "\t",
+              "fontSize": 42.67,
+              "typeface": "Bell MT",
+              "color": {
+                "type": "theme",
+                "value": "accent4",
+                "transform": {
+                  "darken": 0.5
+                }
+              },
+              "bold": true
+            },
+            {
+              "index": 7,
+              "text": "Electrolyzed",
+              "fontSize": 42.67,
+              "typeface": "Bell MT",
+              "color": {
+                "type": "theme",
+                "value": "accent4",
+                "transform": {
+                  "darken": 0.5
+                }
+              },
+              "bold": true
+            },
+            {
+              "index": 8,
+              "text": " ",
+              "fontSize": 42.67,
+              "typeface": "Bell MT",
+              "color": {
+                "type": "theme",
+                "value": "accent4",
+                "transform": {
+                  "darken": 0.5
+                }
+              },
+              "bold": true
+            },
+            {
+              "index": 9,
+              "text": "Water ",
+              "fontSize": 42.67,
+              "typeface": "Bell MT",
+              "color": {
+                "type": "theme",
+                "value": "accent4",
+                "transform": {
+                  "darken": 0.5
+                }
+              },
+              "bold": true
+            },
+            {
+              "index": 10,
+              "text": "Produced",
+              "fontSize": 42.67,
+              "typeface": "Bell MT",
+              "color": {
+                "type": "theme",
+                "value": "accent4",
+                "transform": {
+                  "darken": 0.5
+                }
+              },
+              "bold": true
+            },
+            {
+              "index": 11,
+              "text": " ",
+              "fontSize": 42.67,
+              "typeface": "Bell MT",
+              "color": {
+                "type": "theme",
+                "value": "accent4",
+                "transform": {
+                  "darken": 0.5
+                }
+              },
+              "bold": true
+            },
+            {
+              "index": 12,
+              "text": "by",
+              "fontSize": 42.67,
+              "typeface": "Bell MT",
+              "color": {
+                "type": "theme",
+                "value": "accent4",
+                "transform": {
+                  "darken": 0.5
+                }
+              },
+              "bold": true
+            },
+            {
+              "index": 13,
+              "text": " ",
+              "fontSize": 42.67,
+              "typeface": "Bell MT",
+              "color": {
+                "type": "theme",
+                "value": "accent4",
+                "transform": {
+                  "darken": 0.5
+                }
+              },
+              "bold": true
+            },
+            {
+              "index": 14,
+              "text": "Envirolyte",
+              "fontSize": 42.67,
+              "typeface": "Bell MT",
+              "color": {
+                "type": "theme",
+                "value": "accent4",
+                "transform": {
+                  "darken": 0.5
+                }
+              },
+              "bold": true
+            },
+            {
+              "index": 15,
+              "text": " ",
+              "fontSize": 42.67,
+              "typeface": "Bell MT",
+              "color": {
+                "type": "theme",
+                "value": "accent4",
+                "transform": {
+                  "darken": 0.5
+                }
+              },
+              "bold": true
+            },
+            {
+              "index": 16,
+              "text": "Systems",
+              "fontSize": 42.67,
+              "typeface": "Bell MT",
+              "color": {
+                "type": "theme",
+                "value": "accent4",
+                "transform": {
+                  "darken": 0.5
+                }
+              },
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/zedcfa9g",
+      "id": "5",
+      "name": "TextBox 4",
+      "bbox": [
+        102.61,
+        191.98,
+        597.13,
+        368.05
+      ],
+      "geometry": "rect",
+      "text": "Anolyte - Strong oxidizing solution; used as a broad-spectrum germicidal agent to kill all types of microorganisms.\nCatholyte – Anti-oxidizing solution; used as degreaser or detergent.",
+      "textPreview": "Anolyte - Strong oxidizing solution; used as a broad-spectrum germicidal agent to kill all types of microorganisms. | Catholyte – Anti-ox...",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "fontSize": 24,
+        "typeface": "Corbel",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 7,
+        "lines": [
+          {
+            "index": 1,
+            "text": "§Anolyte - Strong oxidizing solution;"
+          },
+          {
+            "index": 2,
+            "text": "used as a broad-spectrum germicidal"
+          },
+          {
+            "index": 3,
+            "text": "agent to kill all types of"
+          },
+          {
+            "index": 4,
+            "text": "microorganisms."
+          },
+          {
+            "index": 5,
+            "text": ""
+          },
+          {
+            "index": 6,
+            "text": "§Catholyte – Anti-oxidizing solution;"
+          },
+          {
+            "index": 7,
+            "text": "used as degreaser or detergent."
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "Anolyte - Strong oxidizing solution; used as a broad-spectrum germicidal agent to kill all types of microorganisms.",
+          "lineSpacingPercent": 153300,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Anolyte",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "color": {
+                "type": "theme",
+                "value": "accent5",
+                "transform": {
+                  "darken": 0.25
+                }
+              },
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "-",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 4,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 5,
+              "text": "Strong",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 6,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 7,
+              "text": "oxidizing",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 8,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 9,
+              "text": "solution;",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 10,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 11,
+              "text": "used",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 12,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 13,
+              "text": "as",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 14,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 15,
+              "text": "a",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 16,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 17,
+              "text": "broad-spectrum",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 18,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 19,
+              "text": "germicidal",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 20,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 21,
+              "text": "agent",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 22,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 23,
+              "text": "to",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 24,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 25,
+              "text": "kill",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 26,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 27,
+              "text": "all",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 28,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 29,
+              "text": "types",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 30,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 31,
+              "text": "of ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 32,
+              "text": "microorganisms.",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "Catholyte – Anti-oxidizing solution; used as degreaser or detergent.",
+          "lineSpacingPercent": 153200,
+          "runs": [
+            {
+              "index": 1,
+              "text": "Catholyte",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "color": {
+                "type": "theme",
+                "value": "accent5",
+                "transform": {
+                  "darken": 0.25
+                }
+              },
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "–",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 4,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 5,
+              "text": "Anti-oxidizing",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 6,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 7,
+              "text": "solution;",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 8,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 9,
+              "text": "used",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 10,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 11,
+              "text": "as",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 12,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 13,
+              "text": "degreaser ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 14,
+              "text": "or",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 15,
+              "text": " ",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            },
+            {
+              "index": 16,
+              "text": "detergent.",
+              "fontSize": 32,
+              "typeface": "Bell MT",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/5s3mtk7e",
+      "id": "6",
+      "name": "Picture 8",
+      "bbox": [
+        687.71,
+        212.81,
+        580.27,
+        326.4
+      ],
+      "geometry": "roundRect",
+      "contentType": "image/png",
+      "imageCrop": {
+        "left": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0
+      },
+      "imageMask": {
+        "geometry": "roundRect",
+        "adjustmentList": [
+          {
+            "name": "adj",
+            "formula": "val 8594"
+          }
+        ]
+      },
+      "asset": {
+        "assetId": "/ppt/media/image14.png",
+        "contentType": "image/png",
+        "byteLength": 182995
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image14.png",
+        "contentType": "image/png",
+        "byteLength": 182995
+      }
+    }
+  ],
+  "composeRuns": []
+}
