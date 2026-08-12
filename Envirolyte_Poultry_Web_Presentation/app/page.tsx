@@ -14,12 +14,14 @@ const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//
 
 const slides: Slide[] = [
   { kicker: "Poultry Industry", title: "A Complete Water Treatment & Disinfection Solution for the Poultry Industry", type: "cover", image: "/images/cover-chickens.jpg" },
-  { kicker: "The Challenge", title: "Disease Is Not Only a Health Problem — It Is a Business Problem", type: "challenge", image: "/images/barn-disinfection.jpg" },
+  { kicker: "The Challenge", title: "Disease Is Not Only a Health Problem — It Is a Business Problem", type: "challenge", image: "/images/poultry-biosecurity-inspection.png" },
   { kicker: "The Gap", title: "Traditional Disinfection Solves Isolated Problems. Farms Need a Complete System.", type: "journey" },
   { kicker: "The Solution", title: "Envirolyte Extends Water Treatment Into Farm-Wide Biosecurity", type: "solution", image: "/images/envirolyte-system.png" },
   { kicker: "How It Works", title: "Generated On-Site Using Only Salt, Water & Electricity", type: "process" },
+  { kicker: "System Advantages", title: "Why the Envirolyte System Is Built for Poultry Operations", type: "system-benefits" },
   { kicker: "System Outputs", title: "Two Electrolyzed Solutions. Two Different Functions.", type: "outputs" },
-  { kicker: "Across the Farm", title: "One Technology. Multiple Poultry Applications.", type: "applications", image: "/images/modern-poultry-water.jpg" },
+  { kicker: "Anolyte Advantages", title: "A High-Performance Disinfection Solution Generated Fresh On-Site", type: "anolyte-benefits" },
+  { kicker: "Across the Farm", title: "One Technology. Multiple Poultry Applications.", type: "applications", image: "/images/poultry-sanitation-misting.png" },
   { kicker: "Reported Impact", title: "Cleaner Operations Can Translate Into Better Farm Performance", type: "metrics" },
   { kicker: "Business Case", title: "This Is More Than Disinfection — It Is an Operational Cost Decision", type: "business" },
   { kicker: "Safety & Sustainability", title: "Powerful Against Microorganisms. Designed for Safer Operations.", type: "safety" },
@@ -27,7 +29,7 @@ const slides: Slide[] = [
   { kicker: "Qatar Results — As Reported", title: "What Did the Farm Achieve?", type: "qatar" },
   { kicker: "Global Reach", title: "A Technology With International Market Acceptance", type: "global", image: "/images/world-map.png" },
   { kicker: "The Strategic Message", title: "Control the Water. Control More of the Farm’s Risk.", type: "strategy", image: "/images/qatar-chicks.png" },
-  { kicker: "Next Step", title: "Start With an Assessment of Your Farm", type: "closing", image: "/images/qatar-system.png" },
+  { kicker: "Next Step", title: "Start With an Assessment of Your Farm", type: "closing", image: "/images/farm-assessment-team.png" },
 ];
 
 const benefits = [
@@ -58,7 +60,10 @@ function Scene({ slide, index }: { slide: Slide; index: number }) {
   if (slide.type === "cover") return (
     <div className="cover-layout">
       <div className="cover-copy">
-        <img className="envirolyte-logo reveal" src={asset("/images/envirolyte-logo.png")} alt="Envirolyte" />
+        <div className="cover-partners reveal" aria-label="Envirolyte and Raseen Aqua Solutions">
+          <div className="partner-card envirolyte-partner"><img src={asset("/images/envirolyte-logo.png")} alt="Envirolyte" /></div>
+          <div className="partner-card raseen-partner"><img src={asset("/images/raseen-logo.jpeg")} alt="Raseen Aqua Solutions logo" /><span>RASEEN AQUA SOLUTIONS</span></div>
+        </div>
         <p className="eyebrow reveal">POULTRY INDUSTRY</p>
         <h1 className="hero-title reveal">A Complete Water Treatment &amp; Disinfection Solution for the Poultry Industry</h1>
         <p className="cover-tags reveal">STERILIZATION <i /> DISINFECTION <i /> WATER PURIFICATION</p>
@@ -70,13 +75,31 @@ function Scene({ slide, index }: { slide: Slide; index: number }) {
 
   if (slide.type === "challenge") return frame(<div className="split media-right"><div className="copy-block"><h2 className="scene-title reveal">{slide.title}</h2><p className="lead reveal">Diseases and infections create compounding operational pressure across every production cycle.</p><div className="issue-list">{benefits.map(([n, a, b], i) => <div className="issue reveal" key={a} style={{ "--delay": `${i * 90}ms` } as React.CSSProperties}><b>{n}</b><strong>{a}</strong><span>{b}</span></div>)}</div></div><figure className="photo reveal"><img src={slideImage} alt="Worker disinfecting a poultry barn" /></figure></div>);
 
-  if (slide.type === "journey") return frame(<div><h2 className="scene-title reveal">{slide.title}</h2><p className="lead reveal">Effective biosecurity must cover the entire contamination journey — not one chemical or one location.</p><div className="journey">{[["Water", "Daily intake"], ["Barns", "Living environment"], ["Equipment", "Contact surfaces"], ["Workers", "Movement & hygiene"], ["Vehicles", "Farm access"]].map(([a, b], i) => <div className="journey-node reveal" key={a} style={{ "--delay": `${i * 120}ms` } as React.CSSProperties}><b>{i + 1}</b><strong>{a}</strong><span>{b}</span></div>)}</div><div className="thesis reveal">One weak point can reintroduce risk across the full operation.</div></div>);
+  if (slide.type === "journey") return frame(<div><h2 className="scene-title reveal">{slide.title}</h2><p className="lead reveal">Effective biosecurity must cover the entire contamination journey — not one chemical or one location.</p><div className="journey journey-six">{[["Water", "Daily intake"], ["Barns", "Living environment"], ["Equipment", "Contact surfaces"], ["Workers", "Movement & hygiene"], ["Vehicles", "Farm access"], ["Chillers", "Cooling units"]].map(([a, b], i) => <div className="journey-node reveal" key={a} style={{ "--delay": `${i * 90}ms` } as React.CSSProperties}><b>{i + 1}</b><strong>{a}</strong><span>{b}</span></div>)}</div><div className="thesis reveal">One weak point can reintroduce risk across the full operation.</div></div>);
 
-  if (slide.type === "solution") return frame(<div className="split media-right"><div className="copy-block"><h2 className="scene-title reveal">{slide.title}</h2><p className="lead reveal">A comprehensive, eco-conscious and cost-focused program — generated on site and applied where the farm needs it.</p><ul className="check-list">{["Drinking water treatment", "Barn disinfection", "Microbial control", "Farm sanitation", "Less dependence on conventional chemicals"].map((x, i) => <li className="reveal" style={{ "--delay": `${i * 90}ms` } as React.CSSProperties} key={x}>{x}</li>)}</ul></div><figure className="photo equipment reveal"><img src={slideImage} alt="Envirolyte generation equipment" /></figure></div>);
+  if (slide.type === "solution") return frame(<div className="split media-right"><div className="copy-block"><h2 className="scene-title reveal">{slide.title}</h2><p className="lead reveal">A comprehensive, eco-conscious and cost-focused program — generated on site and applied where the farm needs it.</p><ul className="check-list">{["Drinking water treatment", "Barn cleaning and disinfection", "Microbial control", "Farm sanitation", "Eliminate the use of conventional chemical disinfectants"].map((x, i) => <li className="reveal" style={{ "--delay": `${i * 90}ms` } as React.CSSProperties} key={x}>{x}</li>)}</ul></div><figure className="photo equipment reveal"><img src={slideImage} alt="Envirolyte generation equipment" /></figure></div>);
 
   if (slide.type === "process") return frame(<div><h2 className="scene-title reveal">{slide.title}</h2><p className="lead reveal">A conditioned brine solution passes through a diaphragmatic electrolysis cell to create fresh active solutions close to the point of use.</p><div className="process">{[["Water", "Conditioned feed"], ["Salt", "Sodium chloride brine"], ["Electricity", "Controlled current"], ["Envirolyte", "Diaphragmatic cell"], ["Anolyte", "Disinfection solution"]].map(([a, b], i) => <article className="process-step reveal" key={a} style={{ "--delay": `${i * 120}ms` } as React.CSSProperties}><em>{String(i + 1).padStart(2, "0")}</em><strong>{a}</strong><span>{b}</span></article>)}</div><div className="soft-thesis reveal">Fresh generation on demand reduces reliance on transported and stored disinfectants.</div></div>);
 
+  if (slide.type === "system-benefits") return frame(<div><h2 className="scene-title reveal">{slide.title}</h2><p className="lead reveal">A scalable generation platform designed to simplify supply, dosing and operational hygiene across the farm.</p><div className="benefit-matrix">{[
+    ["01", "On-Site Generation", "Uses only salt, water and electricity."],
+    ["02", "Fresh On Demand", "Produces active solution close to the point of use."],
+    ["03", "Automated Control", "Supports controlled dosing and repeatable operation."],
+    ["04", "Scalable Capacity", "System capacity can be matched to farm demand."],
+    ["05", "Reduced Logistics", "Cuts dependence on transported and stored disinfectants."],
+    ["06", "One Farm Platform", "Supports water, cleaning, disinfection, fogging and chillers."],
+  ].map(([n, a, b], i) => <article className="benefit-tile reveal" key={a} style={{ "--delay": `${i * 80}ms` } as React.CSSProperties}><b>{n}</b><div><h3>{a}</h3><p>{b}</p></div></article>)}</div></div>);
+
   if (slide.type === "outputs") return frame(<div><h2 className="scene-title reveal">{slide.title}</h2><div className="solution-pair"><article className="solution-card aqua reveal"><div className="round-icon">A</div><h3>ANOLYTE</h3><b>DISINFECTION</b><p>Oxidizing solution used for microbial control, water treatment and sanitation.</p><small>Broad-spectrum germicidal function</small></article><article className="solution-card green reveal"><div className="round-icon">C</div><h3>CATHOLYTE</h3><b>CLEANING &amp; DEGREASING</b><p>Alkaline reducing solution used for washing, cleaning support and process applications.</p><small>Detergent / degreasing function</small></article></div></div>);
+
+  if (slide.type === "anolyte-benefits") return frame(<div><h2 className="scene-title reveal">{slide.title}</h2><p className="lead reveal">Anolyte combines fast microbial control with practical farm-wide application and fresh on-site availability.</p><div className="anolyte-layout"><div className="anolyte-core reveal"><span>ANOLYTE</span><strong>ACTIVE<br />DISINFECTION</strong><small>Generated fresh where it is needed</small></div><div className="anolyte-points">{[
+    ["Broad-Spectrum Control", "Targets bacteria, viruses and fungi."],
+    ["Rapid Action", "Delivers fast disinfection at practical dosing levels."],
+    ["Water & Surface Use", "Suitable for drinking systems and sanitation programs."],
+    ["Biofilm Support", "Helps control contamination inside water lines."],
+    ["Low Residue Burden", "Reduces reliance on persistent conventional chemicals."],
+    ["Fresh Availability", "Produced on demand without routine chemical deliveries."],
+  ].map(([a, b], i) => <article className="anolyte-point reveal" key={a} style={{ "--delay": `${i * 70}ms` } as React.CSSProperties}><b>{i + 1}</b><div><h3>{a}</h3><p>{b}</p></div></article>)}</div></div></div>);
 
   if (slide.type === "applications") return frame(<div className="split media-right"><div><h2 className="scene-title reveal">{slide.title}</h2><div className="application-list">{apps.map((x, i) => <div className="application reveal" style={{ "--delay": `${i * 80}ms` } as React.CSSProperties} key={x}><b>{i + 1}</b><span>{x}</span></div>)}</div></div><figure className="photo reveal"><img src={slideImage} alt="Modern poultry drinking system" /></figure></div>);
 
