@@ -16,20 +16,20 @@ const slides: Slide[] = [
   { kicker: "Poultry Industry", title: "A Complete Water Treatment & Disinfection Solution for the Poultry Industry", type: "cover", image: "/images/cover-chickens.jpg" },
   { kicker: "The Challenge", title: "Disease Is Not Only a Health Problem — It Is a Business Problem", type: "challenge", image: "/images/poultry-biosecurity-inspection.png" },
   { kicker: "The Gap", title: "Traditional Disinfection Solves Isolated Problems. Farms Need a Complete System.", type: "journey" },
-  { kicker: "The Solution", title: "Envirolyte Extends Water Treatment Into Farm-Wide Biosecurity", type: "solution", image: "/images/envirolyte-system.png" },
+  { kicker: "The Solution", title: "Envirolyte Extends Water Treatment Into Farm-Wide Biosecurity", type: "solution-merged", image: "/images/poultry-sanitation-misting.png" },
   { kicker: "How It Works", title: "Generated On-Site Using Only Salt, Water & Electricity", type: "process" },
   { kicker: "System Advantages", title: "Why the Envirolyte System Is Built for Poultry Operations", type: "system-benefits" },
   { kicker: "System Outputs", title: "Two Electrolyzed Solutions. Two Different Functions.", type: "outputs" },
   { kicker: "Anolyte Advantages", title: "A High-Performance Disinfection Solution Generated Fresh On-Site", type: "anolyte-benefits" },
-  { kicker: "Across the Farm", title: "One Technology. Multiple Poultry Applications.", type: "applications", image: "/images/poultry-sanitation-misting.png" },
   { kicker: "Reported Impact", title: "Cleaner Operations Can Translate Into Better Farm Performance", type: "metrics" },
   { kicker: "Business Case", title: "This Is More Than Disinfection — It Is an Operational Cost Decision", type: "business" },
+  { kicker: "Assessment & Rollout", title: "Start With an Assessment of Your Farm", type: "assessment", image: "/images/farm-assessment-team.png" },
   { kicker: "Safety & Sustainability", title: "Powerful Against Microorganisms. Designed for Safer Operations.", type: "safety" },
-  { kicker: "Selected Installations", title: "From Qatar to International Poultry Operations", type: "markets", image: "/images/international-poultry-network.png" },
   { kicker: "Qatar Results — As Reported", title: "What Did the Farm Achieve?", type: "qatar" },
-  { kicker: "Global Reach", title: "A Technology With International Market Acceptance", type: "global", image: "/images/world-map.png" },
+  { kicker: "Completed Projects in Qatar", title: "Detergent Factory — Reduced Chemical Use", type: "qatar-project", image: "/images/qatar-detergent-factory.jpeg" },
+  { kicker: "International accreditations", title: "International accreditations", type: "accreditations" },
   { kicker: "The Strategic Message", title: "Control the Water. Control More of the Farm’s Risk.", type: "strategy", image: "/images/qatar-chicks.png" },
-  { kicker: "Next Step", title: "Start With an Assessment of Your Farm", type: "closing", image: "/images/farm-assessment-team.png" },
+  { kicker: "International Poultry References", title: "Selected Poultry References & Field Case Studies", type: "references" },
 ];
 
 const benefits = [
@@ -42,6 +42,24 @@ const benefits = [
 
 const apps = ["Drinking water systems", "Barn air — fogging", "Barn floors", "Hatcheries", "Chiller water", "Staff hands & feet", "Vehicles and access points"];
 const assessment = ["Drinking water system", "Current disinfection procedures", "Medication and chemical usage", "Mortality levels", "Farm sanitation requirements", "Potential operational savings"];
+const accreditations = [
+  { code: "ISO", title: "ISO 9001:2015", description: "Quality management system", tone: "navy", links: [["Open ISO certificate ↗", "/accreditations/iso-9001-2015.jpeg"]] },
+  { code: "EPA", title: "EPA", description: "U.S. Environmental Protection Agency", tone: "green", links: [["Open EPA approval ↗", "/accreditations/envirolyte-epa-approval.pdf"]] },
+  { code: "FDA", title: "FDA", description: "U.S. Food and Drug Administration", tone: "amber", links: [["Open FDA letter ↗", "/accreditations/fda-letter.jpeg"]] },
+  { code: "NSF", title: "NSF", description: "Water health and safety standards", tone: "navy", links: [["Company document ↗", "/accreditations/nsf-ansi-61-company.jpeg"], ["Tallinn facility ↗", "/accreditations/nsf-ansi-61-tallinn.jpeg"]] },
+  { code: "ECHA", title: "ECHA", description: "European Chemicals Agency", tone: "green", links: [["Open ECHA document ↗", "/accreditations/echa-approval-2016.pdf"]] },
+];
+const poultryCaseStudies = [
+  { country: "Holland", client: "Alfons Weerink", flock: "60,000 mother hens", unit: "EL400", installed: "December 2012", dosing: "3% in drinking water", source: "/references/weerink-netherlands.pdf" },
+  { country: "Germany", client: "P & P Farmbetrieb Doetlingen", flock: "61,000 mother hens", unit: "EL900", installed: "November 2011", dosing: "2.5% in drinking water", source: "/references/doetlingen-germany.pdf" },
+  { country: "Canada", client: "Starlite Colony", flock: "30,000 meat turkeys", unit: "EL6000", installed: "April 2007", dosing: "3% in drinking water", result: "Reported: 1% total mortality; acid and other chemicals reduced to zero.", source: "/references/starlite-canada-turkey-farm.pdf" },
+];
+const poultryReferences = [
+  ["Cocorico", "Switzerland", "2009", "Layers"],
+  ["Geflügelhof Weber", "Germany", "2016", "Layers"],
+  ["Mosterd Poultry Farms Ltd.", "Canada", "2008", "Broilers"],
+  ["ELTKAWI Poultry Farm", "Qatar", "2019", "Broilers"],
+];
 
 function Dots({ count, active }: { count: number; active: number }) {
   return <div className="mini-dots" aria-hidden="true">{Array.from({ length: count }, (_, i) => <span key={i} className={i === active ? "on" : ""} />)}</div>;
@@ -64,9 +82,12 @@ function Scene({ slide, index }: { slide: Slide; index: number }) {
           <div className="partner-card envirolyte-partner"><img src={asset("/images/envirolyte-logo.png")} alt="Envirolyte" /></div>
           <div className="partner-card raseen-partner"><img src={asset("/images/raseen-logo.jpeg")} alt="Raseen Aqua Solutions logo" /><span>RASEEN AQUA SOLUTIONS</span></div>
         </div>
-        <p className="eyebrow reveal">POULTRY INDUSTRY</p>
+        <p className="eyebrow cover-industry reveal">Poultry Industry</p>
         <h1 className="hero-title reveal">A Complete Water Treatment &amp; Disinfection Solution for the Poultry Industry</h1>
-        <p className="cover-tags reveal">STERILIZATION <i /> DISINFECTION <i /> WATER PURIFICATION</p>
+        <div className="cover-pillars reveal" aria-label="Core solution areas">
+          <span>Sterilization &amp; Disinfection</span>
+          <span>Water Purification</span>
+        </div>
         <p className="cover-support reveal">For safer operations, healthier birds, and better farm performance.</p>
       </div>
       <div className="cover-image" style={{ backgroundImage: `url(${slideImage})` }}><div className="water-glow" /></div>
@@ -77,7 +98,7 @@ function Scene({ slide, index }: { slide: Slide; index: number }) {
 
   if (slide.type === "journey") return frame(<div><h2 className="scene-title reveal">{slide.title}</h2><p className="lead reveal">Effective biosecurity must cover the entire contamination journey — not one chemical or one location.</p><div className="journey journey-six">{[["Water", "Daily intake"], ["Barns", "Living environment"], ["Equipment", "Contact surfaces"], ["Workers", "Movement & hygiene"], ["Vehicles", "Farm access"], ["Chillers", "Cooling units"]].map(([a, b], i) => <div className="journey-node reveal" key={a} style={{ "--delay": `${i * 90}ms` } as React.CSSProperties}><b>{i + 1}</b><strong>{a}</strong><span>{b}</span></div>)}</div><div className="thesis reveal">One weak point can reintroduce risk across the full operation.</div></div>);
 
-  if (slide.type === "solution") return frame(<div className="split media-right"><div className="copy-block"><h2 className="scene-title reveal">{slide.title}</h2><p className="lead reveal">A comprehensive, eco-conscious and cost-focused program — generated on site and applied where the farm needs it.</p><ul className="check-list">{["Drinking water treatment", "Barn cleaning and disinfection", "Microbial control", "Farm sanitation", "Eliminate the use of conventional chemical disinfectants"].map((x, i) => <li className="reveal" style={{ "--delay": `${i * 90}ms` } as React.CSSProperties} key={x}>{x}</li>)}</ul></div><figure className="photo equipment reveal"><img src={slideImage} alt="Envirolyte generation equipment" /></figure></div>);
+  if (slide.type === "solution-merged") return frame(<div className="solution-merged"><h2 className="scene-title reveal">{slide.title}</h2><p className="lead reveal">A comprehensive, eco-conscious and cost-focused program — generated on site and applied where the farm needs it.</p><div className="solution-merged-body"><section className="solution-core reveal"><span className="solution-label">ONE FARM-WIDE PROGRAM</span><ul className="check-list">{["Drinking water treatment", "Barn cleaning and disinfection", "Microbial control", "Farm sanitation", "Eliminate the use of conventional chemical disinfectants"].map((x, i) => <li style={{ "--delay": `${i * 70}ms` } as React.CSSProperties} key={x}>{x}</li>)}</ul></section><section className="application-stage reveal" style={{ backgroundImage: `url(${slideImage})` }}><div className="application-panel"><span className="solution-label">ACROSS THE FARM</span><h3>One Technology. Multiple Poultry Applications.</h3><div className="application-cloud">{apps.map((x, i) => <div className="application-chip" key={x}><b>{i + 1}</b><span>{x}</span></div>)}</div></div></section></div></div>);
 
   if (slide.type === "process") return frame(<div><h2 className="scene-title reveal">{slide.title}</h2><p className="lead reveal">A conditioned brine solution passes through a diaphragmatic electrolysis cell to create fresh active solutions close to the point of use.</p><div className="process">{[["Water", "Conditioned feed"], ["Salt", "Sodium chloride brine"], ["Electricity", "Controlled current"], ["Envirolyte", "Diaphragmatic cell"], ["Anolyte", "Disinfection solution"]].map(([a, b], i) => <article className="process-step reveal" key={a} style={{ "--delay": `${i * 120}ms` } as React.CSSProperties}><em>{String(i + 1).padStart(2, "0")}</em><strong>{a}</strong><span>{b}</span></article>)}</div><div className="soft-thesis reveal">Fresh generation on demand reduces reliance on transported and stored disinfectants.</div></div>);
 
@@ -92,7 +113,7 @@ function Scene({ slide, index }: { slide: Slide; index: number }) {
 
   if (slide.type === "outputs") return frame(<div><h2 className="scene-title reveal">{slide.title}</h2><div className="solution-pair"><article className="solution-card aqua reveal"><div className="round-icon">A</div><h3>ANOLYTE</h3><b>DISINFECTION</b><p>Oxidizing solution used for microbial control, water treatment and sanitation.</p><small>Broad-spectrum germicidal function</small></article><article className="solution-card green reveal"><div className="round-icon">C</div><h3>CATHOLYTE</h3><b>CLEANING &amp; DEGREASING</b><p>Alkaline reducing solution used for washing, cleaning support and process applications.</p><small>Detergent / degreasing function</small></article></div></div>);
 
-  if (slide.type === "anolyte-benefits") return frame(<div><h2 className="scene-title reveal">{slide.title}</h2><p className="lead reveal">Anolyte combines fast microbial control with practical farm-wide application and fresh on-site availability.</p><div className="anolyte-layout"><div className="anolyte-core reveal"><span>ANOLYTE</span><strong>ACTIVE<br />DISINFECTION</strong><small>Generated fresh where it is needed</small></div><div className="anolyte-points">{[
+  if (slide.type === "anolyte-benefits") return frame(<div className="anolyte-benefits-slide"><h2 className="scene-title reveal">{slide.title}</h2><p className="lead reveal">Anolyte combines fast microbial control with practical farm-wide application and fresh on-site availability.</p><div className="anolyte-layout"><div className="anolyte-core reveal"><span>ANOLYTE</span><strong>ACTIVE<br />DISINFECTION</strong><small>Generated fresh where it is needed</small></div><div className="anolyte-points">{[
     ["Broad-Spectrum Control", "Targets bacteria, viruses and fungi."],
     ["Rapid Action", "Delivers fast disinfection at practical dosing levels."],
     ["Water & Surface Use", "Suitable for drinking systems and sanitation programs."],
@@ -101,23 +122,27 @@ function Scene({ slide, index }: { slide: Slide; index: number }) {
     ["Fresh Availability", "Produced on demand without routine chemical deliveries."],
   ].map(([a, b], i) => <article className="anolyte-point reveal" key={a} style={{ "--delay": `${i * 70}ms` } as React.CSSProperties}><b>{i + 1}</b><div><h3>{a}</h3><p>{b}</p></div></article>)}</div></div></div>);
 
-  if (slide.type === "applications") return frame(<div className="split media-right"><div><h2 className="scene-title reveal">{slide.title}</h2><div className="application-list">{apps.map((x, i) => <div className="application reveal" style={{ "--delay": `${i * 80}ms` } as React.CSSProperties} key={x}><b>{i + 1}</b><span>{x}</span></div>)}</div></div><figure className="photo reveal"><img src={slideImage} alt="Modern poultry drinking system" /></figure></div>);
-
   if (slide.type === "metrics") return frame(<div><h2 className="scene-title reveal">{slide.title}</h2><p className="source-line reveal">Benefits reported in the supplied Envirolyte material</p><div className="metric-grid">{[["50%", "Lower mortality rate"], ["70%", "Fewer medications"], ["BETTER", "Feed utilization"], ["FASTER", "Weight gain"]].map(([a, b], i) => <article className={`metric reveal m${i}`} key={a}><strong>{a}</strong><span>{b}</span></article>)}</div><p className="fineprint reveal">The supplied material also reports destruction of germs and activity against pathogens including Salmonella and E. coli.</p></div>);
 
   if (slide.type === "business") return frame(<div><h2 className="scene-title reveal">{slide.title}</h2><div className="business-pair"><article className="model old reveal"><h3>CONVENTIONAL CHEMICAL MODEL</h3><div className="model-flow">Purchase → Transport → Store → Handle → Repeat</div><ul><li>Transport &amp; storage burden</li><li>Leak and handling exposure</li><li>Cost tied to recurring purchases</li></ul></article><article className="model new reveal"><h3>ENVIROLYTE MODEL</h3><div className="model-flow">Generate On-Site → Dose → Use When Needed</div><ul><li>Low generation cost</li><li>Reduced transportation</li><li>Potentially steadier cost structure</li></ul></article></div></div>);
 
+  if (slide.type === "assessment") return frame(<div className="assessment-slide"><h2 className="scene-title reveal">{slide.title}</h2><div className="assessment-layout"><div><h3 className="subhead reveal">Evaluate the operational baseline</h3><div className="application-list compact">{assessment.map((x, i) => <div className={`application reveal ${i === 5 ? "accent" : ""}`} style={{ "--delay": `${i * 70}ms` } as React.CSSProperties} key={x}><b>✓</b><span>{x}</span></div>)}</div><div className="thesis reveal">FROM CLEANER WATER → SAFER OPERATIONS → BETTER POULTRY PERFORMANCE</div></div><figure className="photo assessment-photo reveal"><img src={slideImage} alt="Team assessing poultry farm water treatment and sanitation requirements" /><figcaption>Assessment connects site conditions to the right treatment program</figcaption></figure></div></div>);
+
   if (slide.type === "safety") return frame(<div><h2 className="scene-title reveal">{slide.title}</h2><div className="safety-grid">{[["Safety", "Simple handling\nNon-hazardous operation"], ["Environment", "Lower environmental impact\n100% biodegradable*"], ["Performance", "Fast-acting biocide\nLonger residual effect"], ["Simplicity", "Generated on site\nUsed when needed"]].map(([a, b], i) => <article className="safety-item reveal" key={a}><b>{i + 1}</b><h3>{a}</h3><p>{b}</p></article>)}</div><div className="thesis reveal">Fast-acting • Powerful biocide • Simple to handle • Non-toxic* • Environmentally friendly*</div><p className="fineprint reveal">*As described in the supplied material; application and regulatory requirements should be validated locally.</p></div>);
 
-  if (slide.type === "markets") return frame(<div><h2 className="scene-title reveal">{slide.title}</h2><div className="markets-layout"><div className="market-list reveal"><span>EXAMPLES IN THE SUPPLIED PRESENTATION</span><b>Serbia — slaughterhouse</b><b>Iran — two installations</b><b>France — large hen farm</b><b>Qatar — two poultry farms</b></div><figure className="installation-photo reveal"><img src={slideImage} alt="Modern integrated poultry production complex" /><figcaption><strong>ONE PLATFORM</strong><span>Scalable across poultry operations and markets</span></figcaption></figure></div></div>);
+  if (slide.type === "references") return frame(<div className="references-slide"><h2 className="scene-title reveal">{slide.title}</h2><div className="case-study-grid">{poultryCaseStudies.map((item, i) => <article className={`case-study reveal ${i === 2 ? "featured" : ""}`} style={{ "--delay": `${i * 90}ms` } as React.CSSProperties} key={item.client}><div className="case-study-head"><span>{item.country}</span><b>{item.unit}</b></div><h3>{item.client}</h3><strong>{item.flock}</strong><dl><div><dt>Installed</dt><dd>{item.installed}</dd></div><div><dt>Dosing</dt><dd>{item.dosing}</dd></div></dl>{item.result && <p className="case-result">{item.result}</p>}<a href={asset(item.source)} target="_blank" rel="noopener noreferrer">Open case study ↗</a></article>)}</div><div className="reference-strip reveal"><div className="reference-strip-head"><strong>Additional poultry references</strong><a href={asset("/references/poultry-reference-list.jpeg")} target="_blank" rel="noopener noreferrer">Open supplied reference list ↗</a></div><div className="reference-list">{poultryReferences.map(([client, country, year, sector]) => <div className="reference-item" key={client}><b>{client}</b><span>{country}</span><span>{year}</span><strong>{sector}</strong></div>)}</div></div><p className="fineprint reveal">Installation and outcome details are reproduced from the supplied case materials; no independent verification was provided.</p></div>);
 
-  if (slide.type === "qatar") return frame(<div><h2 className="scene-title reveal">{slide.title}</h2><div className="qatar-grid">{[["NIL", "Antibiotics & reduced medication"], ["NIL", "Conventional disinfectants & sterilizers"], ["2.5%", "Mortality rate"], ["1.6–1.7 kg", "Average bird weight"], ["2.2 kg", "Average feed per bird"], ["25–27 DAYS", "Cycle time"]].map(([a, b], i) => <article className={`qatar-stat reveal q${i}`} key={b}><strong>{a}</strong><span>{b}</span></article>)}</div><p className="fineprint reveal">Operational results reported in the supplied presentation; no independent verification was provided.</p></div>);
+  if (slide.type === "qatar") return frame(<div className="qatar-slide"><h2 className="scene-title reveal">{slide.title}</h2><div className="qatar-layout"><figure className="qatar-video-wrap reveal"><video className="qatar-video" controls playsInline preload="metadata"><source src={asset("/Video/WhatsApp Video 2026-08-13 at 4.41.49 PM.mp4")} type="video/mp4" />Your browser does not support the video element.</video><figcaption>Qatar poultry operations • Supplied project video</figcaption></figure><div className="qatar-grid">{[["NIL", "Antibiotics & reduced medication"], ["NIL", "Conventional disinfectants & sterilizers"], ["2.5%", "Mortality rate"], ["1.6–1.7 kg", "Average bird weight"], ["2.2 kg", "Average feed per bird"], ["25–27 DAYS", "Cycle time"]].map(([a, b], i) => <article className={`qatar-stat reveal q${i}`} key={b}><strong>{a}</strong><span>{b}</span></article>)}</div></div><p className="fineprint reveal">Operational results reported in the supplied presentation; no independent verification was provided.</p></div>);
+
+  if (slide.type === "qatar-project") return frame(<div className="qatar-project-slide"><h2 className="scene-title reveal">{slide.title}</h2><div className="qatar-project-layout"><a className="qatar-project-photo reveal" href={slideImage} target="_blank" rel="noopener noreferrer"><img src={slideImage} alt="Envirolyte on-site production unit installed inside a detergent factory in Qatar" /><span>Open project photo ↗</span></a><div className="qatar-project-copy"><span className="project-status reveal">COMPLETED PROJECT • QATAR</span><p className="project-intro reveal">An Envirolyte on-site production unit integrated into the manufacturing facility.</p><blockquote className="project-impact reveal"><strong>REPORTED OPERATIONAL IMPACT</strong><p>The system contributed to reducing the use of harsh chemicals in detergent manufacturing.</p></blockquote><dl className="project-facts reveal"><div><dt>Sector</dt><dd>Detergent manufacturing</dd></div><div><dt>Application</dt><dd>On-site solution production</dd></div><div><dt>Location</dt><dd>Qatar</dd></div></dl><p className="fineprint">Outcome reproduced from the supplied project material; no reduction percentage or independent verification was provided.</p></div></div></div>);
+
+  if (slide.type === "accreditations") return frame(<div className="accreditations-slide"><h2 className="scene-title reveal">{slide.title}</h2><div className="accreditation-grid" aria-label="International accreditations">{accreditations.map((item, i) => <article className={`accreditation-card ${item.tone} reveal`} style={{ "--delay": `${i * 75}ms` } as React.CSSProperties} key={item.code}><span className="accreditation-mark">{item.code}</span><div className="accreditation-copy"><h3>{item.title}</h3><p>{item.description}</p></div><div className="accreditation-links">{item.links.map(([label, href]) => <a href={asset(href)} target="_blank" rel="noopener noreferrer" key={href}>{label}</a>)}</div></article>)}</div></div>);
 
   if (slide.type === "global") return frame(<div><h2 className="scene-title reveal">{slide.title}</h2><div className="global-layout"><div className="map ghost reveal"><img src={slideImage} alt="World map" /></div><div className="region-list">{[["Europe", "Broad commercial acceptance"], ["United States", "Market presence and use cases"], ["Global", "Applications across multiple sectors"]].map(([a, b], i) => <article className="region reveal" key={a}><b>{i + 1}</b><div><h3>{a}</h3><p>{b}</p></div></article>)}</div></div><div className="soft-thesis reveal">System selection and application remain subject to water quality, dosing requirements, capacity and local regulation.</div></div>);
 
   if (slide.type === "strategy") return <div className="strategy-layout"><div className="strategy-copy"><p className="eyebrow reveal">{slide.kicker}</p><h2 className="strategy-title reveal">Control the Water.<br />Control More of the Farm’s Risk.</h2><h3 className="reveal">Every bird drinks water. Every day.</h3><p className="lead reveal">That makes water one of the most powerful intervention points in poultry production.</p><div className="thesis reveal">BIOSECURITY + EFFICIENCY + COST CONTROL</div></div><div className="strategy-image reveal" style={{ backgroundImage: `url(${slideImage})` }} /></div>;
 
-  return frame(<div className="split media-right"><div><h2 className="scene-title reveal">{slide.title}</h2><h3 className="subhead reveal">Evaluate the operational baseline</h3><div className="application-list compact">{assessment.map((x, i) => <div className={`application reveal ${i === 5 ? "accent" : ""}`} style={{ "--delay": `${i * 80}ms` } as React.CSSProperties} key={x}><b>✓</b><span>{x}</span></div>)}</div><div className="thesis reveal">FROM CLEANER WATER → SAFER OPERATIONS → BETTER POULTRY PERFORMANCE</div></div><figure className="photo reveal"><img src={slideImage} alt="Envirolyte poultry farm installation in Qatar" /><figcaption>Raseen Aqua Solutions • Doha, Qatar</figcaption></figure></div>);
+  return null;
 }
 
 export default function Home() {
@@ -134,6 +159,8 @@ export default function Home() {
 
   useEffect(() => {
     const key = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null;
+      if (target?.closest("button, input, select, textarea, video")) return;
       if (["ArrowRight", "PageDown", " ", "Enter"].includes(event.key)) { event.preventDefault(); next(); }
       if (["ArrowLeft", "PageUp"].includes(event.key)) { event.preventDefault(); prev(); }
       if (event.key === "Home") go(0);
